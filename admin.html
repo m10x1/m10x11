@@ -1,401 +1,572 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mr10x | لوحة الإدارة</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mr10x | لوحة المدير</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#14231b;--panel:#203329;--border:#405947;--accent:#b9d0a8;--cream:#f2ecdc;--muted:#b6c3b7;--danger:#f5a4a4}
+:root{
+  --bg:#14231b;
+  --panel:#203329;
+  --border:#405947;
+  --green:#b9d0a8;
+  --cream:#f2ecdc;
+  --muted:#b6c3b7;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--cream);font-family:Cairo,sans-serif}
-button,input,select{font:inherit}
-button{cursor:pointer;border:0;border-radius:10px;padding:10px 16px;background:var(--accent);color:#14231b;font-weight:800}
-button:disabled{opacity:.5;cursor:wait}
-input,select{background:#17271e;color:var(--cream);border:1px solid var(--border);border-radius:10px;padding:10px;width:100%}
-label{font-size:13px;color:var(--muted)}
-.wrap{max-width:1200px;margin:auto;padding:25px 20px}
-.head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:20px}
-.logo{font-size:30px;font-weight:900}
-.logo span{color:var(--accent)}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--cream);
+  font-family:Cairo,sans-serif;
+  line-height:1.8;
+}
+button,input{font:inherit}
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 19px;
+  cursor:pointer;
+  font-weight:800;
+  background:var(--green);
+  color:var(--bg);
+}
+button:hover{filter:brightness(1.1)}
+button:disabled{opacity:.5}
+input{
+  width:100%;
+  background:#17271e;
+  color:var(--cream);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px;
+  outline:none;
+}
+input:focus{border-color:var(--green)}
+.wrap{
+  max-width:1200px;
+  margin:auto;
+  padding:25px 20px;
+}
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--border);
+}
+.logo{font-weight:900;font-size:29px}
+.logo span{color:var(--green)}
 .muted{color:var(--muted)}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:24px;margin:18px 0}
-.login{max-width:430px;margin:65px auto}
-.field{margin:14px 0}
-.field label{display:block;margin-bottom:5px}
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:25px;
+  margin:18px 0;
+}
+.login{
+  max-width:450px;
+  margin:65px auto;
+}
+.field{margin:16px 0}
+.field label{
+  display:block;
+  font-size:13px;
+  margin-bottom:7px;
+  color:var(--muted);
+}
 .full{width:100%}
-.outline{background:transparent;border:1px solid var(--border);color:var(--cream)}
-.danger{background:#653436;color:#fff}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.metric{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:22px}
-.metric strong{font-size:29px;color:var(--accent);display:block}
-.metric span{font-size:13px;color:var(--muted)}
+.outline{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--cream);
+}
+.danger{
+  background:#643437;
+  color:white;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+.metric{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:22px;
+}
+.metric strong{
+  display:block;
+  color:var(--green);
+  font-size:30px;
+}
+.metric span{
+  color:var(--muted);
+  font-size:13px;
+}
 .table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:730px}
-th,td{text-align:right;padding:13px 9px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
-th{color:var(--accent)}
-td button{margin:2px;font-size:12px;padding:7px 12px}
-.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.toolbar h2{margin:0}
-.msg{font-size:13px;min-height:24px;margin-top:12px}
-.error{color:var(--danger)}
-.ok{color:var(--accent)}
+table{
+  width:100%;
+  min-width:730px;
+  border-collapse:collapse;
+}
+th,td{
+  padding:12px 9px;
+  text-align:right;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+}
+th{color:var(--green)}
+td button{
+  font-size:12px;
+  padding:7px 11px;
+  margin:2px;
+}
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.message{
+  font-size:13px;
+  padding-top:12px;
+  min-height:30px;
+}
 .hidden{display:none!important}
-.small{font-size:12px}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.empty{text-align:center;padding:20px;color:var(--muted)}
 @media(max-width:650px){
-.grid{grid-template-columns:1fr}
-.wrap{padding:15px}
-.card{padding:17px}
+  .grid{grid-template-columns:1fr}
+  .card{padding:17px}
 }
 </style>
 </head>
 <body>
+
 <div class="wrap">
-  <div class="head">
-    <div class="logo">Mr<span>10x</span> <span class="small muted">الإدارة</span></div>
-    <div class="row">
-      <span id="account" class="muted small"></span>
-      <button id="logout" class="outline hidden">تسجيل الخروج</button>
+
+  <header class="header">
+    <div class="logo">Mr<span>10x</span> | الإدارة</div>
+    <div>
+      <span id="account" class="muted"></span>
+      <button id="logout" class="outline hidden">
+        تسجيل الخروج
+      </button>
     </div>
-  </div>
+  </header>
 
   <section id="loginView" class="card login">
     <h2>تسجيل دخول المدير</h2>
-    <p class="muted small">استخدم حساب المدير الذي أنشأته في Supabase.</p>
+    <p class="muted">
+      سجّل الدخول بحساب الإدارة الخاص بك.
+    </p>
+
     <form id="loginForm">
       <div class="field">
-        <label for="email">البريد الإلكتروني</label>
-        <input id="email" type="email" autocomplete="username" required>
+        <label>البريد الإلكتروني</label>
+        <input
+          id="email"
+          type="email"
+          autocomplete="username"
+          required
+        >
       </div>
+
       <div class="field">
-        <label for="password">كلمة المرور</label>
-        <input id="password" type="password" autocomplete="current-password" required>
+        <label>كلمة المرور</label>
+        <input
+          id="password"
+          type="password"
+          autocomplete="current-password"
+          required
+        >
       </div>
-      <button class="full" id="loginButton">دخول آمن</button>
+
+      <button id="loginButton" class="full">
+        تسجيل الدخول
+      </button>
     </form>
-    <div id="loginMessage" class="msg" role="status"></div>
+
+    <div id="loginMessage" class="message"></div>
   </section>
 
   <main id="dashboard" class="hidden">
-    <h1>لوحة التحكم</h1>
-    <p class="muted">إدارة المتاجر والاشتراكات والروابط من مكان واحد.</p>
+
+    <h1>لوحة تحكم Mr10x</h1>
+    <p class="muted">
+      إدارة المتاجر والاشتراكات وروابط العملاء.
+    </p>
 
     <div class="grid">
       <div class="metric">
-        <strong id="storesCount">—</strong>
+        <strong id="storesCount">0</strong>
         <span>إجمالي المتاجر</span>
       </div>
+
       <div class="metric">
-        <strong id="pendingCount">—</strong>
+        <strong id="pendingCount">0</strong>
         <span>طلبات بانتظار الموافقة</span>
       </div>
+
       <div class="metric">
-        <strong id="linksCount">—</strong>
-        <span>روابط العملاء</span>
+        <strong id="linksCount">0</strong>
+        <span>روابط العملاء المعروضة</span>
       </div>
     </div>
 
     <section class="card">
       <div class="toolbar">
-        <h2>المتاجر</h2>
-        <button class="outline" id="refresh">تحديث البيانات</button>
+        <h2>إدارة المتاجر</h2>
+        <button id="refresh" class="outline">
+          تحديث البيانات
+        </button>
       </div>
+
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>اسم المتجر</th>
+              <th>المتجر</th>
               <th>الحالة</th>
               <th>تاريخ التسجيل</th>
               <th>الاشتراك</th>
               <th>الإجراءات</th>
             </tr>
           </thead>
-          <tbody id="storesBody">
-            <tr><td colspan="5" class="empty">جارٍ التحميل...</td></tr>
-          </tbody>
+          <tbody id="storesBody"></tbody>
         </table>
       </div>
     </section>
 
     <section class="card">
       <h2>روابط العملاء</h2>
-      <p class="muted small">عرض روابط المنتجات المصرّح بتوزيعها.</p>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
               <th>المتجر</th>
               <th>المنتج</th>
-              <th>الطلب</th>
+              <th>رقم الطلب</th>
               <th>انتهاء الصلاحية</th>
               <th>الحالة</th>
               <th>الإجراء</th>
             </tr>
           </thead>
-          <tbody id="linksBody">
-            <tr><td colspan="6" class="empty">جارٍ التحميل...</td></tr>
-          </tbody>
+          <tbody id="linksBody"></tbody>
         </table>
       </div>
     </section>
-    <div id="dashboardMessage" class="msg" role="status"></div>
+
+    <div id="dashboardMessage" class="message"></div>
+
   </main>
 </div>
 
 <script type="module">
-import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
 
-// ضع مفتاح Publishable key العام فقط هنا
-const SUPABASE_URL='https://ojlkgvwzzkctjywooogx.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY='PASTE_YOUR_PUBLISHABLE_KEY_HERE';
+import {createClient}
+from "https://esm.sh/@supabase/supabase-js@2";
 
-const $=id=>document.getElementById(id);
-const configured=!SUPABASE_PUBLISHABLE_KEY.includes('PASTE_');
-const db=configured?createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY):null;
-const show=(id,on)=>$(id).classList.toggle('hidden',!on);
+/* Supabase Configuration */
 
-const msg=(id,text,error=false)=>{
+const SUPABASE_URL =
+"https://ojlkgvwzzkctjywooogx.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_YDaAejoRn0hHcECxdQmVqw_EBcdgNiD";
+
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+const $ = id => document.getElementById(id);
+
+const show = (id,visible) => {
+  $(id).classList.toggle("hidden",!visible);
+};
+
+function message(id,text,error=false){
   const el=$(id);
   el.textContent=text;
-  el.className='msg '+(error?'error':'ok');
-};
-
-const format=date=>date?
-  new Date(date).toLocaleDateString('ar-SA',{
-    year:'numeric',month:'short',day:'numeric'
-  }):'—';
-
-const statuses={
-  pending:'بانتظار الموافقة',
-  approved:'مقبول',
-  rejected:'مرفوض',
-  suspended:'موقوف'
-};
-
-let currentStores=[];
-
-function cell(row,text){
-  const td=document.createElement('td');
-  td.textContent=String(text??'—');
-  row.append(td);
-  return td;
+  el.style.color=error?"#f5a4a4":"#b9d0a8";
 }
 
-function action(label,fn,kind=''){
-  const b=document.createElement('button');
-  b.textContent=label;
-  if(kind)b.className=kind;
-  b.addEventListener('click',async()=>{
-    b.disabled=true;
-    try{await fn()}
-    finally{b.disabled=false}
-  });
-  return b;
+function dateText(value){
+  if(!value)return "—";
+  return new Date(value).toLocaleDateString("ar-SA");
 }
+
+function td(row,text){
+  const cell=document.createElement("td");
+  cell.textContent=String(text??"—");
+  row.appendChild(cell);
+  return cell;
+}
+
+function btn(text,handler,style=""){
+  const button=document.createElement("button");
+  button.textContent=text;
+  button.className=style;
+
+  button.onclick=async()=>{
+    button.disabled=true;
+    try{
+      await handler();
+    }finally{
+      button.disabled=false;
+    }
+  };
+
+  return button;
+}
+
+const statusNames={
+  pending:"بانتظار الموافقة",
+  approved:"مقبول",
+  rejected:"مرفوض",
+  suspended:"موقوف"
+};
+
+let stores=[];
 
 async function checkAdmin(){
-  const {data:{user},error}=await db.auth.getUser();
+  const {data:{user},error}=await supabase.auth.getUser();
+
   if(error||!user)return null;
 
-  const {data,error:adminError}=await db
-    .from('mr_admins')
-    .select('user_id')
-    .eq('user_id',user.id)
+  const result=await supabase
+    .from("mr_admins")
+    .select("user_id")
+    .eq("user_id",user.id)
     .maybeSingle();
 
-  if(adminError)throw adminError;
-  return data?user:null;
+  if(result.error)throw result.error;
+
+  return result.data?user:null;
 }
 
 async function initialize(){
-  if(!configured){
-    msg('loginMessage','أضف Publishable key العام في الملف أولًا.',true);
-    return;
-  }
-
   try{
     const user=await checkAdmin();
-    show('loginView',!user);
-    show('dashboard',!!user);
-    show('logout',!!user);
-    $('account').textContent=user?.email||'';
-    if(user)await loadAll();
-  }catch(e){
-    show('loginView',true);
-    show('dashboard',false);
-    msg('loginMessage',e.message,true);
+
+    show("loginView",!user);
+    show("dashboard",!!user);
+    show("logout",!!user);
+
+    $("account").textContent=user?.email||"";
+
+    if(user){
+      await loadData();
+    }
+  }catch(error){
+    show("loginView",true);
+    show("dashboard",false);
+    message("loginMessage",error.message,true);
   }
 }
 
-$('loginForm').addEventListener('submit',async e=>{
-  e.preventDefault();
-  if(!db)return;
+$("loginForm").onsubmit=async event=>{
+  event.preventDefault();
 
-  const b=$('loginButton');
-  b.disabled=true;
-  msg('loginMessage','جارٍ تسجيل الدخول...');
+  const button=$("loginButton");
+  button.disabled=true;
+
+  message("loginMessage","جارٍ تسجيل الدخول...");
 
   try{
-    const {error}=await db.auth.signInWithPassword({
-      email:$('email').value.trim(),
-      password:$('password').value
-    });
+    const {error}=await supabase.auth
+      .signInWithPassword({
+        email:$("email").value.trim(),
+        password:$("password").value
+      });
 
     if(error)throw error;
 
     const user=await checkAdmin();
 
     if(!user){
-      await db.auth.signOut();
-      throw Error('هذا الحساب لا يملك صلاحية المدير');
+      await supabase.auth.signOut();
+      throw new Error("هذا الحساب لا يملك صلاحية المدير");
     }
 
-    $('password').value='';
+    $("password").value="";
     await initialize();
-  }catch(err){
-    msg('loginMessage',err.message,true);
+
+  }catch(error){
+    message("loginMessage",error.message,true);
   }finally{
-    b.disabled=false;
+    button.disabled=false;
   }
-});
+};
 
-$('logout').addEventListener('click',async()=>{
-  await db.auth.signOut();
+$("logout").onclick=async()=>{
+  await supabase.auth.signOut();
   await initialize();
-});
+};
 
-$('refresh').addEventListener('click',loadAll);
+$("refresh").onclick=loadData;
 
-async function loadAll(){
+async function loadData(){
   try{
-    msg('dashboardMessage','جارٍ تحديث البيانات...');
+    message("dashboardMessage","جارٍ تحميل البيانات...");
 
-    const [s,subs,l]=await Promise.all([
-      db.from('mr_stores')
-        .select('id,owner_id,store_name,status,created_at')
-        .order('created_at',{ascending:false}),
+    const [storeResult,subResult,linkResult]=
+      await Promise.all([
+        supabase.from("mr_stores")
+          .select("id,store_name,status,created_at")
+          .order("created_at",{ascending:false}),
 
-      db.from('mr_subscriptions')
-        .select('id,store_id,starts_at,expires_at')
-        .order('expires_at',{ascending:false}),
+        supabase.from("mr_subscriptions")
+          .select("id,store_id,starts_at,expires_at"),
 
-      db.from('mr_customer_links')
-        .select('id,store_id,product_name,order_reference,expires_at,is_active,token')
-        .order('created_at',{ascending:false})
-        .limit(200)
-    ]);
+        supabase.from("mr_customer_links")
+          .select("id,store_id,product_name,order_reference,expires_at,is_active")
+          .order("created_at",{ascending:false})
+          .limit(200)
+      ]);
 
-    for(const r of [s,subs,l]){
-      if(r.error)throw r.error;
+    for(const result of [
+      storeResult,
+      subResult,
+      linkResult
+    ]){
+      if(result.error)throw result.error;
     }
 
-    currentStores=s.data||[];
-    const subscriptions=subs.data||[];
-    const links=l.data||[];
+    stores=storeResult.data||[];
 
-    $('storesCount').textContent=currentStores.length;
-    $('pendingCount').textContent=
-      currentStores.filter(x=>x.status==='pending').length;
-    $('linksCount').textContent=links.length;
+    const subscriptions=subResult.data||[];
+    const links=linkResult.data||[];
 
-    renderStores(currentStores,subscriptions);
+    $("storesCount").textContent=stores.length;
+    $("pendingCount").textContent=
+      stores.filter(s=>s.status==="pending").length;
+
+    $("linksCount").textContent=links.length;
+
+    renderStores(stores,subscriptions);
     renderLinks(links);
-    msg('dashboardMessage','تم تحديث البيانات');
-  }catch(e){
-    msg('dashboardMessage',e.message,true);
+
+    message("dashboardMessage","تم تحديث البيانات بنجاح");
+
+  }catch(error){
+    message("dashboardMessage",error.message,true);
   }
 }
 
-function renderStores(stores,subs){
-  const body=$('storesBody');
+function renderStores(items,subscriptions){
+  const body=$("storesBody");
   body.replaceChildren();
 
-  if(!stores.length){
-    const tr=document.createElement('tr');
-    cell(tr,'لا توجد متاجر مسجلة بعد').colSpan=5;
-    body.append(tr);
+  if(items.length===0){
+    const row=document.createElement("tr");
+    td(row,"لا توجد متاجر مسجلة").colSpan=5;
+    body.appendChild(row);
     return;
   }
 
-  for(const s of stores){
-    const tr=document.createElement('tr');
+  for(const store of items){
+    const row=document.createElement("tr");
 
-    cell(tr,s.store_name);
-    cell(tr,statuses[s.status]||s.status);
-    cell(tr,format(s.created_at));
+    td(row,store.store_name);
+    td(row,statusNames[store.status]||store.status);
+    td(row,dateText(store.created_at));
 
-    const sub=subs.find(x=>
-      x.store_id===s.id &&
-      new Date(x.expires_at)>new Date() &&
-      new Date(x.starts_at)<=new Date()
+    const activeSubscription=subscriptions.find(sub=>
+      sub.store_id===store.id &&
+      new Date(sub.starts_at)<=new Date() &&
+      new Date(sub.expires_at)>new Date()
     );
 
-    cell(tr,sub?'حتى '+format(sub.expires_at):'لا يوجد اشتراك نشط');
+    td(row,activeSubscription
+      ?dateText(activeSubscription.expires_at)
+      :"لا يوجد اشتراك نشط"
+    );
 
-    const actions=document.createElement('td');
+    const actions=document.createElement("td");
 
-    if(s.status!=='approved'){
-      actions.append(action('قبول',()=>updateStore(s.id,'approved')));
+    if(store.status!=="approved"){
+      actions.appendChild(
+        btn("قبول",()=>changeStore(store.id,"approved"))
+      );
     }
 
-    if(s.status!=='rejected'){
-      actions.append(action('رفض',()=>updateStore(s.id,'rejected'),'danger'));
+    if(store.status!=="rejected"){
+      actions.appendChild(
+        btn("رفض",()=>changeStore(store.id,"rejected"),"danger")
+      );
     }
 
-    if(s.status==='approved'){
-      actions.append(action('إيقاف',()=>updateStore(s.id,'suspended'),'outline'));
+    if(store.status==="approved"){
+      actions.appendChild(
+        btn("إيقاف",()=>changeStore(store.id,"suspended"),"outline")
+      );
     }
 
-    actions.append(action('اشتراك',()=>createSubscription(s),'outline'));
-    tr.append(actions);
-    body.append(tr);
+    actions.appendChild(
+      btn("اشتراك",()=>addSubscription(store),"outline")
+    );
+
+    row.appendChild(actions);
+    body.appendChild(row);
   }
 }
 
-async function updateStore(id,status){
-  if(!confirm('تأكيد تغيير حالة المتجر إلى: '+
-    (statuses[status]||status)+'؟'))return;
+async function changeStore(id,status){
+  const label=statusNames[status]||status;
+
+  if(!confirm("هل تريد تغيير حالة المتجر إلى "+label+"؟")){
+    return;
+  }
 
   try{
-    const {error}=await db.from('mr_stores')
+    const result=await supabase
+      .from("mr_stores")
       .update({
         status,
-        approved_at:status==='approved'?new Date().toISOString():null
+        approved_at:status==="approved"
+          ?new Date().toISOString()
+          :null
       })
-      .eq('id',id);
+      .eq("id",id);
 
-    if(error)throw error;
-    await loadAll();
-  }catch(e){
-    msg('dashboardMessage',e.message,true);
+    if(result.error)throw result.error;
+
+    await loadData();
+
+  }catch(error){
+    message("dashboardMessage",error.message,true);
   }
 }
 
-async function createSubscription(store){
-  if(store.status!=='approved'){
-    alert('يجب قبول المتجر قبل تفعيل الاشتراك');
+async function addSubscription(store){
+  if(store.status!=="approved"){
+    alert("يجب قبول المتجر أولًا");
     return;
   }
 
-  const daysText=prompt(
-    'مدة الاشتراك بالأيام للمتجر: '+store.store_name+
-    '\nمثال: 30','30'
+  const input=prompt(
+    "أدخل مدة اشتراك "+store.store_name+" بالأيام",
+    "30"
   );
 
-  if(daysText===null)return;
+  if(input===null)return;
 
-  const days=Number(daysText);
+  const days=Number(input);
 
   if(!Number.isInteger(days)||days<1||days>3650){
-    alert('أدخل عدد أيام صحيح بين 1 و3650');
+    alert("أدخل مدة صحيحة بين 1 و3650 يومًا");
     return;
   }
 
-  if(!confirm('تفعيل اشتراك '+days+' يومًا للمتجر '+store.store_name+'؟')){
+  if(!confirm("تفعيل اشتراك لمدة "+days+" يومًا؟")){
     return;
   }
 
@@ -403,71 +574,83 @@ async function createSubscription(store){
   const end=new Date(start.getTime()+days*86400000);
 
   try{
-    const {error}=await db.from('mr_subscriptions')
+    const result=await supabase
+      .from("mr_subscriptions")
       .insert({
         store_id:store.id,
         starts_at:start.toISOString(),
         expires_at:end.toISOString()
       });
 
-    if(error)throw error;
-    await loadAll();
-  }catch(e){
-    msg('dashboardMessage',e.message,true);
+    if(result.error)throw result.error;
+
+    await loadData();
+
+  }catch(error){
+    message("dashboardMessage",error.message,true);
   }
 }
 
 function renderLinks(links){
-  const body=$('linksBody');
+  const body=$("linksBody");
   body.replaceChildren();
 
-  if(!links.length){
-    const tr=document.createElement('tr');
-    cell(tr,'لا توجد روابط بعد').colSpan=6;
-    body.append(tr);
+  if(links.length===0){
+    const row=document.createElement("tr");
+    td(row,"لا توجد روابط حاليًا").colSpan=6;
+    body.appendChild(row);
     return;
   }
 
-  for(const l of links){
-    const tr=document.createElement('tr');
+  for(const link of links){
+    const row=document.createElement("tr");
 
-    cell(tr,currentStores.find(s=>s.id===l.store_id)?.store_name||'—');
-    cell(tr,l.product_name);
-    cell(tr,l.order_reference||'—');
-    cell(tr,format(l.expires_at));
+    const store=stores.find(s=>s.id===link.store_id);
 
-    cell(tr,
-      l.is_active&&new Date(l.expires_at)>new Date()
-      ?'فعال':'غير فعال'
-    );
+    td(row,store?.store_name||"—");
+    td(row,link.product_name);
+    td(row,link.order_reference||"—");
+    td(row,dateText(link.expires_at));
 
-    const td=document.createElement('td');
+    const active=
+      link.is_active &&
+      new Date(link.expires_at)>new Date();
 
-    if(l.is_active){
-      td.append(action('إيقاف الرابط',()=>disableLink(l.id),'danger'));
+    td(row,active?"فعال":"غير فعال");
+
+    const actions=document.createElement("td");
+
+    if(link.is_active){
+      actions.appendChild(
+        btn("إيقاف",()=>disableLink(link.id),"danger")
+      );
     }
 
-    tr.append(td);
-    body.append(tr);
+    row.appendChild(actions);
+    body.appendChild(row);
   }
 }
 
 async function disableLink(id){
-  if(!confirm('هل تريد إيقاف هذا الرابط؟'))return;
+  if(!confirm("هل تريد إيقاف هذا الرابط؟"))return;
 
   try{
-    const {error}=await db.from('mr_customer_links')
+    const result=await supabase
+      .from("mr_customer_links")
       .update({is_active:false})
-      .eq('id',id);
+      .eq("id",id);
 
-    if(error)throw error;
-    await loadAll();
-  }catch(e){
-    msg('dashboardMessage',e.message,true);
+    if(result.error)throw result.error;
+
+    await loadData();
+
+  }catch(error){
+    message("dashboardMessage",error.message,true);
   }
 }
 
 initialize();
+
 </script>
 </body>
 </html>
