@@ -2,385 +2,685 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#182820">
-<title>Mr10x | الرئيسية</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#182820">
+  <title>Mr10x | الرئيسية</title>
 
-<style>
-:root{
-  --bg:#182820;
-  --bg2:#20352a;
-  --card:#293e32;
-  --border:#455d4c;
-  --accent:#b9d0a8;
-  --cream:#f2ecdc;
-  --muted:#b9c5b7;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--cream);
-  font-family:'Cairo',sans-serif;
-  line-height:1.8;
-}
-button,input{font:inherit}
-button{cursor:pointer}
-a{text-decoration:none;color:inherit}
-button:focus-visible,a:focus-visible,input:focus-visible{
-  outline:3px solid var(--accent);
-  outline-offset:3px;
-}
-.container{max-width:1180px;margin:auto;padding:0 24px}
-header{
-  position:sticky;top:0;z-index:20;
-  background:rgba(24,40,32,.96);
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid var(--border);
-}
-.nav{
-  min-height:78px;
-  display:flex;align-items:center;
-  justify-content:space-between;gap:20px;
-}
-.logo{font-size:30px;font-weight:900}
-.logo span{color:var(--accent)}
-.links{display:flex;gap:28px}
-.links a{
-  color:var(--muted);
-  font-size:14px;font-weight:700;
-}
-.links a:hover{color:var(--cream)}
-.btn{
-  border:0;
-  background:linear-gradient(120deg,#b9d0a8,#e4dbc5);
-  color:#182820;
-  font-weight:900;
-  padding:12px 27px;
-  border-radius:12px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  transition:transform .25s,box-shadow .25s;
-}
-.btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 32px #b9d0a82b;
-}
-.btn-outline{
-  background:transparent;
-  color:var(--cream);
-  border:1px solid var(--border);
-}
-.hero{
-  min-height:600px;
-  display:grid;
-  grid-template-columns:1.2fr 1fr;
-  align-items:center;
-  gap:65px;
-  padding-top:90px;
-  padding-bottom:90px;
-  position:relative;
-}
-.hero:before{
-  content:"";
-  position:absolute;
-  width:400px;height:400px;
-  background:#b9d0a81b;
-  filter:blur(100px);
-  border-radius:50%;
-  left:0;top:60px;
-  pointer-events:none;
-}
-.hero-content{position:relative;animation:rise .8s both}
-.tag{
-  display:inline-block;
-  padding:7px 16px;
-  background:#b9d0a814;
-  color:var(--accent);
-  border:1px solid #b9d0a84a;
-  border-radius:50px;
-  font-size:13px;
-  font-weight:800;
-}
-h1{
-  font-size:clamp(38px,5vw,65px);
-  line-height:1.4;
-  margin:20px 0;
-  font-weight:900;
-}
-h1 span{color:var(--accent)}
-.hero p{
-  font-size:16px;
-  color:var(--muted);
-  max-width:530px;
-  margin-bottom:30px;
-}
-.actions{display:flex;gap:14px;flex-wrap:wrap}
-.panel{
-  position:relative;
-  background:linear-gradient(150deg,#30493a,#23372c);
-  border:1px solid var(--border);
-  padding:27px;
-  border-radius:24px;
-  box-shadow:0 25px 60px #0003;
-  animation:rise 1s both,float 7s ease-in-out 1s infinite;
-}
-.panel-top{
-  display:flex;align-items:center;
-  justify-content:space-between;
-  margin-bottom:22px;
-}
-.panel-top strong{font-size:18px}
-.pill{
-  background:#b9d0a820;
-  color:var(--accent);
-  padding:4px 12px;
-  border-radius:30px;
-  font-size:11px;
-}
-.step{
-  background:#1e3127;
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:16px;
-  margin-top:12px;
-  display:flex;
-  align-items:center;
-  gap:13px;
-}
-.step-icon{
-  width:40px;height:40px;
-  display:grid;place-items:center;
-  background:#b9d0a81c;
-  border-radius:10px;
-  flex-shrink:0;
-}
-.step strong{display:block;font-size:13px}
-.step small{color:var(--muted);font-size:11px}
-.step:last-child{border-color:#b9d0a880}
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-  padding-bottom:35px;
-}
-.stat{
-  padding:23px;
-  text-align:center;
-  background:var(--bg2);
-  border:1px solid var(--border);
-  border-radius:16px;
-}
-.stat strong{
-  display:block;
-  font-size:27px;
-  color:var(--accent);
-}
-.stat span{font-size:12px;color:var(--muted)}
-section.content{
-  padding:85px 0;
-  scroll-margin-top:90px;
-}
-.section-head{text-align:center;margin-bottom:42px}
-.section-head h2{
-  font-size:clamp(27px,4vw,39px);
-  margin:10px 0;
-}
-.section-head p{color:var(--muted)}
-.cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  padding:30px;
-  border-radius:18px;
-  transition:transform .3s,border-color .3s;
-}
-.card:hover{
-  transform:translateY(-7px);
-  border-color:var(--accent);
-}
-.card .symbol{font-size:34px}
-.card h3{font-size:19px;margin:14px 0 8px}
-.card p{font-size:13px;color:var(--muted);margin:0}
-.services{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:17px;
-}
-.service{
-  background:var(--bg2);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:22px;
-  font-weight:800;
-  transition:transform .3s,border-color .3s;
-}
-.service:hover{
-  transform:translateY(-5px);
-  border-color:var(--accent);
-}
-.cta{
-  text-align:center;
-  background:linear-gradient(120deg,#304b3b,#263b30);
-  border:1px solid var(--border);
-  border-radius:25px;
-  padding:55px 25px;
-}
-.cta h2{font-size:32px;margin:0 0 12px}
-.cta p{color:var(--muted);margin-bottom:25px}
-.faq{max-width:800px;margin:auto}
-.faq details{
-  padding:18px 22px;
-  margin:12px 0;
-  border-radius:12px;
-  background:var(--card);
-  border:1px solid var(--border);
-}
-.faq summary{font-weight:800;cursor:pointer}
-.faq p{color:var(--muted);font-size:13px}
-footer{
-  text-align:center;
-  padding:30px;
-  color:var(--muted);
-  border-top:1px solid var(--border);
-  font-size:12px;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-/* Login and registration window */
-.modal{
-  position:fixed;
-  inset:0;
-  background:#07120bdc;
-  z-index:100;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  backdrop-filter:blur(10px);
-}
-.modal.open{display:flex}
-.dialog{
-  width:100%;
-  max-width:460px;
-  max-height:92vh;
-  overflow-y:auto;
-  background:#293e32;
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:32px;
-  position:relative;
-  animation:rise .35s both;
-}
-.close{
-  position:absolute;
-  top:12px;left:17px;
-  background:none;border:0;
-  color:var(--cream);
-  font-size:30px;
-}
-.dialog h2{text-align:center;margin:0;font-size:27px}
-.dialog .subtitle{
-  color:var(--muted);
-  text-align:center;
-  font-size:13px;
-  margin:4px 0 22px;
-}
-.tabs{display:flex;gap:10px;margin-bottom:22px}
-.tab{
-  flex:1;
-  padding:11px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:#20352a;
-  color:var(--cream);
-  font-weight:800;
-}
-.tab.active{
-  background:var(--accent);
-  color:#182820;
-}
-.field{margin-bottom:17px}
-.field label{
-  display:block;
-  font-size:13px;
-  font-weight:800;
-  margin-bottom:7px;
-}
-.field input{
-  width:100%;
-  background:#1e3127;
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:12px 14px;
-  color:var(--cream);
-  outline:none;
-}
-.field input:focus{border-color:var(--accent)}
-.field input::placeholder{color:#aab9a9}
-.full{width:100%}
-.status{
-  text-align:center;
-  font-size:13px;
-  color:var(--accent);
-  margin:15px 0;
-  line-height:2;
-}
-.notice{
-  background:#b9d0a812;
-  border:1px solid var(--border);
-  padding:14px;
-  border-radius:12px;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  margin-top:18px;
-}
-.notice strong{color:var(--cream)}
-.hidden{display:none!important}
-@keyframes rise{
-  from{opacity:0;transform:translateY(25px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-9px)}
-}
-@media(max-width:850px){
-  .hero{grid-template-columns:1fr;gap:35px;padding-top:60px}
-  .links{display:none}
-  .cards,.services{grid-template-columns:1fr 1fr}
-}
-@media(max-width:550px){
-  .container{padding:0 18px}
-  .nav{min-height:70px}
-  .logo{font-size:25px}
-  .nav .btn{padding:10px 14px;font-size:12px}
-  .hero{padding-bottom:50px}
-  .hero h1{font-size:37px}
-  .actions .btn{flex:1}
-  .cards,.services{grid-template-columns:1fr}
-  .stats{gap:8px}
-  .stat{padding:13px 5px}
-  .stat strong{font-size:21px}
-  section.content{padding:55px 0}
-  .dialog{padding:28px 21px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation:none!important;
-    transition:none!important;
-    scroll-behavior:auto!important;
-  }
-}
-</style>
+  <style>
+    :root {
+      --bg: #182820;
+      --bg-soft: #20352A;
+      --card: #293E32;
+      --border: #455D4C;
+      --accent: #B9D0A8;
+      --cream: #F2ECDC;
+      --muted: #B9C5B7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Cairo', sans-serif;
+      line-height: 1.85;
+    }
+
+    body.english {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.65;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: auto;
+      padding: 0 22px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(24, 40, 32, .96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .logo {
+      font-size: 29px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lang-btn {
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--cream);
+      border-radius: 10px;
+      padding: 10px 13px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 11px;
+      background: linear-gradient(120deg, #B9D0A8, #E4DBC5);
+      color: #182820;
+      font-weight: 900;
+      text-align: center;
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(185, 208, 168, .2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--cream);
+    }
+
+    .hero {
+      min-height: 580px;
+      padding-top: 95px;
+      padding-bottom: 85px;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      align-items: center;
+      gap: 55px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      top: 20px;
+      left: 5%;
+      border-radius: 50%;
+      background: rgba(185, 208, 168, .1);
+      filter: blur(95px);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      animation: rise .8s ease both;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 15px;
+      border-radius: 30px;
+      border: 1px solid rgba(185, 208, 168, .35);
+      background: rgba(185, 208, 168, .07);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-size: clamp(36px, 5vw, 62px);
+      line-height: 1.45;
+      font-weight: 900;
+      margin: 20px 0;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .preview {
+      position: relative;
+      background: linear-gradient(145deg, #304938, #203329);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 27px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, .2);
+      animation: rise 1s ease both, float 7s ease-in-out 1s infinite;
+    }
+
+    .preview-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .preview-head strong {
+      font-size: 18px;
+    }
+
+    .preview-head small {
+      color: var(--accent);
+      border: 1px solid rgba(185, 208, 168, .3);
+      border-radius: 30px;
+      padding: 4px 10px;
+      font-size: 10px;
+    }
+
+    .preview-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      background: #1B2D23;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 11px;
+    }
+
+    .preview-row .emoji {
+      font-size: 24px;
+    }
+
+    .preview-row b {
+      display: block;
+      font-size: 13px;
+    }
+
+    .preview-row small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .preview-row:last-child {
+      border-color: rgba(185, 208, 168, .65);
+    }
+
+    /* Statistics */
+    .stats-wrap {
+      padding-bottom: 35px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow: hidden;
+      background: #101B17;
+      border: 1px solid #35483D;
+      border-radius: 19px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, .13);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 30px 10px;
+      border-inline-end: 1px solid #35483D;
+      transition: background .25s;
+    }
+
+    .stat:last-child {
+      border-inline-end: none;
+    }
+
+    .stat:hover {
+      background: rgba(185, 208, 168, .07);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--accent);
+      font-size: clamp(22px, 2.6vw, 34px);
+      font-weight: 900;
+      line-height: 1.5;
+      direction: ltr;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .section {
+      padding: 85px 0;
+      scroll-margin-top: 90px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(27px, 4vw, 38px);
+      margin: 12px 0 6px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      padding: 28px;
+      transition: transform .3s, border-color .3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+    }
+
+    .card-icon {
+      font-size: 30px;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin: 13px 0 7px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .service {
+      padding: 20px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      font-weight: 800;
+      transition: transform .25s, border-color .25s;
+    }
+
+    .service:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .cta {
+      text-align: center;
+      padding: 50px 22px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: linear-gradient(120deg, #304938, #24382D);
+    }
+
+    .cta h2 {
+      font-size: 30px;
+      margin: 0;
+    }
+
+    .cta p {
+      color: var(--muted);
+    }
+
+    .faq {
+      max-width: 780px;
+      margin: auto;
+    }
+
+    .faq details {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 12px 0;
+      padding: 17px 20px;
+    }
+
+    .faq summary {
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .faq p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 28px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Login / Registration */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(6, 17, 11, .88);
+      backdrop-filter: blur(9px);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .dialog {
+      position: relative;
+      width: 100%;
+      max-width: 450px;
+      max-height: 92vh;
+      overflow-y: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 21px;
+      padding: 32px;
+      animation: rise .35s ease;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      inset-inline-end: 15px;
+      background: transparent;
+      border: none;
+      color: var(--cream);
+      font-size: 29px;
+    }
+
+    .dialog h2 {
+      text-align: center;
+      margin: 0;
+    }
+
+    .dialog-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--cream);
+      border-radius: 9px;
+      font-weight: 800;
+    }
+
+    .tab.active {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #1B2D23;
+      color: var(--cream);
+      outline: none;
+    }
+
+    .field input:focus {
+      border-color: var(--accent);
+    }
+
+    .field input::placeholder {
+      color: #A5B5A5;
+    }
+
+    .full {
+      width: 100%;
+    }
+
+    .status {
+      color: var(--accent);
+      text-align: center;
+      font-size: 13px;
+      line-height: 2;
+      margin: 14px 0;
+    }
+
+    .notice {
+      text-align: center;
+      color: var(--muted);
+      background: rgba(185, 208, 168, .05);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 13px;
+      font-size: 12px;
+      margin-top: 18px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @media (max-width: 850px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding-top: 65px;
+      }
+
+      .cards, .services {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 550px) {
+      .container {
+        padding: 0 17px;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      .nav-actions {
+        gap: 6px;
+      }
+
+      .nav-actions .btn,
+      .lang-btn {
+        padding: 9px 11px;
+        font-size: 11px;
+      }
+
+      .hero {
+        padding-bottom: 50px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .cards, .services {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat:nth-child(2) {
+        border-inline-end: none;
+      }
+
+      .stat:nth-child(-n+2) {
+        border-bottom: 1px solid #35483D;
+      }
+
+      .stat {
+        padding: 22px 6px;
+      }
+
+      .section {
+        padding: 55px 0;
+      }
+
+      .dialog {
+        padding: 28px 21px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -389,189 +689,258 @@ footer{
   <div class="container nav">
     <a class="logo" href="#home">Mr<span>10x</span></a>
 
-    <nav class="links" aria-label="القائمة الرئيسية">
-      <a href="#home">الرئيسية</a>
-      <a href="#about">كيف يعمل</a>
-      <a href="#services">خدماتنا</a>
-      <a href="#faq">الأسئلة الشائعة</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#home" data-i18n="navHome">الرئيسية</a>
+      <a href="#about" data-i18n="navHow">كيف يعمل</a>
+      <a href="#services" data-i18n="navServices">خدماتنا</a>
+      <a href="#faq" data-i18n="navFaq">الأسئلة الشائعة</a>
     </nav>
 
-    <button class="btn" onclick="openModal('login')">
-      تسجيل الدخول
-    </button>
+    <div class="nav-actions">
+      <button class="lang-btn" id="languageButton"
+              type="button" onclick="toggleLanguage()">
+        English
+      </button>
+
+      <button class="btn" type="button"
+              onclick="openModal('login')"
+              data-i18n="login">
+        تسجيل الدخول
+      </button>
+    </div>
   </div>
 </header>
 
 <main>
 
-<section class="container hero" id="home">
-  <div class="hero-content">
-    <span class="tag">✦ مرحبًا بك في Mr10x</span>
+  <section class="container hero" id="home">
+    <div class="hero-content">
+      <span class="tag" data-i18n="welcome">
+        ✦ مرحبًا بك في Mr10x
+      </span>
 
-    <h1>
-      مستقبل إدارة متجرك
-      <br>
-      <span>يبدأ من هنا.</span>
-    </h1>
+      <h1>
+        <span data-i18n="heroFirst">مستقبل إدارة متجرك</span>
+        <br>
+        <span data-i18n="heroSecond">يبدأ من هنا.</span>
+      </h1>
 
-    <p>
-      منصة رقمية بواجهة بسيطة واحترافية
-      تساعدك على تنظيم طلبات متجرك
-      وإدارة خدماتك من مكان واحد.
-    </p>
+      <p data-i18n="heroDescription">
+        منصة رقمية بواجهة بسيطة واحترافية
+        تساعدك على تنظيم طلبات متجرك
+        وإدارة خدماتك من مكان واحد.
+      </p>
 
-    <div class="actions">
-      <button class="btn" onclick="openModal('register')">
-        ابدأ الآن
-      </button>
-      <a class="btn btn-outline" href="#about">
-        اكتشف المزيد
-      </a>
-    </div>
-  </div>
+      <div class="hero-actions">
+        <button class="btn" type="button"
+                onclick="openModal('register')"
+                data-i18n="startNow">
+          ابدأ الآن
+        </button>
 
-  <div class="panel">
-    <div class="panel-top">
-      <strong>لوحة Mr10x</strong>
-      <span class="pill">معاينة تجريبية</span>
-    </div>
-
-    <div class="step">
-      <div class="step-icon">👤</div>
-      <div>
-        <strong>إنشاء حساب المتجر</strong>
-        <small>أدخل بياناتك الأساسية</small>
+        <a class="btn btn-outline" href="#about"
+           data-i18n="discover">
+          اكتشف المزيد
+        </a>
       </div>
     </div>
 
-    <div class="step">
-      <div class="step-icon">🏪</div>
-      <div>
-        <strong>إدارة معلومات المتجر</strong>
-        <small>تنظيم بيانات نشاطك</small>
+    <div class="preview">
+      <div class="preview-head">
+        <strong data-i18n="panelTitle">لوحة Mr10x</strong>
+        <small data-i18n="demo">معاينة تجريبية</small>
+      </div>
+
+      <div class="preview-row">
+        <span class="emoji">👤</span>
+        <div>
+          <b data-i18n="previewOne">إنشاء حساب المتجر</b>
+          <small data-i18n="previewOneDesc">
+            أدخل بياناتك الأساسية
+          </small>
+        </div>
+      </div>
+
+      <div class="preview-row">
+        <span class="emoji">🏪</span>
+        <div>
+          <b data-i18n="previewTwo">إدارة معلومات المتجر</b>
+          <small data-i18n="previewTwoDesc">
+            تنظيم بيانات نشاطك
+          </small>
+        </div>
+      </div>
+
+      <div class="preview-row">
+        <span class="emoji">✓</span>
+        <div>
+          <b data-i18n="previewThree">متابعة الطلبات</b>
+          <small data-i18n="previewThreeDesc">
+            واجهة جاهزة للتطوير
+          </small>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="step">
-      <div class="step-icon">✓</div>
-      <div>
-        <strong>متابعة الطلبات</strong>
-        <small>واجهة جاهزة للتطوير</small>
+  <div class="container stats-wrap">
+    <div class="stats">
+      <div class="stat">
+        <strong>3s</strong>
+        <span data-i18n="statDelivery">زمن تسليم الكود</span>
+      </div>
+
+      <div class="stat">
+        <strong>99.9%</strong>
+        <span data-i18n="statUptime">وقت التشغيل</span>
+      </div>
+
+      <div class="stat">
+        <strong>∞</strong>
+        <span data-i18n="statPlatforms">منصات مدعومة</span>
+      </div>
+
+      <div class="stat">
+        <strong>24/7</strong>
+        <span data-i18n="statAutomatic">يعمل تلقائيًا</span>
       </div>
     </div>
   </div>
-</section>
 
-<div class="container stats">
-  <div class="stat">
-    <strong>24/7</strong>
-    <span>واجهة متاحة</span>
-  </div>
-  <div class="stat">
-    <strong>RTL</strong>
-    <span>دعم العربية</span>
-  </div>
-  <div class="stat">
-    <strong>100%</strong>
-    <span>تصميم متجاوب</span>
-  </div>
-</div>
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-title">
+        <span class="tag" data-i18n="howTag">كيف يعمل؟</span>
+        <h2 data-i18n="howTitle">كل شيء بخطوات بسيطة</h2>
+        <p data-i18n="howDesc">
+          واجهة سهلة وواضحة لكل عميل.
+        </p>
+      </div>
 
-<section class="content" id="about">
-  <div class="container">
-    <div class="section-head">
-      <span class="tag">كيف يعمل؟</span>
-      <h2>كل شيء بخطوات بسيطة</h2>
-      <p>واجهة سهلة وواضحة لكل عميل.</p>
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon">👤</div>
+          <h3 data-i18n="stepOne">01 — أنشئ حسابك</h3>
+          <p data-i18n="stepOneDesc">
+            أدخل اسمك واسم متجرك وبيانات التواصل.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">🏪</div>
+          <h3 data-i18n="stepTwo">02 — أضف متجرك</h3>
+          <p data-i18n="stepTwoDesc">
+            جهّز المعلومات الأساسية الخاصة بنشاطك.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">📋</div>
+          <h3 data-i18n="stepThree">03 — تابع طلباتك</h3>
+          <p data-i18n="stepThreeDesc">
+            لوحة متابعة الطلبات ضمن خطة تطوير المنصة.
+          </p>
+        </article>
+      </div>
     </div>
+  </section>
 
-    <div class="cards">
-      <article class="card">
-        <div class="symbol">👤</div>
-        <h3>01 — أنشئ حسابك</h3>
-        <p>أدخل اسمك واسم متجرك وبيانات التواصل.</p>
-      </article>
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-title">
+        <span class="tag">Mr10x</span>
+        <h2 data-i18n="servicesTitle">خدمات المنصة</h2>
+        <p data-i18n="servicesDesc">
+          أقسام مقترحة لخدمات متجرك.
+        </p>
+      </div>
 
-      <article class="card">
-        <div class="symbol">🏪</div>
-        <h3>02 — أضف متجرك</h3>
-        <p>جهّز المعلومات الأساسية الخاصة بنشاطك.</p>
-      </article>
-
-      <article class="card">
-        <div class="symbol">📋</div>
-        <h3>03 — تابع طلباتك</h3>
-        <p>لوحة متابعة الطلبات ضمن خطة تطوير المنصة.</p>
-      </article>
+      <div class="services">
+        <div class="service" data-i18n="serviceOne">
+          🛡️ إدارة الحسابات
+        </div>
+        <div class="service" data-i18n="serviceTwo">
+          🏪 إدارة المتاجر
+        </div>
+        <div class="service" data-i18n="serviceThree">
+          📋 متابعة الطلبات
+        </div>
+        <div class="service" data-i18n="serviceFour">
+          📩 طلبات الدعم
+        </div>
+        <div class="service" data-i18n="serviceFive">
+          🔔 الإشعارات
+        </div>
+        <div class="service" data-i18n="serviceSix">
+          ⚙️ إعدادات الحساب
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="content" id="services">
-  <div class="container">
-    <div class="section-head">
-      <span class="tag">Mr10x</span>
-      <h2>خدمات المنصة</h2>
-      <p>أقسام مقترحة لخدمات متجرك.</p>
+  <section class="section">
+    <div class="container">
+      <div class="cta">
+        <h2 data-i18n="ctaTitle">جاهز تبدأ مع Mr10x؟</h2>
+        <p data-i18n="ctaDesc">
+          تعرّف على تجربة إنشاء حساب متجر.
+        </p>
+        <button class="btn" type="button"
+                onclick="openModal('register')"
+                data-i18n="createStore">
+          إنشاء حساب متجر
+        </button>
+      </div>
     </div>
+  </section>
 
-    <div class="services">
-      <div class="service">🛡️ إدارة الحسابات</div>
-      <div class="service">🏪 إدارة المتاجر</div>
-      <div class="service">📋 متابعة الطلبات</div>
-      <div class="service">📩 طلبات الدعم</div>
-      <div class="service">🔔 الإشعارات</div>
-      <div class="service">⚙️ إعدادات الحساب</div>
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-title">
+        <span class="tag" data-i18n="help">المساعدة</span>
+        <h2 data-i18n="faqTitle">الأسئلة الشائعة</h2>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary data-i18n="faqOne">
+            ما هو Mr10x؟
+          </summary>
+          <p data-i18n="faqOneAnswer">
+            منصة قيد التطوير لإدارة خدمات المتاجر وطلباتها.
+          </p>
+        </details>
+
+        <details>
+          <summary data-i18n="faqTwo">
+            هل أستطيع إنشاء حساب الآن؟
+          </summary>
+          <p data-i18n="faqTwoAnswer">
+            يمكنك تجربة النموذج، لكن إنشاء الحسابات الحقيقية غير مفعّل بعد.
+          </p>
+        </details>
+
+        <details>
+          <summary data-i18n="faqThree">
+            كم مدة التواصل المتوقعة؟
+          </summary>
+          <p data-i18n="faqThreeAnswer">
+            بعد تفعيل استقبال الطلبات، المدة المستهدفة من ساعة إلى 24 ساعة بعد مراجعة الطلب.
+          </p>
+        </details>
+      </div>
     </div>
-  </div>
-</section>
-
-<section class="content">
-  <div class="container">
-    <div class="cta">
-      <h2>جاهز تبدأ مع Mr10x؟</h2>
-      <p>تعرّف على تجربة إنشاء حساب متجر.</p>
-      <button class="btn" onclick="openModal('register')">
-        إنشاء حساب متجر
-      </button>
-    </div>
-  </div>
-</section>
-
-<section class="content" id="faq">
-  <div class="container">
-    <div class="section-head">
-      <span class="tag">المساعدة</span>
-      <h2>الأسئلة الشائعة</h2>
-    </div>
-
-    <div class="faq">
-      <details>
-        <summary>ما هو Mr10x؟</summary>
-        <p>منصة قيد التطوير لإدارة خدمات المتاجر وطلباتها.</p>
-      </details>
-
-      <details>
-        <summary>هل أستطيع إنشاء حساب الآن؟</summary>
-        <p>يمكنك تجربة النموذج، لكن إنشاء الحسابات الحقيقية غير مفعّل بعد.</p>
-      </details>
-
-      <details>
-        <summary>كم مدة التواصل المتوقعة؟</summary>
-        <p>بعد تفعيل استقبال الطلبات، المدة المستهدفة من ساعة إلى 24 ساعة بعد مراجعة الطلب.</p>
-      </details>
-    </div>
-  </div>
-</section>
+  </section>
 
 </main>
 
 <footer>
   <div class="logo">Mr<span>10x</span></div>
-  <p>© 2026 Mr10x — جميع الحقوق محفوظة</p>
+  <p data-i18n="footer">
+    © 2026 Mr10x — جميع الحقوق محفوظة
+  </p>
 </footer>
 
-<!-- نافذة الدخول والتسجيل -->
 <div class="modal" id="accountModal"
      role="dialog"
      aria-modal="true"
@@ -581,28 +950,34 @@ footer{
   <div class="dialog">
     <button class="close" type="button"
             onclick="closeModal()"
-            aria-label="إغلاق">×</button>
+            aria-label="Close">×</button>
 
     <h2 id="modalTitle">Mr10x</h2>
-    <p class="subtitle">مرحبًا بك في منصتك</p>
+    <p class="dialog-sub" data-i18n="modalSubtitle">
+      مرحبًا بك في منصتك
+    </p>
 
     <div class="tabs">
       <button id="loginTab" class="tab active"
               type="button"
-              onclick="switchTab('login')">
+              onclick="switchTab('login')"
+              data-i18n="login">
         تسجيل الدخول
       </button>
 
       <button id="registerTab" class="tab"
               type="button"
-              onclick="switchTab('register')">
+              onclick="switchTab('register')"
+              data-i18n="createAccount">
         إنشاء حساب
       </button>
     </div>
 
     <form id="loginForm">
       <div class="field">
-        <label for="loginEmail">البريد الإلكتروني</label>
+        <label for="loginEmail" data-i18n="email">
+          البريد الإلكتروني
+        </label>
         <input type="email" id="loginEmail"
                autocomplete="username"
                placeholder="example@email.com"
@@ -610,14 +985,16 @@ footer{
       </div>
 
       <div class="field">
-        <label for="loginPassword">كلمة المرور</label>
+        <label for="loginPassword" data-i18n="password">
+          كلمة المرور
+        </label>
         <input type="password" id="loginPassword"
                autocomplete="current-password"
-               placeholder="كلمة مرور حساب Mr10x"
                required>
       </div>
 
-      <button type="submit" class="btn full">
+      <button type="submit" class="btn full"
+              data-i18n="login">
         تسجيل الدخول
       </button>
 
@@ -627,29 +1004,35 @@ footer{
 
     <form id="registerForm" class="hidden">
       <div class="field">
-        <label for="customerName">اسم العميل</label>
+        <label for="customerName" data-i18n="customerName">
+          اسم العميل
+        </label>
         <input type="text" id="customerName"
                autocomplete="name"
                maxlength="80"
-               placeholder="أدخل اسمك" required>
-      </div>
-
-      <div class="field">
-        <label for="storeName">اسم المتجر</label>
-        <input type="text" id="storeName"
-               maxlength="100"
-               placeholder="أدخل اسم متجرك" required>
-      </div>
-
-      <div class="field">
-        <label for="registerEmail">البريد الإلكتروني</label>
-        <input type="email" id="registerEmail"
-               autocomplete="email"
-               placeholder="example@email.com"
                required>
       </div>
 
-      <button type="submit" class="btn full">
+      <div class="field">
+        <label for="storeName" data-i18n="storeName">
+          اسم المتجر
+        </label>
+        <input type="text" id="storeName"
+               maxlength="100"
+               required>
+      </div>
+
+      <div class="field">
+        <label for="registerEmail" data-i18n="email">
+          البريد الإلكتروني
+        </label>
+        <input type="email" id="registerEmail"
+               autocomplete="email"
+               required>
+      </div>
+
+      <button type="submit" class="btn full"
+              data-i18n="submitRequest">
         متابعة طلب إنشاء الحساب
       </button>
 
@@ -657,19 +1040,176 @@ footer{
          role="status"></p>
     </form>
 
-    <div class="notice">
-      ⏳ مدة التواصل المستهدفة
-      <br>
-      <strong>من ساعة إلى 24 ساعة</strong>
-      <br>
-      بعد تفعيل استقبال الطلبات ومراجعتها
-      <br>
-      <small>النماذج حاليًا تجريبية ولا ترسل البيانات.</small>
+    <div class="notice" data-i18n="notice">
+      مدة التواصل المستهدفة: من ساعة إلى 24 ساعة
+      بعد تفعيل استقبال الطلبات ومراجعتها.
+      النماذج حاليًا تجريبية.
     </div>
   </div>
 </div>
 
 <script>
+const translations = {
+  ar: {
+    navHome: "الرئيسية",
+    navHow: "كيف يعمل",
+    navServices: "خدماتنا",
+    navFaq: "الأسئلة الشائعة",
+    login: "تسجيل الدخول",
+    welcome: "✦ مرحبًا بك في Mr10x",
+    heroFirst: "مستقبل إدارة متجرك",
+    heroSecond: "يبدأ من هنا.",
+    heroDescription: "منصة رقمية بواجهة بسيطة واحترافية تساعدك على تنظيم طلبات متجرك وإدارة خدماتك من مكان واحد.",
+    startNow: "ابدأ الآن",
+    discover: "اكتشف المزيد",
+    panelTitle: "لوحة Mr10x",
+    demo: "معاينة تجريبية",
+    previewOne: "إنشاء حساب المتجر",
+    previewOneDesc: "أدخل بياناتك الأساسية",
+    previewTwo: "إدارة معلومات المتجر",
+    previewTwoDesc: "تنظيم بيانات نشاطك",
+    previewThree: "متابعة الطلبات",
+    previewThreeDesc: "واجهة جاهزة للتطوير",
+    statDelivery: "زمن تسليم الكود",
+    statUptime: "وقت التشغيل",
+    statPlatforms: "منصات مدعومة",
+    statAutomatic: "يعمل تلقائيًا",
+    howTag: "كيف يعمل؟",
+    howTitle: "كل شيء بخطوات بسيطة",
+    howDesc: "واجهة سهلة وواضحة لكل عميل.",
+    stepOne: "01 — أنشئ حسابك",
+    stepOneDesc: "أدخل اسمك واسم متجرك وبيانات التواصل.",
+    stepTwo: "02 — أضف متجرك",
+    stepTwoDesc: "جهّز المعلومات الأساسية الخاصة بنشاطك.",
+    stepThree: "03 — تابع طلباتك",
+    stepThreeDesc: "لوحة متابعة الطلبات ضمن خطة تطوير المنصة.",
+    servicesTitle: "خدمات المنصة",
+    servicesDesc: "أقسام مقترحة لخدمات متجرك.",
+    serviceOne: "🛡️ إدارة الحسابات",
+    serviceTwo: "🏪 إدارة المتاجر",
+    serviceThree: "📋 متابعة الطلبات",
+    serviceFour: "📩 طلبات الدعم",
+    serviceFive: "🔔 الإشعارات",
+    serviceSix: "⚙️ إعدادات الحساب",
+    ctaTitle: "جاهز تبدأ مع Mr10x؟",
+    ctaDesc: "تعرّف على تجربة إنشاء حساب متجر.",
+    createStore: "إنشاء حساب متجر",
+    help: "المساعدة",
+    faqTitle: "الأسئلة الشائعة",
+    faqOne: "ما هو Mr10x؟",
+    faqOneAnswer: "منصة قيد التطوير لإدارة خدمات المتاجر وطلباتها.",
+    faqTwo: "هل أستطيع إنشاء حساب الآن؟",
+    faqTwoAnswer: "يمكنك تجربة النموذج، لكن إنشاء الحسابات الحقيقية غير مفعّل بعد.",
+    faqThree: "كم مدة التواصل المتوقعة؟",
+    faqThreeAnswer: "بعد تفعيل استقبال الطلبات، المدة المستهدفة من ساعة إلى 24 ساعة بعد مراجعة الطلب.",
+    footer: "© 2026 Mr10x — جميع الحقوق محفوظة",
+    modalSubtitle: "مرحبًا بك في منصتك",
+    createAccount: "إنشاء حساب",
+    email: "البريد الإلكتروني",
+    password: "كلمة المرور",
+    customerName: "اسم العميل",
+    storeName: "اسم المتجر",
+    submitRequest: "متابعة طلب إنشاء الحساب",
+    notice: "مدة التواصل المستهدفة: من ساعة إلى 24 ساعة بعد تفعيل استقبال الطلبات ومراجعتها. النماذج حاليًا تجريبية.",
+    loginStatus: "تسجيل الدخول غير مفعّل بعد. لم تُرسل أي بيانات.",
+    registerStatus: "النموذج مكتمل، لكنه تجريبي ولم يُرسل طلبًا. بعد تفعيل استقبال الطلبات، سوف يتم التواصل معكم خلال ساعة إلى 24 ساعة بعد مراجعة طلبكم. شكرًا لاختياركم Mr10x."
+  },
+
+  en: {
+    navHome: "Home",
+    navHow: "How It Works",
+    navServices: "Services",
+    navFaq: "FAQ",
+    login: "Log In",
+    welcome: "✦ Welcome to Mr10x",
+    heroFirst: "The Future of Store Management",
+    heroSecond: "Starts Here.",
+    heroDescription: "A modern digital platform designed to help you organize your store requests and manage your services in one place.",
+    startNow: "Get Started",
+    discover: "Discover More",
+    panelTitle: "Mr10x Dashboard",
+    demo: "Demo Preview",
+    previewOne: "Create a Store Account",
+    previewOneDesc: "Enter your basic information",
+    previewTwo: "Manage Store Information",
+    previewTwoDesc: "Organize your business details",
+    previewThree: "Track Requests",
+    previewThreeDesc: "A dashboard ready for development",
+    statDelivery: "Code Delivery Time",
+    statUptime: "Uptime",
+    statPlatforms: "Supported Platforms",
+    statAutomatic: "Automated Operation",
+    howTag: "How It Works",
+    howTitle: "Three Simple Steps",
+    howDesc: "A clear and simple experience for every customer.",
+    stepOne: "01 — Create Your Account",
+    stepOneDesc: "Enter your name, store name, and contact information.",
+    stepTwo: "02 — Add Your Store",
+    stepTwoDesc: "Prepare your business information.",
+    stepThree: "03 — Track Your Requests",
+    stepThreeDesc: "Request tracking is planned for future development.",
+    servicesTitle: "Platform Services",
+    servicesDesc: "Planned sections for managing your store.",
+    serviceOne: "🛡️ Account Management",
+    serviceTwo: "🏪 Store Management",
+    serviceThree: "📋 Request Tracking",
+    serviceFour: "📩 Support Requests",
+    serviceFive: "🔔 Notifications",
+    serviceSix: "⚙️ Account Settings",
+    ctaTitle: "Ready to Get Started with Mr10x?",
+    ctaDesc: "Explore our store registration experience.",
+    createStore: "Create Store Account",
+    help: "Help Center",
+    faqTitle: "Frequently Asked Questions",
+    faqOne: "What is Mr10x?",
+    faqOneAnswer: "Mr10x is a platform under development for managing store services and requests.",
+    faqTwo: "Can I create an account now?",
+    faqTwoAnswer: "You can try the form, but real account registration is not enabled yet.",
+    faqThree: "How long does it take to get a response?",
+    faqThreeAnswer: "Once requests are enabled, our target response time will be 1 to 24 hours after review.",
+    footer: "© 2026 Mr10x — All Rights Reserved",
+    modalSubtitle: "Welcome to Your Platform",
+    createAccount: "Create Account",
+    email: "Email Address",
+    password: "Password",
+    customerName: "Customer Name",
+    storeName: "Store Name",
+    submitRequest: "Continue Registration Request",
+    notice: "Target response time: 1 to 24 hours after request handling is enabled and your request is reviewed. Forms are currently demos.",
+    loginStatus: "Login is not enabled yet. No data was sent.",
+    registerStatus: "The form is complete, but this is a demo and no request was sent. Once submissions are enabled, we aim to contact you within 1 to 24 hours after reviewing your request. Thank you for choosing Mr10x."
+  }
+};
+
+let currentLanguage = 'ar';
+
+function applyLanguage(language) {
+  currentLanguage = language;
+  document.documentElement.lang = language;
+  document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+  document.body.classList.toggle('english', language === 'en');
+
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.dataset.i18n;
+    if (translations[language][key]) {
+      element.textContent = translations[language][key];
+    }
+  });
+
+  document.getElementById('languageButton').textContent =
+    language === 'ar' ? 'English' : 'العربية';
+
+  document.title =
+    language === 'ar' ? 'Mr10x | الرئيسية' : 'Mr10x | Home';
+
+  document.getElementById('loginStatus').textContent = '';
+  document.getElementById('registerStatus').textContent = '';
+}
+
+function toggleLanguage() {
+  applyLanguage(currentLanguage === 'ar' ? 'en' : 'ar');
+}
+
 const modal = document.getElementById('accountModal');
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
@@ -677,65 +1217,69 @@ const registerForm = document.getElementById('registerForm');
 function openModal(tab = 'login') {
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
+  document.body.classList.add('modal-open');
   switchTab(tab);
-  setTimeout(() => {
-    const field = modal.querySelector(
-      tab === 'login' ? '#loginEmail' : '#customerName'
-    );
-    if (field) field.focus();
-  }, 50);
+
+  const input = tab === 'login'
+    ? document.getElementById('loginEmail')
+    : document.getElementById('customerName');
+
+  input.focus();
 }
 
 function closeModal() {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
+  document.body.classList.remove('modal-open');
 }
 
 function switchTab(tab) {
-  const login = tab === 'login';
+  const isLogin = tab === 'login';
 
-  loginForm.classList.toggle('hidden', !login);
-  registerForm.classList.toggle('hidden', login);
+  loginForm.classList.toggle('hidden', !isLogin);
+  registerForm.classList.toggle('hidden', isLogin);
 
   document.getElementById('loginTab')
-    .classList.toggle('active', login);
+    .classList.toggle('active', isLogin);
 
   document.getElementById('registerTab')
-    .classList.toggle('active', !login);
+    .classList.toggle('active', !isLogin);
 
   document.getElementById('loginStatus').textContent = '';
   document.getElementById('registerStatus').textContent = '';
 }
 
-loginForm.addEventListener('submit', event => {
+loginForm.addEventListener('submit', function(event) {
   event.preventDefault();
 
   document.getElementById('loginStatus').textContent =
-    'تسجيل الدخول غير مفعّل بعد. لا يتم إرسال كلمة المرور أو حفظها.';
+    translations[currentLanguage].loginStatus;
 
   document.getElementById('loginPassword').value = '';
 });
 
-registerForm.addEventListener('submit', event => {
+registerForm.addEventListener('submit', function(event) {
   event.preventDefault();
 
   if (!registerForm.reportValidity()) return;
 
   document.getElementById('registerStatus').textContent =
-    '✓ النموذج مكتمل. بعد تفعيل استقبال الطلبات، سوف يتم التواصل معكم خلال ساعة إلى 24 ساعة بعد مراجعة طلبكم. شكرًا لاختياركم Mr10x 💚';
+    translations[currentLanguage].registerStatus;
 });
 
-modal.addEventListener('click', event => {
-  if (event.target === modal) closeModal();
+modal.addEventListener('click', function(event) {
+  if (event.target === modal) {
+    closeModal();
+  }
 });
 
-document.addEventListener('keydown', event => {
+document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape' && modal.classList.contains('open')) {
     closeModal();
   }
 });
+
+applyLanguage('ar');
 </script>
 
 </body>
