@@ -100,7 +100,6 @@
       text-align: center;
       font-size: 38px;
       font-weight: 900;
-      letter-spacing: -.8px;
       color: var(--beige);
     }
 
@@ -148,8 +147,7 @@
 
     input:focus {
       border-color: var(--sage);
-      box-shadow: 0 0 0 3px
-        rgba(167,196,160,.14);
+      box-shadow: 0 0 0 3px rgba(167,196,160,.14);
       transform: translateY(-1px);
     }
 
@@ -160,25 +158,18 @@
       margin-top: 8px;
       border: none;
       border-radius: 12px;
-      background: linear-gradient(
-        110deg,
-        #A7C4A0,
-        #E0D7C1
-      );
+      background: linear-gradient(110deg, #A7C4A0, #E0D7C1);
       color: #1E302A;
       font-family: inherit;
       font-size: 15px;
       font-weight: 900;
       cursor: pointer;
-      transition:
-        transform .25s,
-        box-shadow .25s;
+      transition: transform .25s, box-shadow .25s;
     }
 
     .submit-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 28px
-        rgba(167,196,160,.2);
+      box-shadow: 0 12px 28px rgba(167,196,160,.2);
     }
 
     .submit-btn:active {
@@ -210,7 +201,6 @@
       font-size: 14px;
       font-weight: 800;
       text-decoration: none;
-      transition: color .2s;
     }
 
     .back:hover {
@@ -228,9 +218,10 @@
     #registerStatus {
       margin: 16px 0 0;
       text-align: center;
-      font-size: 13px;
+      font-size: 14px;
+      font-weight: 700;
       color: var(--sage);
-      line-height: 1.9;
+      line-height: 2;
     }
 
     @keyframes fadeUp {
@@ -288,9 +279,7 @@
       <form id="registerForm">
 
         <div class="field">
-          <label for="customerName">
-            اسم العميل
-          </label>
+          <label for="customerName">اسم العميل</label>
           <input
             type="text"
             id="customerName"
@@ -303,9 +292,7 @@
         </div>
 
         <div class="field">
-          <label for="storeName">
-            اسم المتجر
-          </label>
+          <label for="storeName">اسم المتجر</label>
           <input
             type="text"
             id="storeName"
@@ -317,9 +304,7 @@
         </div>
 
         <div class="field">
-          <label for="email">
-            البريد الإلكتروني
-          </label>
+          <label for="email">البريد الإلكتروني</label>
           <input
             type="email"
             id="email"
@@ -389,8 +374,8 @@
           'registerStatus'
         );
 
-        status.textContent =
-          '✓ النموذج مكتمل. إنشاء الحساب وإرسال الطلب غير مفعّلين حاليًا. بعد تفعيل استقبال الطلبات، ستكون مدة التواصل المتوقعة من ساعة إلى 24 ساعة.';
+        status.innerHTML =
+          '✅ سوف يتم التواصل معكم خلال ساعة إلى 24 ساعة بعد مراجعة طلبكم.<br>شكرًا لاختياركم Mr10x 💚';
       });
   </script>
 
