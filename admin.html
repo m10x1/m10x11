@@ -2,655 +2,357 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mr10x | لوحة المدير</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#14231b;
-  --panel:#203329;
-  --border:#405947;
-  --green:#b9d0a8;
-  --cream:#f2ecdc;
-  --muted:#b6c3b7;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--cream);
-  font-family:Cairo,sans-serif;
-  line-height:1.8;
-}
-button,input{font:inherit}
-button{
-  border:0;
-  border-radius:10px;
-  padding:11px 19px;
-  cursor:pointer;
-  font-weight:800;
-  background:var(--green);
-  color:var(--bg);
-}
-button:hover{filter:brightness(1.1)}
-button:disabled{opacity:.5}
-input{
-  width:100%;
-  background:#17271e;
-  color:var(--cream);
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:12px;
-  outline:none;
-}
-input:focus{border-color:var(--green)}
-.wrap{
-  max-width:1200px;
-  margin:auto;
-  padding:25px 20px;
-}
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
-  padding-bottom:20px;
-  border-bottom:1px solid var(--border);
-}
-.logo{font-weight:900;font-size:29px}
-.logo span{color:var(--green)}
-.muted{color:var(--muted)}
-.card{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:25px;
-  margin:18px 0;
-}
-.login{
-  max-width:450px;
-  margin:65px auto;
-}
-.field{margin:16px 0}
-.field label{
-  display:block;
-  font-size:13px;
-  margin-bottom:7px;
-  color:var(--muted);
-}
-.full{width:100%}
-.outline{
-  background:transparent;
-  border:1px solid var(--border);
-  color:var(--cream);
-}
-.danger{
-  background:#643437;
-  color:white;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-.metric{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:22px;
-}
-.metric strong{
-  display:block;
-  color:var(--green);
-  font-size:30px;
-}
-.metric span{
-  color:var(--muted);
-  font-size:13px;
-}
-.table-wrap{overflow-x:auto}
-table{
-  width:100%;
-  min-width:730px;
-  border-collapse:collapse;
-}
-th,td{
-  padding:12px 9px;
-  text-align:right;
-  border-bottom:1px solid var(--border);
-  font-size:13px;
-}
-th{color:var(--green)}
-td button{
-  font-size:12px;
-  padding:7px 11px;
-  margin:2px;
-}
-.toolbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.message{
-  font-size:13px;
-  padding-top:12px;
-  min-height:30px;
-}
-.hidden{display:none!important}
-@media(max-width:650px){
-  .grid{grid-template-columns:1fr}
-  .card{padding:17px}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mr10x | لوحة المدير</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:#09120f;color:#eaf8f0;font-family:Cairo,sans-serif}
+    .wrap{max-width:850px;margin:35px auto;padding:16px}
+    .card{background:#14221d;border:1px solid #2a4538;border-radius:18px;padding:25px;margin-bottom:20px}
+    h1{color:#40dca2;margin:0 0 8px}
+    h2{margin-top:0;font-size:21px}
+    p,.muted{color:#9ab2a6}
+    label{display:block;margin:13px 0 6px;font-weight:700}
+    input,select{width:100%;padding:13px;background:#0d1914;color:white;border:1px solid #345345;border-radius:10px;font:inherit}
+    button{background:#37d5a0;color:#062017;border:0;border-radius:10px;padding:13px 20px;font:inherit;font-weight:800;cursor:pointer}
+    button:disabled{opacity:.5;cursor:wait}
+    .secondary{background:#263c32;color:white}
+    .danger{background:#663a3a;color:white}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .row button{flex:1}
+    .hidden{display:none}
+    .message{margin-top:15px;white-space:pre-wrap}
+    .success{color:#4ae5ab}
+    .error{color:#ff9a9a}
+    .linkbox{background:#0b1812;border:1px solid #365f49;border-radius:10px;padding:13px;margin:12px 0;overflow-wrap:anywhere;direction:ltr;text-align:left}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}
+    small{color:#9ab2a6}
+    a{color:#4ae5ab}
+  </style>
 </head>
 <body>
-
 <div class="wrap">
 
-  <header class="header">
-    <div class="logo">Mr<span>10x</span> | الإدارة</div>
+  <div class="top">
     <div>
-      <span id="account" class="muted"></span>
-      <button id="logout" class="outline hidden">
-        تسجيل الخروج
-      </button>
+      <h1>Mr10x</h1>
+      <p>لوحة إدارة المتاجر والاشتراكات</p>
     </div>
-  </header>
+    <a href="index.html">الرئيسية</a>
+  </div>
 
-  <section id="loginView" class="card login">
-    <h2>تسجيل دخول المدير</h2>
-    <p class="muted">
-      سجّل الدخول بحساب الإدارة الخاص بك.
-    </p>
+  <section id="loginSection" class="card">
+    <h2>دخول المدير</h2>
 
-    <form id="loginForm">
-      <div class="field">
-        <label>البريد الإلكتروني</label>
-        <input
-          id="email"
-          type="email"
-          autocomplete="username"
-          required
-        >
-      </div>
+    <label for="loginEmail">البريد الإلكتروني</label>
+    <input id="loginEmail" type="email" autocomplete="username">
 
-      <div class="field">
-        <label>كلمة المرور</label>
-        <input
-          id="password"
-          type="password"
-          autocomplete="current-password"
-          required
-        >
-      </div>
+    <label for="loginPassword">كلمة المرور</label>
+    <input id="loginPassword" type="password" autocomplete="current-password">
 
-      <button id="loginButton" class="full">
-        تسجيل الدخول
-      </button>
-    </form>
+    <div class="row">
+      <button id="loginBtn" onclick="login()">تسجيل الدخول</button>
+    </div>
 
     <div id="loginMessage" class="message"></div>
   </section>
 
   <main id="dashboard" class="hidden">
 
-    <h1>لوحة تحكم Mr10x</h1>
-    <p class="muted">
-      إدارة المتاجر والاشتراكات وروابط العملاء.
-    </p>
-
-    <div class="grid">
-      <div class="metric">
-        <strong id="storesCount">0</strong>
-        <span>إجمالي المتاجر</span>
-      </div>
-
-      <div class="metric">
-        <strong id="pendingCount">0</strong>
-        <span>طلبات بانتظار الموافقة</span>
-      </div>
-
-      <div class="metric">
-        <strong id="linksCount">0</strong>
-        <span>روابط العملاء المعروضة</span>
-      </div>
-    </div>
-
     <section class="card">
-      <div class="toolbar">
-        <h2>إدارة المتاجر</h2>
-        <button id="refresh" class="outline">
-          تحديث البيانات
-        </button>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>المتجر</th>
-              <th>الحالة</th>
-              <th>تاريخ التسجيل</th>
-              <th>الاشتراك</th>
-              <th>الإجراءات</th>
-            </tr>
-          </thead>
-          <tbody id="storesBody"></tbody>
-        </table>
+      <div class="top">
+        <div>
+          <h2>مرحبًا بالمدير</h2>
+          <small id="adminEmail"></small>
+        </div>
+        <button class="danger" onclick="logout()">خروج</button>
       </div>
     </section>
 
     <section class="card">
-      <h2>روابط العملاء</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>المتجر</th>
-              <th>المنتج</th>
-              <th>رقم الطلب</th>
-              <th>انتهاء الصلاحية</th>
-              <th>الحالة</th>
-              <th>الإجراء</th>
-            </tr>
-          </thead>
-          <tbody id="linksBody"></tbody>
-        </table>
+      <h2>إنشاء رابط دعوة لمتجر</h2>
+      <p>أدخل بيانات المتجر وحدد مدة الاشتراك.</p>
+
+      <label for="storeName">اسم المتجر</label>
+      <input id="storeName" placeholder="مثال: متجر النخبة" maxlength="100">
+
+      <label for="ownerEmail">البريد الإلكتروني لصاحب المتجر</label>
+      <input id="ownerEmail" type="email" placeholder="owner@example.com">
+
+      <label for="duration">مدة الاشتراك</label>
+      <select id="duration">
+        <option value="7">7 أيام</option>
+        <option value="30" selected>30 يومًا</option>
+        <option value="90">90 يومًا</option>
+        <option value="180">180 يومًا</option>
+        <option value="365">سنة كاملة</option>
+      </select>
+
+      <div class="row">
+        <button id="createBtn" onclick="createInvite()">إنشاء رابط الدعوة</button>
       </div>
+
+      <div id="createMessage" class="message"></div>
     </section>
 
-    <div id="dashboardMessage" class="message"></div>
+    <section id="resultSection" class="card hidden">
+      <h2>تم إنشاء رابط الدعوة</h2>
+      <p>انسخ الرابط وأرسله لصاحب المتجر.</p>
+
+      <div id="inviteLink" class="linkbox"></div>
+
+      <div class="row">
+        <button onclick="copyInvite()">نسخ رابط الدعوة</button>
+        <button class="secondary" onclick="openInvite()">فتح الرابط</button>
+      </div>
+
+      <p>تنتهي صلاحية الدعوة بعد 48 ساعة من إنشائها. يبدأ الاشتراك بعد قبول الدعوة.</p>
+    </section>
+
+    <section class="card">
+      <h2>روابط الدعوات المنشأة من هذا المتصفح</h2>
+      <p>هذه قائمة محلية للروابط التي أنشأتها هنا، وليست سجلًا شاملًا من قاعدة البيانات.</p>
+      <div id="recentInvites"></div>
+    </section>
 
   </main>
 </div>
 
-<script type="module">
-
-import {createClient}
-from "https://esm.sh/@supabase/supabase-js@2";
-
-/* Supabase Configuration */
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
 const SUPABASE_URL =
-"https://ojlkgvwzzkctjywooogx.supabase.co";
+  "https://ojlkgvwzzkctjywooogx.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_YDaAejoRn0hHcECxdQmVqw_EBcdgNiD";
+  "sb_publishable_YDaAejoRn0hHcECxdQmVqw_EBcdgNiD";
 
-const supabase = createClient(
+const db = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
+let currentInvite = "";
+
 const $ = id => document.getElementById(id);
 
-const show = (id,visible) => {
-  $(id).classList.toggle("hidden",!visible);
-};
-
-function message(id,text,error=false){
-  const el=$(id);
-  el.textContent=text;
-  el.style.color=error?"#f5a4a4":"#b9d0a8";
+function message(id, text, error = false) {
+  const el = $(id);
+  el.textContent = text;
+  el.className = "message " + (error ? "error" : "success");
 }
 
-function dateText(value){
-  if(!value)return "—";
-  return new Date(value).toLocaleDateString("ar-SA");
+async function login() {
+  const email = $("loginEmail").value.trim();
+  const password = $("loginPassword").value;
+
+  if (!email || !password) {
+    message("loginMessage", "أدخل البريد وكلمة المرور", true);
+    return;
+  }
+
+  $("loginBtn").disabled = true;
+
+  const { error } = await db.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  $("loginBtn").disabled = false;
+
+  if (error) {
+    message("loginMessage", error.message, true);
+    return;
+  }
+
+  await loadDashboard();
 }
 
-function td(row,text){
-  const cell=document.createElement("td");
-  cell.textContent=String(text??"—");
-  row.appendChild(cell);
-  return cell;
-}
+async function loadDashboard() {
+  const { data: { user } } = await db.auth.getUser();
 
-function btn(text,handler,style=""){
-  const button=document.createElement("button");
-  button.textContent=text;
-  button.className=style;
+  if (!user) {
+    $("loginSection").classList.remove("hidden");
+    $("dashboard").classList.add("hidden");
+    return;
+  }
 
-  button.onclick=async()=>{
-    button.disabled=true;
-    try{
-      await handler();
-    }finally{
-      button.disabled=false;
-    }
-  };
-
-  return button;
-}
-
-const statusNames={
-  pending:"بانتظار الموافقة",
-  approved:"مقبول",
-  rejected:"مرفوض",
-  suspended:"موقوف"
-};
-
-let stores=[];
-
-async function checkAdmin(){
-  const {data:{user},error}=await supabase.auth.getUser();
-
-  if(error||!user)return null;
-
-  const result=await supabase
+  // التحقق من صلاحية المدير عبر قاعدة البيانات
+  const { data, error } = await db
     .from("mr_admins")
     .select("user_id")
-    .eq("user_id",user.id)
+    .eq("user_id", user.id)
     .maybeSingle();
 
-  if(result.error)throw result.error;
-
-  return result.data?user:null;
-}
-
-async function initialize(){
-  try{
-    const user=await checkAdmin();
-
-    show("loginView",!user);
-    show("dashboard",!!user);
-    show("logout",!!user);
-
-    $("account").textContent=user?.email||"";
-
-    if(user){
-      await loadData();
-    }
-  }catch(error){
-    show("loginView",true);
-    show("dashboard",false);
-    message("loginMessage",error.message,true);
-  }
-}
-
-$("loginForm").onsubmit=async event=>{
-  event.preventDefault();
-
-  const button=$("loginButton");
-  button.disabled=true;
-
-  message("loginMessage","جارٍ تسجيل الدخول...");
-
-  try{
-    const {error}=await supabase.auth
-      .signInWithPassword({
-        email:$("email").value.trim(),
-        password:$("password").value
-      });
-
-    if(error)throw error;
-
-    const user=await checkAdmin();
-
-    if(!user){
-      await supabase.auth.signOut();
-      throw new Error("هذا الحساب لا يملك صلاحية المدير");
-    }
-
-    $("password").value="";
-    await initialize();
-
-  }catch(error){
-    message("loginMessage",error.message,true);
-  }finally{
-    button.disabled=false;
-  }
-};
-
-$("logout").onclick=async()=>{
-  await supabase.auth.signOut();
-  await initialize();
-};
-
-$("refresh").onclick=loadData;
-
-async function loadData(){
-  try{
-    message("dashboardMessage","جارٍ تحميل البيانات...");
-
-    const [storeResult,subResult,linkResult]=
-      await Promise.all([
-        supabase.from("mr_stores")
-          .select("id,store_name,status,created_at")
-          .order("created_at",{ascending:false}),
-
-        supabase.from("mr_subscriptions")
-          .select("id,store_id,starts_at,expires_at"),
-
-        supabase.from("mr_customer_links")
-          .select("id,store_id,product_name,order_reference,expires_at,is_active")
-          .order("created_at",{ascending:false})
-          .limit(200)
-      ]);
-
-    for(const result of [
-      storeResult,
-      subResult,
-      linkResult
-    ]){
-      if(result.error)throw result.error;
-    }
-
-    stores=storeResult.data||[];
-
-    const subscriptions=subResult.data||[];
-    const links=linkResult.data||[];
-
-    $("storesCount").textContent=stores.length;
-    $("pendingCount").textContent=
-      stores.filter(s=>s.status==="pending").length;
-
-    $("linksCount").textContent=links.length;
-
-    renderStores(stores,subscriptions);
-    renderLinks(links);
-
-    message("dashboardMessage","تم تحديث البيانات بنجاح");
-
-  }catch(error){
-    message("dashboardMessage",error.message,true);
-  }
-}
-
-function renderStores(items,subscriptions){
-  const body=$("storesBody");
-  body.replaceChildren();
-
-  if(items.length===0){
-    const row=document.createElement("tr");
-    td(row,"لا توجد متاجر مسجلة").colSpan=5;
-    body.appendChild(row);
+  if (error || !data) {
+    $("loginSection").classList.remove("hidden");
+    $("dashboard").classList.add("hidden");
+    message(
+      "loginMessage",
+      "هذا الحساب غير مصرح له بدخول لوحة المدير",
+      true
+    );
     return;
   }
 
-  for(const store of items){
-    const row=document.createElement("tr");
-
-    td(row,store.store_name);
-    td(row,statusNames[store.status]||store.status);
-    td(row,dateText(store.created_at));
-
-    const activeSubscription=subscriptions.find(sub=>
-      sub.store_id===store.id &&
-      new Date(sub.starts_at)<=new Date() &&
-      new Date(sub.expires_at)>new Date()
-    );
-
-    td(row,activeSubscription
-      ?dateText(activeSubscription.expires_at)
-      :"لا يوجد اشتراك نشط"
-    );
-
-    const actions=document.createElement("td");
-
-    if(store.status!=="approved"){
-      actions.appendChild(
-        btn("قبول",()=>changeStore(store.id,"approved"))
-      );
-    }
-
-    if(store.status!=="rejected"){
-      actions.appendChild(
-        btn("رفض",()=>changeStore(store.id,"rejected"),"danger")
-      );
-    }
-
-    if(store.status==="approved"){
-      actions.appendChild(
-        btn("إيقاف",()=>changeStore(store.id,"suspended"),"outline")
-      );
-    }
-
-    actions.appendChild(
-      btn("اشتراك",()=>addSubscription(store),"outline")
-    );
-
-    row.appendChild(actions);
-    body.appendChild(row);
-  }
+  $("loginSection").classList.add("hidden");
+  $("dashboard").classList.remove("hidden");
+  $("adminEmail").textContent = user.email;
+  renderRecent();
 }
 
-async function changeStore(id,status){
-  const label=statusNames[status]||status;
+async function createInvite() {
+  const name = $("storeName").value.trim();
+  const email = $("ownerEmail").value.trim().toLowerCase();
+  const days = Number($("duration").value);
 
-  if(!confirm("هل تريد تغيير حالة المتجر إلى "+label+"؟")){
+  if (name.length < 2 || !email.includes("@")) {
+    message(
+      "createMessage",
+      "تأكد من اسم المتجر والبريد الإلكتروني",
+      true
+    );
     return;
   }
 
-  try{
-    const result=await supabase
-      .from("mr_stores")
-      .update({
-        status,
-        approved_at:status==="approved"
-          ?new Date().toISOString()
-          :null
-      })
-      .eq("id",id);
+  $("createBtn").disabled = true;
+  message("createMessage", "جاري إنشاء الدعوة...");
 
-    if(result.error)throw result.error;
-
-    await loadData();
-
-  }catch(error){
-    message("dashboardMessage",error.message,true);
-  }
-}
-
-async function addSubscription(store){
-  if(store.status!=="approved"){
-    alert("يجب قبول المتجر أولًا");
-    return;
-  }
-
-  const input=prompt(
-    "أدخل مدة اشتراك "+store.store_name+" بالأيام",
-    "30"
+  const { data, error } = await db.rpc(
+    "mr10_create_invite",
+    {
+      p_store_name: name,
+      p_email: email,
+      p_days: days
+    }
   );
 
-  if(input===null)return;
+  $("createBtn").disabled = false;
 
-  const days=Number(input);
-
-  if(!Number.isInteger(days)||days<1||days>3650){
-    alert("أدخل مدة صحيحة بين 1 و3650 يومًا");
+  if (error) {
+    message("createMessage", error.message, true);
     return;
   }
 
-  if(!confirm("تفعيل اشتراك لمدة "+days+" يومًا؟")){
+  if (typeof data !== "string" || !data) {
+    message("createMessage", "لم يتم استلام رمز الدعوة", true);
     return;
   }
 
-  const start=new Date();
-  const end=new Date(start.getTime()+days*86400000);
+  const url = new URL(
+    "store.html",
+    window.location.href
+  );
 
-  try{
-    const result=await supabase
-      .from("mr_subscriptions")
-      .insert({
-        store_id:store.id,
-        starts_at:start.toISOString(),
-        expires_at:end.toISOString()
-      });
+  url.searchParams.set("invite", data);
+  currentInvite = url.toString();
 
-    if(result.error)throw result.error;
+  $("inviteLink").textContent = currentInvite;
+  $("resultSection").classList.remove("hidden");
 
-    await loadData();
+  message("createMessage", "تم إنشاء الدعوة بنجاح");
 
-  }catch(error){
-    message("dashboardMessage",error.message,true);
+  const key = "mr10_recent_invites";
+  let recent = [];
+
+  try {
+    recent = JSON.parse(localStorage.getItem(key) || "[]");
+    if (!Array.isArray(recent)) recent = [];
+  } catch {
+    recent = [];
+  }
+
+  recent.unshift({
+    name,
+    email,
+    days,
+    url: currentInvite,
+    created: new Date().toISOString()
+  });
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(recent.slice(0, 20))
+  );
+
+  renderRecent();
+}
+
+async function copyInvite() {
+  if (!currentInvite) return;
+
+  try {
+    await navigator.clipboard.writeText(currentInvite);
+    message("createMessage", "تم نسخ الرابط");
+  } catch {
+    message(
+      "createMessage",
+      "تعذر النسخ التلقائي. انسخ الرابط يدويًا.",
+      true
+    );
   }
 }
 
-function renderLinks(links){
-  const body=$("linksBody");
-  body.replaceChildren();
+function openInvite() {
+  if (currentInvite) {
+    window.open(currentInvite, "_blank", "noopener");
+  }
+}
 
-  if(links.length===0){
-    const row=document.createElement("tr");
-    td(row,"لا توجد روابط حاليًا").colSpan=6;
-    body.appendChild(row);
+function renderRecent() {
+  const container = $("recentInvites");
+  container.replaceChildren();
+
+  let items = [];
+
+  try {
+    items = JSON.parse(
+      localStorage.getItem("mr10_recent_invites") || "[]"
+    );
+    if (!Array.isArray(items)) items = [];
+  } catch {
+    items = [];
+  }
+
+  if (!items.length) {
+    container.textContent = "لا توجد دعوات محفوظة هنا بعد.";
     return;
   }
 
-  for(const link of links){
-    const row=document.createElement("tr");
+  for (const item of items) {
+    const div = document.createElement("div");
+    div.className = "linkbox";
+    div.style.direction = "rtl";
+    div.style.textAlign = "right";
 
-    const store=stores.find(s=>s.id===link.store_id);
+    const title = document.createElement("strong");
+    title.textContent = item.name + " — " + item.days + " يوم";
 
-    td(row,store?.store_name||"—");
-    td(row,link.product_name);
-    td(row,link.order_reference||"—");
-    td(row,dateText(link.expires_at));
+    const email = document.createElement("div");
+    email.textContent = item.email;
 
-    const active=
-      link.is_active &&
-      new Date(link.expires_at)>new Date();
+    const link = document.createElement("a");
+    link.href = item.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "فتح رابط الدعوة";
 
-    td(row,active?"فعال":"غير فعال");
-
-    const actions=document.createElement("td");
-
-    if(link.is_active){
-      actions.appendChild(
-        btn("إيقاف",()=>disableLink(link.id),"danger")
-      );
-    }
-
-    row.appendChild(actions);
-    body.appendChild(row);
+    div.append(title, email, link);
+    container.appendChild(div);
   }
 }
 
-async function disableLink(id){
-  if(!confirm("هل تريد إيقاف هذا الرابط؟"))return;
-
-  try{
-    const result=await supabase
-      .from("mr_customer_links")
-      .update({is_active:false})
-      .eq("id",id);
-
-    if(result.error)throw result.error;
-
-    await loadData();
-
-  }catch(error){
-    message("dashboardMessage",error.message,true);
-  }
+async function logout() {
+  await db.auth.signOut();
+  currentInvite = "";
+  $("resultSection").classList.add("hidden");
+  $("dashboard").classList.add("hidden");
+  $("loginSection").classList.remove("hidden");
+  message("loginMessage", "تم تسجيل الخروج");
 }
 
-initialize();
-
+loadDashboard();
 </script>
 </body>
 </html>
