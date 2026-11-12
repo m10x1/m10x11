@@ -3,142 +3,342 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>وصلة | منصة إدارة الطلبات</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080f0d">
+  <meta name="description"
+        content="Mr10x - منصة إدارة الطلبات">
+  <title>Mr10x | منصة إدارة الطلبات</title>
+
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
+
 <body>
 
-<header class="navbar">
-  <div class="logo">وصلة<span>●</span></div>
-  <nav>
-    <a href="#home">الرئيسية</a>
-    <a href="#steps">كيف يعمل</a>
-    <a href="#services">المنصات</a>
-    <a href="#faq">الأسئلة الشائعة</a>
-  </nav>
-  <a class="login-btn" href="#request">ابدأ الآن</a>
-</header>
+  <!-- القائمة العلوية -->
+  <header class="navbar">
+    <a href="#home" class="logo">
+      Mr<span>10x</span>
+    </a>
 
-<main>
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <span class="eyebrow">منصة ذكية لإدارة الطلبات</span>
-      <h1>إدارة طلباتك<br><span>بسهولة وفي ثوانٍ</span></h1>
-      <p>
-        واجهة حديثة تساعدك على تنظيم طلبات العملاء
-        ومتابعة حالتها من مكان واحد.
-      </p>
-      <div class="hero-actions">
-        <a href="#request" class="primary-btn">ابدأ الآن</a>
-        <a href="#steps" class="secondary-btn">شاهد كيف يعمل</a>
+    <nav aria-label="القائمة الرئيسية">
+      <a href="#home">الرئيسية</a>
+      <a href="#how">كيف يعمل</a>
+      <a href="#platforms">خدماتنا</a>
+      <a href="#faq">الأسئلة الشائعة</a>
+    </nav>
+
+    <a href="#request" class="login-btn">
+      ابدأ الآن
+    </a>
+  </header>
+
+  <main>
+
+    <!-- الواجهة الرئيسية -->
+    <section class="hero" id="home">
+
+      <div class="hero-content">
+        <span class="eyebrow">
+          ● مرحبًا بك في Mr10x
+        </span>
+
+        <h1>
+          كل خدماتك
+          <br>
+          <span>في مكان واحد</span>
+        </h1>
+
+        <p>
+          تجربة رقمية متكاملة بتصميم عصري،
+          وواجهة سهلة الاستخدام تساعدك
+          على إدارة طلباتك بسرعة وتنظيم.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#request" class="primary-btn">
+            ابدأ الآن
+          </a>
+
+          <a href="#how" class="secondary-btn">
+            اكتشف المزيد
+          </a>
+        </div>
       </div>
-    </div>
 
-    <div class="preview-card">
-      <div class="preview-title">لوحة متابعة الطلبات</div>
-      <div class="preview-item">👤 العميل يرسل الطلب</div>
-      <div class="preview-item">📩 تم استلام الطلب</div>
-      <div class="preview-item active">⚡ الطلب قيد المعالجة</div>
-    </div>
-  </section>
+      <div class="preview-card">
+        <div class="preview-title">
+          ⚡ لوحة متابعة الطلبات
+        </div>
 
-  <section class="stats">
-    <div><strong>24/7</strong><p>واجهة متاحة</p></div>
-    <div><strong>RTL</strong><p>دعم اللغة العربية</p></div>
-    <div><strong>100%</strong><p>تصميم متجاوب</p></div>
-    <div><strong>SSL</strong><p>اتصال HTTPS</p></div>
-  </section>
+        <div class="preview-item">
+          📋 إنشاء طلب جديد
+        </div>
 
-  <section class="section" id="steps">
-    <span class="eyebrow">ثلاث خطوات</span>
-    <h2>بساطة تخفي وراءها قوة</h2>
-    <p class="section-desc">كل ما تحتاجه في واجهة واحدة.</p>
+        <div class="preview-item">
+          🔍 مراجعة بيانات الطلب
+        </div>
 
-    <div class="cards">
-      <article class="card">
-        <span class="card-icon">🔗</span>
-        <h3>اختر الخدمة</h3>
-        <p>حدد الخدمة المطلوبة من القائمة.</p>
-      </article>
-      <article class="card">
-        <span class="card-icon">📨</span>
-        <h3>أرسل الطلب</h3>
-        <p>أدخل تفاصيل الطلب وأرسله بسهولة.</p>
-      </article>
-      <article class="card">
-        <span class="card-icon">⚡</span>
-        <h3>تابع الحالة</h3>
-        <p>اطلع على حالة الطلب من لوحة المتابعة.</p>
-      </article>
-    </div>
-  </section>
+        <div class="preview-item active">
+          ✓ تأكيد الطلب التجريبي
+        </div>
+      </div>
 
-  <section class="section" id="services">
-    <span class="eyebrow">الخدمات</span>
-    <h2>كل خدماتك في مكان واحد</h2>
-    <div class="service-grid">
-      <div class="service">🎬 Netflix</div>
-      <div class="service">🎮 PlayStation</div>
-      <div class="service">🎵 Spotify</div>
-      <div class="service">📺 Disney+</div>
-      <div class="service">💻 Steam</div>
-      <div class="service">➕ خدمات أخرى</div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="request">
-    <span class="eyebrow">إرسال طلب</span>
-    <h2>ابدأ طلبك الآن</h2>
+    <!-- الإحصائيات -->
+    <section class="stats">
+      <div>
+        <strong>24/7</strong>
+        <p>واجهة متاحة</p>
+      </div>
 
-    <form id="requestForm" class="request-form">
-      <label for="service">الخدمة</label>
-      <select id="service" required>
-        <option value="">اختر الخدمة</option>
-        <option>Netflix</option>
-        <option>PlayStation</option>
-        <option>Spotify</option>
-        <option>Disney+</option>
-        <option>Steam</option>
-        <option>أخرى</option>
-      </select>
+      <div>
+        <strong>100%</strong>
+        <p>تصميم متجاوب</p>
+      </div>
 
-      <label for="customerEmail">البريد الإلكتروني للتواصل</label>
-      <input id="customerEmail" type="email"
-             placeholder="example@email.com" required>
+      <div>
+        <strong>RTL</strong>
+        <p>دعم العربية</p>
+      </div>
 
-      <button type="submit" class="primary-btn">
-        إرسال الطلب
-      </button>
-      <p id="requestStatus" role="status"></p>
-    </form>
-  </section>
+      <div>
+        <strong>SSL</strong>
+        <p>اتصال HTTPS</p>
+      </div>
+    </section>
 
-  <section class="section" id="faq">
-    <span class="eyebrow">مساعدة</span>
-    <h2>أسئلة شائعة</h2>
-    <div class="faq-list">
-      <details>
-        <summary>كيف أرسل طلبًا؟</summary>
-        <p>اختر الخدمة وأدخل بريد التواصل ثم اضغط إرسال.</p>
-      </details>
-      <details>
-        <summary>هل الخدمة متاحة على الجوال؟</summary>
-        <p>نعم، تصميم الواجهة متوافق مع الجوال والكمبيوتر.</p>
-      </details>
-      <details>
-        <summary>هل الطلبات متصلة بالسيرفر؟</summary>
-        <p>هذه نسخة واجهة تجريبية، والربط الخلفي لم يفعّل بعد.</p>
-      </details>
-    </div>
-  </section>
-</main>
+    <!-- طريقة العمل -->
+    <section class="section" id="how">
+      <span class="eyebrow">
+        كيف يعمل Mr10x؟
+      </span>
 
-<footer>
-  <div class="logo">وصلة<span>●</span></div>
-  <p>© 2026 وصلة — جميع الحقوق محفوظة</p>
-</footer>
+      <h2>ثلاث خطوات بسيطة</h2>
 
-<script src="script.js"></script>
+      <p class="section-desc">
+        كل شيء مصمم ليكون واضحًا وسهلًا.
+      </p>
+
+      <div class="cards">
+
+        <article class="card">
+          <span class="card-icon">📋</span>
+          <h3>01. اختر الخدمة</h3>
+          <p>
+            اختر نوع الخدمة التي ترغب
+            في استخدامها من القائمة.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="card-icon">⚡</span>
+          <h3>02. أدخل التفاصيل</h3>
+          <p>
+            أدخل معلومات التواصل المطلوبة
+            لإكمال الطلب التجريبي.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="card-icon">✅</span>
+          <h3>03. تأكيد الطلب</h3>
+          <p>
+            تظهر رسالة تأكيد مباشرة
+            بعد إرسال النموذج.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- الخدمات -->
+    <section class="section" id="platforms">
+      <span class="eyebrow">
+        خدمات Mr10x
+      </span>
+
+      <h2>اكتشف خدماتنا</h2>
+
+      <p class="section-desc">
+        مجموعة من الأقسام لتنظيم
+        الخدمات والطلبات.
+      </p>
+
+      <div class="service-grid">
+        <div class="service">🛡️ إدارة الحساب</div>
+        <div class="service">📩 طلبات الدعم</div>
+        <div class="service">📋 متابعة الطلبات</div>
+        <div class="service">🔔 الإشعارات</div>
+        <div class="service">⚙️ الإعدادات</div>
+        <div class="service">➕ خدمات إضافية</div>
+      </div>
+    </section>
+
+    <!-- نموذج تجريبي -->
+    <section class="section" id="request">
+      <span class="eyebrow">
+        ابدأ تجربتك
+      </span>
+
+      <h2>إرسال طلب جديد</h2>
+
+      <p class="section-desc">
+        نموذج تجريبي يعمل داخل المتصفح.
+      </p>
+
+      <form class="request-form"
+            id="demoRequestForm">
+
+        <label for="demoEmail">
+          البريد الإلكتروني للتواصل
+        </label>
+
+        <input
+          type="email"
+          id="demoEmail"
+          name="email"
+          placeholder="example@email.com"
+          autocomplete="email"
+          required
+        >
+
+        <label for="demoService">
+          نوع الخدمة
+        </label>
+
+        <select
+          id="demoService"
+          name="service"
+          required
+        >
+          <option value="">
+            اختر الخدمة
+          </option>
+
+          <option value="support">
+            طلب دعم
+          </option>
+
+          <option value="account">
+            إدارة الحساب
+          </option>
+
+          <option value="general">
+            استفسار عام
+          </option>
+        </select>
+
+        <button
+          type="submit"
+          class="primary-btn"
+        >
+          إرسال الطلب
+        </button>
+
+        <p
+          id="requestStatus"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </form>
+    </section>
+
+    <!-- الأسئلة الشائعة -->
+    <section class="section" id="faq">
+      <span class="eyebrow">
+        مركز المساعدة
+      </span>
+
+      <h2>الأسئلة الشائعة</h2>
+
+      <div class="faq-list">
+
+        <details>
+          <summary>
+            ما هو Mr10x؟
+          </summary>
+          <p>
+            Mr10x واجهة رقمية لتنظيم
+            الطلبات وإدارة الخدمات.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            كيف أستخدم الموقع؟
+          </summary>
+          <p>
+            اختر الخدمة وأدخل بيانات
+            التواصل ثم أرسل الطلب.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            هل الموقع يعمل على الجوال؟
+          </summary>
+          <p>
+            نعم، الواجهة متوافقة مع
+            الجوال والكمبيوتر.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            هل الطلبات تُرسل فعليًا؟
+          </summary>
+          <p>
+            حاليًا النموذج تجريبي،
+            ولا يرسل البيانات إلى خادم.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            هل يمكن إضافة لوحة تحكم؟
+          </summary>
+          <p>
+            نعم، يمكن تطوير لوحة تحكم
+            خاصة بإدارة طلبات Mr10x.
+          </p>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- القسم الأخير -->
+    <section class="section">
+      <span class="eyebrow">
+        Mr10x
+      </span>
+
+      <h2>ابدأ رحلتك معنا</h2>
+
+      <p class="section-desc">
+        كل ما تحتاجه في واجهة واحدة.
+      </p>
+
+      <a href="#request" class="primary-btn">
+        ابدأ الآن
+      </a>
+    </section>
+
+  </main>
+
+  <!-- التذييل -->
+  <footer>
+    <a href="#home" class="logo">
+      Mr<span>10x</span>
+    </a>
+
+    <p>
+      © 2026 Mr10x.
+      جميع الحقوق محفوظة.
+    </p>
+  </footer>
+
 </body>
 </html>
