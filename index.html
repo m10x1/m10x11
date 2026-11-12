@@ -2,343 +2,741 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080f0d">
-  <meta name="description"
-        content="Mr10x - منصة إدارة الطلبات">
-  <title>Mr10x | منصة إدارة الطلبات</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#182820">
+<title>Mr10x | الرئيسية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<style>
+:root{
+  --bg:#182820;
+  --bg2:#20352a;
+  --card:#293e32;
+  --border:#455d4c;
+  --accent:#b9d0a8;
+  --cream:#f2ecdc;
+  --muted:#b9c5b7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--cream);
+  font-family:'Cairo',sans-serif;
+  line-height:1.8;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible{
+  outline:3px solid var(--accent);
+  outline-offset:3px;
+}
+.container{max-width:1180px;margin:auto;padding:0 24px}
+header{
+  position:sticky;top:0;z-index:20;
+  background:rgba(24,40,32,.96);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+}
+.nav{
+  min-height:78px;
+  display:flex;align-items:center;
+  justify-content:space-between;gap:20px;
+}
+.logo{font-size:30px;font-weight:900}
+.logo span{color:var(--accent)}
+.links{display:flex;gap:28px}
+.links a{
+  color:var(--muted);
+  font-size:14px;font-weight:700;
+}
+.links a:hover{color:var(--cream)}
+.btn{
+  border:0;
+  background:linear-gradient(120deg,#b9d0a8,#e4dbc5);
+  color:#182820;
+  font-weight:900;
+  padding:12px 27px;
+  border-radius:12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .25s,box-shadow .25s;
+}
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 32px #b9d0a82b;
+}
+.btn-outline{
+  background:transparent;
+  color:var(--cream);
+  border:1px solid var(--border);
+}
+.hero{
+  min-height:600px;
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  align-items:center;
+  gap:65px;
+  padding-top:90px;
+  padding-bottom:90px;
+  position:relative;
+}
+.hero:before{
+  content:"";
+  position:absolute;
+  width:400px;height:400px;
+  background:#b9d0a81b;
+  filter:blur(100px);
+  border-radius:50%;
+  left:0;top:60px;
+  pointer-events:none;
+}
+.hero-content{position:relative;animation:rise .8s both}
+.tag{
+  display:inline-block;
+  padding:7px 16px;
+  background:#b9d0a814;
+  color:var(--accent);
+  border:1px solid #b9d0a84a;
+  border-radius:50px;
+  font-size:13px;
+  font-weight:800;
+}
+h1{
+  font-size:clamp(38px,5vw,65px);
+  line-height:1.4;
+  margin:20px 0;
+  font-weight:900;
+}
+h1 span{color:var(--accent)}
+.hero p{
+  font-size:16px;
+  color:var(--muted);
+  max-width:530px;
+  margin-bottom:30px;
+}
+.actions{display:flex;gap:14px;flex-wrap:wrap}
+.panel{
+  position:relative;
+  background:linear-gradient(150deg,#30493a,#23372c);
+  border:1px solid var(--border);
+  padding:27px;
+  border-radius:24px;
+  box-shadow:0 25px 60px #0003;
+  animation:rise 1s both,float 7s ease-in-out 1s infinite;
+}
+.panel-top{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  margin-bottom:22px;
+}
+.panel-top strong{font-size:18px}
+.pill{
+  background:#b9d0a820;
+  color:var(--accent);
+  padding:4px 12px;
+  border-radius:30px;
+  font-size:11px;
+}
+.step{
+  background:#1e3127;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:16px;
+  margin-top:12px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+.step-icon{
+  width:40px;height:40px;
+  display:grid;place-items:center;
+  background:#b9d0a81c;
+  border-radius:10px;
+  flex-shrink:0;
+}
+.step strong{display:block;font-size:13px}
+.step small{color:var(--muted);font-size:11px}
+.step:last-child{border-color:#b9d0a880}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  padding-bottom:35px;
+}
+.stat{
+  padding:23px;
+  text-align:center;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:16px;
+}
+.stat strong{
+  display:block;
+  font-size:27px;
+  color:var(--accent);
+}
+.stat span{font-size:12px;color:var(--muted)}
+section.content{
+  padding:85px 0;
+  scroll-margin-top:90px;
+}
+.section-head{text-align:center;margin-bottom:42px}
+.section-head h2{
+  font-size:clamp(27px,4vw,39px);
+  margin:10px 0;
+}
+.section-head p{color:var(--muted)}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:30px;
+  border-radius:18px;
+  transition:transform .3s,border-color .3s;
+}
+.card:hover{
+  transform:translateY(-7px);
+  border-color:var(--accent);
+}
+.card .symbol{font-size:34px}
+.card h3{font-size:19px;margin:14px 0 8px}
+.card p{font-size:13px;color:var(--muted);margin:0}
+.services{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:17px;
+}
+.service{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:22px;
+  font-weight:800;
+  transition:transform .3s,border-color .3s;
+}
+.service:hover{
+  transform:translateY(-5px);
+  border-color:var(--accent);
+}
+.cta{
+  text-align:center;
+  background:linear-gradient(120deg,#304b3b,#263b30);
+  border:1px solid var(--border);
+  border-radius:25px;
+  padding:55px 25px;
+}
+.cta h2{font-size:32px;margin:0 0 12px}
+.cta p{color:var(--muted);margin-bottom:25px}
+.faq{max-width:800px;margin:auto}
+.faq details{
+  padding:18px 22px;
+  margin:12px 0;
+  border-radius:12px;
+  background:var(--card);
+  border:1px solid var(--border);
+}
+.faq summary{font-weight:800;cursor:pointer}
+.faq p{color:var(--muted);font-size:13px}
+footer{
+  text-align:center;
+  padding:30px;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+  font-size:12px;
+}
+
+/* Login and registration window */
+.modal{
+  position:fixed;
+  inset:0;
+  background:#07120bdc;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  backdrop-filter:blur(10px);
+}
+.modal.open{display:flex}
+.dialog{
+  width:100%;
+  max-width:460px;
+  max-height:92vh;
+  overflow-y:auto;
+  background:#293e32;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:32px;
+  position:relative;
+  animation:rise .35s both;
+}
+.close{
+  position:absolute;
+  top:12px;left:17px;
+  background:none;border:0;
+  color:var(--cream);
+  font-size:30px;
+}
+.dialog h2{text-align:center;margin:0;font-size:27px}
+.dialog .subtitle{
+  color:var(--muted);
+  text-align:center;
+  font-size:13px;
+  margin:4px 0 22px;
+}
+.tabs{display:flex;gap:10px;margin-bottom:22px}
+.tab{
+  flex:1;
+  padding:11px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#20352a;
+  color:var(--cream);
+  font-weight:800;
+}
+.tab.active{
+  background:var(--accent);
+  color:#182820;
+}
+.field{margin-bottom:17px}
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:7px;
+}
+.field input{
+  width:100%;
+  background:#1e3127;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:12px 14px;
+  color:var(--cream);
+  outline:none;
+}
+.field input:focus{border-color:var(--accent)}
+.field input::placeholder{color:#aab9a9}
+.full{width:100%}
+.status{
+  text-align:center;
+  font-size:13px;
+  color:var(--accent);
+  margin:15px 0;
+  line-height:2;
+}
+.notice{
+  background:#b9d0a812;
+  border:1px solid var(--border);
+  padding:14px;
+  border-radius:12px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:18px;
+}
+.notice strong{color:var(--cream)}
+.hidden{display:none!important}
+@keyframes rise{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-9px)}
+}
+@media(max-width:850px){
+  .hero{grid-template-columns:1fr;gap:35px;padding-top:60px}
+  .links{display:none}
+  .cards,.services{grid-template-columns:1fr 1fr}
+}
+@media(max-width:550px){
+  .container{padding:0 18px}
+  .nav{min-height:70px}
+  .logo{font-size:25px}
+  .nav .btn{padding:10px 14px;font-size:12px}
+  .hero{padding-bottom:50px}
+  .hero h1{font-size:37px}
+  .actions .btn{flex:1}
+  .cards,.services{grid-template-columns:1fr}
+  .stats{gap:8px}
+  .stat{padding:13px 5px}
+  .stat strong{font-size:21px}
+  section.content{padding:55px 0}
+  .dialog{padding:28px 21px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- القائمة العلوية -->
-  <header class="navbar">
-    <a href="#home" class="logo">
-      Mr<span>10x</span>
-    </a>
+<header>
+  <div class="container nav">
+    <a class="logo" href="#home">Mr<span>10x</span></a>
 
-    <nav aria-label="القائمة الرئيسية">
+    <nav class="links" aria-label="القائمة الرئيسية">
       <a href="#home">الرئيسية</a>
-      <a href="#how">كيف يعمل</a>
-      <a href="#platforms">خدماتنا</a>
+      <a href="#about">كيف يعمل</a>
+      <a href="#services">خدماتنا</a>
       <a href="#faq">الأسئلة الشائعة</a>
     </nav>
 
-    <a href="#request" class="login-btn">
-      ابدأ الآن
-    </a>
-  </header>
+    <button class="btn" onclick="openModal('login')">
+      تسجيل الدخول
+    </button>
+  </div>
+</header>
 
-  <main>
+<main>
 
-    <!-- الواجهة الرئيسية -->
-    <section class="hero" id="home">
+<section class="container hero" id="home">
+  <div class="hero-content">
+    <span class="tag">✦ مرحبًا بك في Mr10x</span>
 
-      <div class="hero-content">
-        <span class="eyebrow">
-          ● مرحبًا بك في Mr10x
-        </span>
-
-        <h1>
-          كل خدماتك
-          <br>
-          <span>في مكان واحد</span>
-        </h1>
-
-        <p>
-          تجربة رقمية متكاملة بتصميم عصري،
-          وواجهة سهلة الاستخدام تساعدك
-          على إدارة طلباتك بسرعة وتنظيم.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#request" class="primary-btn">
-            ابدأ الآن
-          </a>
-
-          <a href="#how" class="secondary-btn">
-            اكتشف المزيد
-          </a>
-        </div>
-      </div>
-
-      <div class="preview-card">
-        <div class="preview-title">
-          ⚡ لوحة متابعة الطلبات
-        </div>
-
-        <div class="preview-item">
-          📋 إنشاء طلب جديد
-        </div>
-
-        <div class="preview-item">
-          🔍 مراجعة بيانات الطلب
-        </div>
-
-        <div class="preview-item active">
-          ✓ تأكيد الطلب التجريبي
-        </div>
-      </div>
-
-    </section>
-
-    <!-- الإحصائيات -->
-    <section class="stats">
-      <div>
-        <strong>24/7</strong>
-        <p>واجهة متاحة</p>
-      </div>
-
-      <div>
-        <strong>100%</strong>
-        <p>تصميم متجاوب</p>
-      </div>
-
-      <div>
-        <strong>RTL</strong>
-        <p>دعم العربية</p>
-      </div>
-
-      <div>
-        <strong>SSL</strong>
-        <p>اتصال HTTPS</p>
-      </div>
-    </section>
-
-    <!-- طريقة العمل -->
-    <section class="section" id="how">
-      <span class="eyebrow">
-        كيف يعمل Mr10x؟
-      </span>
-
-      <h2>ثلاث خطوات بسيطة</h2>
-
-      <p class="section-desc">
-        كل شيء مصمم ليكون واضحًا وسهلًا.
-      </p>
-
-      <div class="cards">
-
-        <article class="card">
-          <span class="card-icon">📋</span>
-          <h3>01. اختر الخدمة</h3>
-          <p>
-            اختر نوع الخدمة التي ترغب
-            في استخدامها من القائمة.
-          </p>
-        </article>
-
-        <article class="card">
-          <span class="card-icon">⚡</span>
-          <h3>02. أدخل التفاصيل</h3>
-          <p>
-            أدخل معلومات التواصل المطلوبة
-            لإكمال الطلب التجريبي.
-          </p>
-        </article>
-
-        <article class="card">
-          <span class="card-icon">✅</span>
-          <h3>03. تأكيد الطلب</h3>
-          <p>
-            تظهر رسالة تأكيد مباشرة
-            بعد إرسال النموذج.
-          </p>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- الخدمات -->
-    <section class="section" id="platforms">
-      <span class="eyebrow">
-        خدمات Mr10x
-      </span>
-
-      <h2>اكتشف خدماتنا</h2>
-
-      <p class="section-desc">
-        مجموعة من الأقسام لتنظيم
-        الخدمات والطلبات.
-      </p>
-
-      <div class="service-grid">
-        <div class="service">🛡️ إدارة الحساب</div>
-        <div class="service">📩 طلبات الدعم</div>
-        <div class="service">📋 متابعة الطلبات</div>
-        <div class="service">🔔 الإشعارات</div>
-        <div class="service">⚙️ الإعدادات</div>
-        <div class="service">➕ خدمات إضافية</div>
-      </div>
-    </section>
-
-    <!-- نموذج تجريبي -->
-    <section class="section" id="request">
-      <span class="eyebrow">
-        ابدأ تجربتك
-      </span>
-
-      <h2>إرسال طلب جديد</h2>
-
-      <p class="section-desc">
-        نموذج تجريبي يعمل داخل المتصفح.
-      </p>
-
-      <form class="request-form"
-            id="demoRequestForm">
-
-        <label for="demoEmail">
-          البريد الإلكتروني للتواصل
-        </label>
-
-        <input
-          type="email"
-          id="demoEmail"
-          name="email"
-          placeholder="example@email.com"
-          autocomplete="email"
-          required
-        >
-
-        <label for="demoService">
-          نوع الخدمة
-        </label>
-
-        <select
-          id="demoService"
-          name="service"
-          required
-        >
-          <option value="">
-            اختر الخدمة
-          </option>
-
-          <option value="support">
-            طلب دعم
-          </option>
-
-          <option value="account">
-            إدارة الحساب
-          </option>
-
-          <option value="general">
-            استفسار عام
-          </option>
-        </select>
-
-        <button
-          type="submit"
-          class="primary-btn"
-        >
-          إرسال الطلب
-        </button>
-
-        <p
-          id="requestStatus"
-          role="status"
-          aria-live="polite"
-        ></p>
-      </form>
-    </section>
-
-    <!-- الأسئلة الشائعة -->
-    <section class="section" id="faq">
-      <span class="eyebrow">
-        مركز المساعدة
-      </span>
-
-      <h2>الأسئلة الشائعة</h2>
-
-      <div class="faq-list">
-
-        <details>
-          <summary>
-            ما هو Mr10x؟
-          </summary>
-          <p>
-            Mr10x واجهة رقمية لتنظيم
-            الطلبات وإدارة الخدمات.
-          </p>
-        </details>
-
-        <details>
-          <summary>
-            كيف أستخدم الموقع؟
-          </summary>
-          <p>
-            اختر الخدمة وأدخل بيانات
-            التواصل ثم أرسل الطلب.
-          </p>
-        </details>
-
-        <details>
-          <summary>
-            هل الموقع يعمل على الجوال؟
-          </summary>
-          <p>
-            نعم، الواجهة متوافقة مع
-            الجوال والكمبيوتر.
-          </p>
-        </details>
-
-        <details>
-          <summary>
-            هل الطلبات تُرسل فعليًا؟
-          </summary>
-          <p>
-            حاليًا النموذج تجريبي،
-            ولا يرسل البيانات إلى خادم.
-          </p>
-        </details>
-
-        <details>
-          <summary>
-            هل يمكن إضافة لوحة تحكم؟
-          </summary>
-          <p>
-            نعم، يمكن تطوير لوحة تحكم
-            خاصة بإدارة طلبات Mr10x.
-          </p>
-        </details>
-
-      </div>
-    </section>
-
-    <!-- القسم الأخير -->
-    <section class="section">
-      <span class="eyebrow">
-        Mr10x
-      </span>
-
-      <h2>ابدأ رحلتك معنا</h2>
-
-      <p class="section-desc">
-        كل ما تحتاجه في واجهة واحدة.
-      </p>
-
-      <a href="#request" class="primary-btn">
-        ابدأ الآن
-      </a>
-    </section>
-
-  </main>
-
-  <!-- التذييل -->
-  <footer>
-    <a href="#home" class="logo">
-      Mr<span>10x</span>
-    </a>
+    <h1>
+      مستقبل إدارة متجرك
+      <br>
+      <span>يبدأ من هنا.</span>
+    </h1>
 
     <p>
-      © 2026 Mr10x.
-      جميع الحقوق محفوظة.
+      منصة رقمية بواجهة بسيطة واحترافية
+      تساعدك على تنظيم طلبات متجرك
+      وإدارة خدماتك من مكان واحد.
     </p>
-  </footer>
+
+    <div class="actions">
+      <button class="btn" onclick="openModal('register')">
+        ابدأ الآن
+      </button>
+      <a class="btn btn-outline" href="#about">
+        اكتشف المزيد
+      </a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-top">
+      <strong>لوحة Mr10x</strong>
+      <span class="pill">معاينة تجريبية</span>
+    </div>
+
+    <div class="step">
+      <div class="step-icon">👤</div>
+      <div>
+        <strong>إنشاء حساب المتجر</strong>
+        <small>أدخل بياناتك الأساسية</small>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-icon">🏪</div>
+      <div>
+        <strong>إدارة معلومات المتجر</strong>
+        <small>تنظيم بيانات نشاطك</small>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-icon">✓</div>
+      <div>
+        <strong>متابعة الطلبات</strong>
+        <small>واجهة جاهزة للتطوير</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container stats">
+  <div class="stat">
+    <strong>24/7</strong>
+    <span>واجهة متاحة</span>
+  </div>
+  <div class="stat">
+    <strong>RTL</strong>
+    <span>دعم العربية</span>
+  </div>
+  <div class="stat">
+    <strong>100%</strong>
+    <span>تصميم متجاوب</span>
+  </div>
+</div>
+
+<section class="content" id="about">
+  <div class="container">
+    <div class="section-head">
+      <span class="tag">كيف يعمل؟</span>
+      <h2>كل شيء بخطوات بسيطة</h2>
+      <p>واجهة سهلة وواضحة لكل عميل.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <div class="symbol">👤</div>
+        <h3>01 — أنشئ حسابك</h3>
+        <p>أدخل اسمك واسم متجرك وبيانات التواصل.</p>
+      </article>
+
+      <article class="card">
+        <div class="symbol">🏪</div>
+        <h3>02 — أضف متجرك</h3>
+        <p>جهّز المعلومات الأساسية الخاصة بنشاطك.</p>
+      </article>
+
+      <article class="card">
+        <div class="symbol">📋</div>
+        <h3>03 — تابع طلباتك</h3>
+        <p>لوحة متابعة الطلبات ضمن خطة تطوير المنصة.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="content" id="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="tag">Mr10x</span>
+      <h2>خدمات المنصة</h2>
+      <p>أقسام مقترحة لخدمات متجرك.</p>
+    </div>
+
+    <div class="services">
+      <div class="service">🛡️ إدارة الحسابات</div>
+      <div class="service">🏪 إدارة المتاجر</div>
+      <div class="service">📋 متابعة الطلبات</div>
+      <div class="service">📩 طلبات الدعم</div>
+      <div class="service">🔔 الإشعارات</div>
+      <div class="service">⚙️ إعدادات الحساب</div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="container">
+    <div class="cta">
+      <h2>جاهز تبدأ مع Mr10x؟</h2>
+      <p>تعرّف على تجربة إنشاء حساب متجر.</p>
+      <button class="btn" onclick="openModal('register')">
+        إنشاء حساب متجر
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="content" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="tag">المساعدة</span>
+      <h2>الأسئلة الشائعة</h2>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>ما هو Mr10x؟</summary>
+        <p>منصة قيد التطوير لإدارة خدمات المتاجر وطلباتها.</p>
+      </details>
+
+      <details>
+        <summary>هل أستطيع إنشاء حساب الآن؟</summary>
+        <p>يمكنك تجربة النموذج، لكن إنشاء الحسابات الحقيقية غير مفعّل بعد.</p>
+      </details>
+
+      <details>
+        <summary>كم مدة التواصل المتوقعة؟</summary>
+        <p>بعد تفعيل استقبال الطلبات، المدة المستهدفة من ساعة إلى 24 ساعة بعد مراجعة الطلب.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="logo">Mr<span>10x</span></div>
+  <p>© 2026 Mr10x — جميع الحقوق محفوظة</p>
+</footer>
+
+<!-- نافذة الدخول والتسجيل -->
+<div class="modal" id="accountModal"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="modalTitle"
+     aria-hidden="true">
+
+  <div class="dialog">
+    <button class="close" type="button"
+            onclick="closeModal()"
+            aria-label="إغلاق">×</button>
+
+    <h2 id="modalTitle">Mr10x</h2>
+    <p class="subtitle">مرحبًا بك في منصتك</p>
+
+    <div class="tabs">
+      <button id="loginTab" class="tab active"
+              type="button"
+              onclick="switchTab('login')">
+        تسجيل الدخول
+      </button>
+
+      <button id="registerTab" class="tab"
+              type="button"
+              onclick="switchTab('register')">
+        إنشاء حساب
+      </button>
+    </div>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="loginEmail">البريد الإلكتروني</label>
+        <input type="email" id="loginEmail"
+               autocomplete="username"
+               placeholder="example@email.com"
+               required>
+      </div>
+
+      <div class="field">
+        <label for="loginPassword">كلمة المرور</label>
+        <input type="password" id="loginPassword"
+               autocomplete="current-password"
+               placeholder="كلمة مرور حساب Mr10x"
+               required>
+      </div>
+
+      <button type="submit" class="btn full">
+        تسجيل الدخول
+      </button>
+
+      <p class="status" id="loginStatus"
+         role="status"></p>
+    </form>
+
+    <form id="registerForm" class="hidden">
+      <div class="field">
+        <label for="customerName">اسم العميل</label>
+        <input type="text" id="customerName"
+               autocomplete="name"
+               maxlength="80"
+               placeholder="أدخل اسمك" required>
+      </div>
+
+      <div class="field">
+        <label for="storeName">اسم المتجر</label>
+        <input type="text" id="storeName"
+               maxlength="100"
+               placeholder="أدخل اسم متجرك" required>
+      </div>
+
+      <div class="field">
+        <label for="registerEmail">البريد الإلكتروني</label>
+        <input type="email" id="registerEmail"
+               autocomplete="email"
+               placeholder="example@email.com"
+               required>
+      </div>
+
+      <button type="submit" class="btn full">
+        متابعة طلب إنشاء الحساب
+      </button>
+
+      <p class="status" id="registerStatus"
+         role="status"></p>
+    </form>
+
+    <div class="notice">
+      ⏳ مدة التواصل المستهدفة
+      <br>
+      <strong>من ساعة إلى 24 ساعة</strong>
+      <br>
+      بعد تفعيل استقبال الطلبات ومراجعتها
+      <br>
+      <small>النماذج حاليًا تجريبية ولا ترسل البيانات.</small>
+    </div>
+  </div>
+</div>
+
+<script>
+const modal = document.getElementById('accountModal');
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
+
+function openModal(tab = 'login') {
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  switchTab(tab);
+  setTimeout(() => {
+    const field = modal.querySelector(
+      tab === 'login' ? '#loginEmail' : '#customerName'
+    );
+    if (field) field.focus();
+  }, 50);
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function switchTab(tab) {
+  const login = tab === 'login';
+
+  loginForm.classList.toggle('hidden', !login);
+  registerForm.classList.toggle('hidden', login);
+
+  document.getElementById('loginTab')
+    .classList.toggle('active', login);
+
+  document.getElementById('registerTab')
+    .classList.toggle('active', !login);
+
+  document.getElementById('loginStatus').textContent = '';
+  document.getElementById('registerStatus').textContent = '';
+}
+
+loginForm.addEventListener('submit', event => {
+  event.preventDefault();
+
+  document.getElementById('loginStatus').textContent =
+    'تسجيل الدخول غير مفعّل بعد. لا يتم إرسال كلمة المرور أو حفظها.';
+
+  document.getElementById('loginPassword').value = '';
+});
+
+registerForm.addEventListener('submit', event => {
+  event.preventDefault();
+
+  if (!registerForm.reportValidity()) return;
+
+  document.getElementById('registerStatus').textContent =
+    '✓ النموذج مكتمل. بعد تفعيل استقبال الطلبات، سوف يتم التواصل معكم خلال ساعة إلى 24 ساعة بعد مراجعة طلبكم. شكرًا لاختياركم Mr10x 💚';
+});
+
+modal.addEventListener('click', event => {
+  if (event.target === modal) closeModal();
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && modal.classList.contains('open')) {
+    closeModal();
+  }
+});
+</script>
 
 </body>
 </html>
