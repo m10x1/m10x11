@@ -6,83 +6,215 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1">
 
+  <meta name="theme-color" content="#1E302A">
+
   <title>إنشاء حساب | Mr10x</title>
 
   <link rel="stylesheet" href="style.css">
 
   <style>
+    :root {
+      --olive: #1E302A;
+      --olive-light: #30453A;
+      --sage: #A7C4A0;
+      --beige: #F1EDE3;
+      --muted: #C0CBBF;
+    }
+
+    body {
+      margin: 0;
+      background: var(--olive);
+      color: var(--beige);
+      font-family: 'Cairo', sans-serif;
+    }
+
     .register-page {
       min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      padding: 35px 16px;
+      justify-content: center;
+      padding: 40px 16px;
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(167,196,160,.12),
+          transparent 40%
+        ),
+        radial-gradient(
+          circle at 85% 80%,
+          rgba(241,237,227,.06),
+          transparent 40%
+        );
     }
 
     .register-box {
       width: 100%;
       max-width: 480px;
-      background: #111a17;
-      border: 1px solid #263630;
-      border-radius: 22px;
-      padding: 35px;
-      box-shadow: 0 25px 70px
-        rgba(0, 0, 0, .3);
+      padding: 36px;
+      background: #263B31;
+      border: 1px solid #496052;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px
+        rgba(0,0,0,.2);
+      animation: fadeUp .8s ease both;
+      box-sizing: border-box;
     }
 
-    .register-box h1 {
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .brand {
       text-align: center;
-      font-size: 32px;
-      margin: 0 0 8px;
+      font-size: 35px;
+      font-weight: 900;
+      margin: 0 0 5px;
     }
 
-    .register-box h1 span {
-      color: #39dfa0;
+    .brand span {
+      color: var(--sage);
     }
 
-    .register-box p {
+    .subtitle {
       text-align: center;
-      color: #94a8a0;
-      margin-bottom: 30px;
+      color: var(--muted);
+      margin: 0 0 32px;
+      font-size: 15px;
     }
 
-    .register-box label {
+    label {
       display: block;
       margin-bottom: 8px;
       font-weight: 700;
       font-size: 14px;
     }
 
-    .register-box input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 20px;
-      background: #0c1511;
-      color: white;
-      border: 1px solid #263630;
-      border-radius: 10px;
-      outline: none;
-    }
-
-    .register-box input:focus {
-      border-color: #39dfa0;
-    }
-
-    .register-box button {
-      width: 100%;
-    }
-
-    .register-box .back {
+    input {
       display: block;
-      margin-top: 22px;
-      text-align: center;
-      color: #39dfa0;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      background: #1E302A;
+      border: 1px solid #496052;
+      border-radius: 12px;
+      color: var(--beige);
+      outline: none;
+      font: inherit;
+      transition:
+        border-color .25s,
+        box-shadow .25s;
     }
 
-    .register-box .notice {
-      font-size: 12px;
-      margin-top: 20px;
-      margin-bottom: 0;
+    input::placeholder {
+      color: #A5B4A8;
+    }
+
+    input:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px
+        rgba(167,196,160,.12);
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      background: linear-gradient(
+        110deg,
+        #A7C4A0,
+        #D8D0B9
+      );
+      color: #17291F;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      transition:
+        transform .25s,
+        box-shadow .25s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px
+        rgba(167,196,160,.2);
+    }
+
+    .submit-btn:active {
+      transform: scale(.98);
+    }
+
+    .notice {
+      text-align: center;
+      margin-top: 24px;
+      padding: 15px;
+      border: 1px solid #496052;
+      border-radius: 12px;
+      background: rgba(167,196,160,.06);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .notice strong {
+      color: var(--sage);
+    }
+
+    #registerStatus {
+      text-align: center;
+      color: var(--sage);
+      font-size: 14px;
+      line-height: 2;
+      margin-top: 18px;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 22px;
+      color: var(--sage);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    .disclaimer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 22px;
+    }
+
+    @media (max-width: 500px) {
+      .register-box {
+        padding: 25px 20px;
+      }
+
+      .brand {
+        font-size: 30px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .register-box {
+        animation: none;
+      }
+
+      .submit-btn,
+      input {
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -93,15 +225,20 @@
 
     <div class="register-box">
 
-      <h1>Mr<span>10x</span></h1>
+      <h1 class="brand">
+        Mr<span>10x</span>
+      </h1>
 
-      <p>إنشاء حساب متجر جديد</p>
+      <p class="subtitle">
+        إنشاء حساب متجر جديد
+      </p>
 
       <form id="registerForm">
 
         <label for="customerName">
           اسم العميل
         </label>
+
         <input
           type="text"
           id="customerName"
@@ -115,6 +252,7 @@
         <label for="storeName">
           اسم المتجر
         </label>
+
         <input
           type="text"
           id="storeName"
@@ -127,6 +265,7 @@
         <label for="email">
           البريد الإلكتروني
         </label>
+
         <input
           type="email"
           id="email"
@@ -139,6 +278,7 @@
         <label for="password">
           كلمة مرور حساب Mr10x
         </label>
+
         <input
           type="password"
           id="password"
@@ -151,7 +291,7 @@
 
         <button
           type="submit"
-          class="primary-btn"
+          class="submit-btn"
         >
           إنشاء الحساب
         </button>
@@ -162,14 +302,22 @@
 
       </form>
 
+      <div class="notice">
+        ⏳ مدة التواصل المتوقعة
+        <br>
+        <strong>من ساعة إلى 24 ساعة</strong>
+        <br>
+        بعد استلام الطلب ومراجعته.
+      </div>
+
       <a class="back" href="index.html">
-        العودة للرئيسية
+        ← العودة إلى الرئيسية
       </a>
 
-      <p class="notice">
+      <p class="disclaimer">
         هذه واجهة تجريبية.
-        إنشاء الحسابات الفعلية يحتاج
-        خدمة مصادقة آمنة.
+        لم يتم تفعيل إنشاء الحسابات
+        أو استقبال الطلبات بعد.
       </p>
 
     </div>
@@ -192,9 +340,10 @@
         return;
       }
 
-      status.style.color = '#39dfa0';
       status.textContent =
-        'النموذج جاهز. سنفعّل إنشاء الحساب بعد ربط نظام التسجيل الآمن.';
+        '✓ النموذج مكتمل. بعد تفعيل استقبال الطلبات، سيتم التواصل معكم خلال ساعة إلى 24 ساعة.';
+
+      status.style.color = '#A7C4A0';
     });
   </script>
 
