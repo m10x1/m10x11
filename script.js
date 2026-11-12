@@ -1,40 +1,56 @@
-// Add JavaScript functionality here
-document.addEventListener('DOMContentLoaded', function() {
-    const verificationForm = document.getElementById('verification-form');
-    const netflixRequestForm = document.getElementById('netflix-request-form');
 
-    verificationForm.addEventListener('submit', function(event) {
+document.addEventListener('DOMContentLoaded', () => {
+  // Smooth navigation
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', event => {
+      const target = document.querySelector(
+        link.getAttribute('href')
+      );
+
+      if (target) {
         event.preventDefault();
-        
-        // Make an AJAX request to your Node.js backend for requesting the code
-        fetch('/requestVerificationCode', {
-            method: 'POST',
-            body: JSON.stringify({
-                email: document.getElementById('email').value
-            }),
-        })
-        .then(response => response.text())
-        .then(data => {
-            const statusMessage = document.getElementById('status-message');
-            statusMessage.textContent = data;
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
         });
+      }
     });
+  });
 
-    netflixRequestForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        // Make an AJAX request to your Node.js backend for requesting the code
-        fetch('/requestVerificationCode', {
-            method: 'POST',
-            body: JSON.stringify({
-                email: document.getElementById('email-netflix').value,
-                service: 'netflix'
-            }),
-        })
-        .then(response => response.text())
-        .then(data => {
-            const statusMessage = document.getElementById('netflix-status-message');
-            statusMessage.textContent = data;
-        });
+  // Safe demonstration request form
+  const form = document.getElementById('demoRequestForm');
+  const status = document.getElementById('requestStatus');
+
+  if (form && status) {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+
+      const email = form.querySelector(
+        'input[type="email"]'
+      );
+
+      if (!email || !email.validity.valid) {
+        status.textContent = 'يرجى إدخال بريد إلكتروني صحيح.';
+        return;
+      }
+
+      status.textContent =
+        'تم تسجيل الطلب التجريبي بنجاح. لم يتم إرسال أي رمز تحقق.';
+
+      form.reset();
+    });
+  }
+
+  // FAQ: Allow one expanded answer at a time
+  document.querySelectorAll('.faq-list details')
+    .forEach(item => {
+      item.addEventListener('toggle', () => {
+        if (!item.open) return;
+
+        document.querySelectorAll('.faq-list details')
+          .forEach(other => {
+            if (other !== item) other.open = false;
+          });
+      });
     });
 });
