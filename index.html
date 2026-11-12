@@ -1,62 +1,144 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix Verification System</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>وصلة | منصة إدارة الطلبات</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Netflix Verification System</h1>
-        <nav>
-            <ul>
-                <li><a href="#customer-request">Customer Request</a></li>
-                <li><a href="#services">Services</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section id="customer-request">
-        <h2>Customer Request</h2>
-        <form id="verification-form">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <button type="submit">Request Verification Code</button>
-        </form>
+<header class="navbar">
+  <div class="logo">وصلة<span>●</span></div>
+  <nav>
+    <a href="#home">الرئيسية</a>
+    <a href="#steps">كيف يعمل</a>
+    <a href="#services">المنصات</a>
+    <a href="#faq">الأسئلة الشائعة</a>
+  </nav>
+  <a class="login-btn" href="#request">ابدأ الآن</a>
+</header>
 
-        <div id="status-message"></div>
-    </section>
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <span class="eyebrow">منصة ذكية لإدارة الطلبات</span>
+      <h1>إدارة طلباتك<br><span>بسهولة وفي ثوانٍ</span></h1>
+      <p>
+        واجهة حديثة تساعدك على تنظيم طلبات العملاء
+        ومتابعة حالتها من مكان واحد.
+      </p>
+      <div class="hero-actions">
+        <a href="#request" class="primary-btn">ابدأ الآن</a>
+        <a href="#steps" class="secondary-btn">شاهد كيف يعمل</a>
+      </div>
+    </div>
 
-    <section id="services">
-        <h2>Services</h2>
-        <ul>
-            <li><a href="#netflix">Netflix</a></li>
-            <!-- Add more services as needed -->
-        </ul>
-        
-        <div id="netflix-details" class="service-details">
-            <h3>Netflix</h3>
-            <p>Select Netflix to request a verification code.</p>
-            
-            <form id="netflix-request-form">
-                <label for="email-netflix">Email:</label>
-                <input type="email" id="email-netflix" name="email" required>
-                
-                <button type="submit">Request Verification Code</button>
-            </form>
+    <div class="preview-card">
+      <div class="preview-title">لوحة متابعة الطلبات</div>
+      <div class="preview-item">👤 العميل يرسل الطلب</div>
+      <div class="preview-item">📩 تم استلام الطلب</div>
+      <div class="preview-item active">⚡ الطلب قيد المعالجة</div>
+    </div>
+  </section>
 
-            <div id="netflix-status-message"></div>
-        </div>
-    </section>
+  <section class="stats">
+    <div><strong>24/7</strong><p>واجهة متاحة</p></div>
+    <div><strong>RTL</strong><p>دعم اللغة العربية</p></div>
+    <div><strong>100%</strong><p>تصميم متجاوب</p></div>
+    <div><strong>SSL</strong><p>اتصال HTTPS</p></div>
+  </section>
 
-    <footer>
-        <p>&copy; 2026 Netflix Verification System. All rights reserved.</p>
-    </footer>
+  <section class="section" id="steps">
+    <span class="eyebrow">ثلاث خطوات</span>
+    <h2>بساطة تخفي وراءها قوة</h2>
+    <p class="section-desc">كل ما تحتاجه في واجهة واحدة.</p>
 
-    <!-- Include the script file -->
-    <script src="script.js"></script>
+    <div class="cards">
+      <article class="card">
+        <span class="card-icon">🔗</span>
+        <h3>اختر الخدمة</h3>
+        <p>حدد الخدمة المطلوبة من القائمة.</p>
+      </article>
+      <article class="card">
+        <span class="card-icon">📨</span>
+        <h3>أرسل الطلب</h3>
+        <p>أدخل تفاصيل الطلب وأرسله بسهولة.</p>
+      </article>
+      <article class="card">
+        <span class="card-icon">⚡</span>
+        <h3>تابع الحالة</h3>
+        <p>اطلع على حالة الطلب من لوحة المتابعة.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <span class="eyebrow">الخدمات</span>
+    <h2>كل خدماتك في مكان واحد</h2>
+    <div class="service-grid">
+      <div class="service">🎬 Netflix</div>
+      <div class="service">🎮 PlayStation</div>
+      <div class="service">🎵 Spotify</div>
+      <div class="service">📺 Disney+</div>
+      <div class="service">💻 Steam</div>
+      <div class="service">➕ خدمات أخرى</div>
+    </div>
+  </section>
+
+  <section class="section" id="request">
+    <span class="eyebrow">إرسال طلب</span>
+    <h2>ابدأ طلبك الآن</h2>
+
+    <form id="requestForm" class="request-form">
+      <label for="service">الخدمة</label>
+      <select id="service" required>
+        <option value="">اختر الخدمة</option>
+        <option>Netflix</option>
+        <option>PlayStation</option>
+        <option>Spotify</option>
+        <option>Disney+</option>
+        <option>Steam</option>
+        <option>أخرى</option>
+      </select>
+
+      <label for="customerEmail">البريد الإلكتروني للتواصل</label>
+      <input id="customerEmail" type="email"
+             placeholder="example@email.com" required>
+
+      <button type="submit" class="primary-btn">
+        إرسال الطلب
+      </button>
+      <p id="requestStatus" role="status"></p>
+    </form>
+  </section>
+
+  <section class="section" id="faq">
+    <span class="eyebrow">مساعدة</span>
+    <h2>أسئلة شائعة</h2>
+    <div class="faq-list">
+      <details>
+        <summary>كيف أرسل طلبًا؟</summary>
+        <p>اختر الخدمة وأدخل بريد التواصل ثم اضغط إرسال.</p>
+      </details>
+      <details>
+        <summary>هل الخدمة متاحة على الجوال؟</summary>
+        <p>نعم، تصميم الواجهة متوافق مع الجوال والكمبيوتر.</p>
+      </details>
+      <details>
+        <summary>هل الطلبات متصلة بالسيرفر؟</summary>
+        <p>هذه نسخة واجهة تجريبية، والربط الخلفي لم يفعّل بعد.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="logo">وصلة<span>●</span></div>
+  <p>© 2026 وصلة — جميع الحقوق محفوظة</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
-
