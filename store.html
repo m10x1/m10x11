@@ -3,138 +3,53 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mr10x | لوحة المتجر</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;
-  min-height:100vh;
-  background:#08120e;
-  color:#f0fff6;
-  font-family:Cairo,sans-serif
-}
-.container{
-  max-width:950px;
-  margin:35px auto;
-  padding:15px
-}
-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:25px
-}
-.logo{
-  color:#36d9a1;
-  font-size:34px;
-  font-weight:800
-}
-.card{
-  background:#13231c;
-  border:1px solid #2b493a;
-  border-radius:18px;
-  padding:25px;
-  margin-bottom:18px
-}
+body{margin:0;min-height:100vh;background:#08120e;color:#f0fff6;font-family:Cairo,sans-serif}
+.wrap{max-width:950px;margin:35px auto;padding:15px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:25px}
+.logo{color:#36d9a1;font-size:34px;font-weight:800}
+.card{background:#13231c;border:1px solid #2b493a;border-radius:18px;padding:25px;margin-bottom:18px}
 h2{margin:0 0 15px}
 p{color:#a7bcb1}
-label{
-  display:block;
-  margin:14px 0 7px;
-  font-weight:700
-}
-input{
-  width:100%;
-  padding:14px;
-  background:#0b1912;
-  color:white;
-  border:1px solid #345445;
-  border-radius:10px;
-  font:inherit
-}
-button{
-  border:0;
-  border-radius:10px;
-  background:#35d4a0;
-  color:#062017;
-  padding:13px 20px;
-  font:inherit;
-  font-weight:800;
-  cursor:pointer
-}
-button:disabled{opacity:.55}
-.secondary{
-  background:#284036;
-  color:white
-}
-.danger{
-  background:#663a3a;
-  color:white
-}
-.full{
-  width:100%;
-  margin-top:13px
-}
+label{display:block;margin:14px 0 7px;font-weight:700}
+input{width:100%;padding:14px;background:#0b1912;color:white;border:1px solid #345445;border-radius:10px;font:inherit}
+button{border:0;border-radius:10px;background:#35d4a0;color:#062017;padding:12px 19px;font:inherit;font-weight:800;cursor:pointer}
+button:disabled{opacity:.5;cursor:wait}
+.secondary{background:#284036;color:white}
+.danger{background:#663a3a;color:white}
+.full{width:100%;margin-top:13px}
 .hidden{display:none!important}
-.message{
-  margin-top:14px;
-  overflow-wrap:anywhere;
-  white-space:pre-wrap
-}
+.message{margin-top:14px;overflow-wrap:anywhere;white-space:pre-wrap}
 .error{color:#ff9999}
 .success{color:#4ae4a9}
-.info{
-  background:#0b1c14;
-  border:1px solid #315340;
-  border-radius:12px;
-  padding:15px;
-  margin:15px 0
-}
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px
-}
-.stat{
-  background:#0d1c15;
-  border:1px solid #294b39;
-  padding:20px;
-  border-radius:14px
-}
-.stat span{
-  color:#9fb7a9;
-  display:block;
-  font-size:13px
-}
-.stat strong{
-  display:block;
-  color:#42e0a8;
-  font-size:23px;
-  margin-top:8px;
-  overflow-wrap:anywhere
-}
+.info{background:#0b1c14;border:1px solid #315340;border-radius:12px;padding:15px;margin:15px 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:15px}
+.stat{background:#0d1c15;border:1px solid #294b39;padding:20px;border-radius:14px}
+.stat span{color:#9fb7a9;display:block;font-size:13px}
+.stat strong{display:block;color:#42e0a8;font-size:22px;margin-top:8px;overflow-wrap:anywhere}
 .center{text-align:center}
-.small{font-size:13px;color:#a7bcb1}
+.link-item{background:#0b1c14;border:1px solid #294b39;border-radius:12px;padding:17px;margin-top:12px}
+.link-item strong{display:block}
+.link-item small{display:block;color:#9fb7a9;margin:5px 0;overflow-wrap:anywhere}
+.link-item button{margin-top:10px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 a{color:#42e0a8}
 </style>
 </head>
 
 <body>
-<div class="container">
+<div class="wrap">
 
 <header>
   <div>
     <div class="logo">Mr10x</div>
     <p>بوابة أصحاب المتاجر</p>
   </div>
-  <button id="logoutTop"
-    class="danger hidden"
-    onclick="logout()">
+  <button id="logoutTop" class="danger hidden" onclick="logout()">
     تسجيل الخروج
   </button>
 </header>
@@ -143,65 +58,42 @@ a{color:#42e0a8}
   جاري تحميل حساب المتجر...
 </section>
 
-<!-- تسجيل الدخول أو إنشاء الحساب -->
-<section id="authBox" class="card hidden"
-  style="max-width:520px;margin:auto">
-
+<section id="authBox" class="card hidden" style="max-width:520px;margin:auto">
   <h2 id="authTitle">تسجيل دخول صاحب المتجر</h2>
 
   <div id="inviteNotice" class="info hidden">
-    لديك دعوة لإنشاء متجر.
-    سجّل بنفس البريد الذي حدده المدير.
+    لديك دعوة متجر. استخدم نفس البريد الذي حدده المدير.
   </div>
 
   <label>البريد الإلكتروني</label>
-  <input id="email" type="email"
-    autocomplete="email"
-    placeholder="owner@example.com">
+  <input id="email" type="email" autocomplete="email">
 
   <label>كلمة المرور</label>
-  <input id="password" type="password"
-    autocomplete="current-password"
-    placeholder="8 أحرف على الأقل">
+  <input id="password" type="password" autocomplete="current-password">
 
-  <button id="authButton"
-    class="full"
-    onclick="submitAuth()">
+  <button id="authButton" class="full" onclick="submitAuth()">
     تسجيل الدخول
   </button>
 
-  <button id="switchButton"
-    class="secondary full hidden"
-    onclick="switchAuth()">
+  <button id="switchButton" class="secondary full hidden" onclick="switchAuth()">
     إنشاء حساب جديد
   </button>
 
   <div id="authMessage" class="message"></div>
 </section>
 
-<!-- تفعيل الدعوة -->
-<section id="claimBox" class="card hidden"
-  style="max-width:520px;margin:auto">
-
-  <h2>تفعيل المتجر</h2>
-
+<section id="claimBox" class="card hidden" style="max-width:520px;margin:auto">
+  <h2>تفعيل دعوة المتجر</h2>
   <p id="claimEmail"></p>
-
   <div class="info">
-    سيتم ربط المتجر بحسابك وتفعيل الاشتراك
-    بعد التحقق من الدعوة.
+    سيتم ربط المتجر بحسابك بعد التحقق من الدعوة.
   </div>
-
-  <button id="claimButton"
-    class="full"
-    onclick="claimInvite()">
-    تفعيل المتجر
+  <button id="claimButton" class="full" onclick="claimInvite()">
+    تفعيل المتجر الآن
   </button>
-
   <div id="claimMessage" class="message"></div>
 </section>
 
-<!-- لوحة المتجر -->
 <main id="dashboard" class="hidden">
 
   <section class="card">
@@ -211,27 +103,22 @@ a{color:#42e0a8}
   </section>
 
   <section class="stats">
-
     <div class="stat">
       <span>اسم المتجر</span>
       <strong id="statName">—</strong>
     </div>
-
     <div class="stat">
       <span>حالة المتجر</span>
       <strong id="statStatus">—</strong>
     </div>
-
     <div class="stat">
       <span>الأيام المتبقية</span>
       <strong id="statDays">—</strong>
     </div>
-
     <div class="stat">
       <span>تاريخ انتهاء الاشتراك</span>
       <strong id="statExpiry">—</strong>
     </div>
-
   </section>
 
   <section class="card" style="margin-top:18px">
@@ -240,33 +127,59 @@ a{color:#42e0a8}
   </section>
 
   <section class="card">
-    <h2>روابط العملاء</h2>
-    <p>
-      هذا القسم مخصص لإنشاء روابط معلومات الطلبات
-      ومتابعتها. سنفعّله في الخطوة التالية بعد
-      إضافة دوال قاعدة البيانات اللازمة.
-    </p>
+    <h2>إنشاء رابط جديد للعميل</h2>
+    <p>أنشئ رابطًا يعرض معلومات المنتج والطلب للعميل.</p>
+
+    <label>اسم المنتج أو الخدمة</label>
+    <input id="productName" maxlength="150"
+      placeholder="مثال: اشتراك الخدمة">
+
+    <label>رقم الطلب أو مرجعه</label>
+    <input id="orderReference" maxlength="150"
+      placeholder="مثال: ORDER-1001">
+
+    <button id="createButton" class="full" onclick="createLink()">
+      إنشاء رابط العميل
+    </button>
+
+    <div id="createMessage" class="message"></div>
+
+    <div id="newLinkBox" class="info hidden">
+      <strong>تم إنشاء الرابط:</strong>
+      <input id="newLink" readonly dir="ltr"
+        style="margin-top:12px;text-align:left">
+      <button class="full" onclick="copyNewLink()">
+        نسخ الرابط
+      </button>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="row" style="justify-content:space-between">
+      <h2>روابط العملاء السابقة</h2>
+      <button class="secondary" onclick="loadLinks()">
+        تحديث القائمة
+      </button>
+    </div>
+
+    <p id="linksCount"></p>
+    <div id="linksList">جاري تحميل الروابط...</div>
+    <div id="linksMessage" class="message"></div>
   </section>
 
 </main>
 
-<!-- حساب لا يملك متجرًا -->
 <section id="noStoreBox" class="card hidden">
   <h2>لا يوجد متجر مرتبط بهذا الحساب</h2>
   <p>
-    إذا كنت صاحب متجر جديدًا، افتح رابط الدعوة
-    الذي أرسله لك المدير.
-  </p>
-  <p>
-    إذا سبق تفعيل متجرك، تأكد أنك دخلت
-    بنفس البريد الإلكتروني المسجل للمتجر.
+    افتح رابط الدعوة الذي أرسله لك المدير،
+    أو تأكد أنك دخلت بنفس بريد صاحب المتجر.
   </p>
 </section>
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
 const SUPABASE_URL =
   "https://ojlkgvwzzkctjywooogx.supabase.co";
@@ -274,58 +187,39 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_YDaAejoRn0hHcECxdQmVqw_EBcdgNiD";
 
-const db = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const $ = id => document.getElementById(id);
-
 const TOKEN_KEY = "mr10_pending_store_invite";
 
+let currentUser = null;
+let currentStore = null;
 let inviteToken = "";
 let signupMode = false;
-let currentUser = null;
 
 function show(id) {
-  [
-    "loading",
-    "authBox",
-    "claimBox",
-    "dashboard",
-    "noStoreBox"
-  ].forEach(section => {
-    $(section).classList.add("hidden");
-  });
+  ["loading","authBox","claimBox","dashboard","noStoreBox"]
+    .forEach(x => $(x).classList.add("hidden"));
 
   $(id).classList.remove("hidden");
-
-  $("logoutTop").classList.toggle(
-    "hidden",
-    !currentUser
-  );
+  $("logoutTop").classList.toggle("hidden", !currentUser);
 }
 
-function msg(id, text, error = false) {
+function message(id, value, isError = false) {
   const el = $(id);
-  el.textContent = text;
-  el.className = "message " +
-    (error ? "error" : "success");
+  el.textContent = value;
+  el.className = "message " + (isError ? "error" : "success");
 }
 
 function readInvite() {
-  const params = new URLSearchParams(
-    window.location.search
-  );
+  const params = new URLSearchParams(location.search);
+  const token = params.get("invite");
 
-  const urlToken = params.get("invite");
-
-  if (urlToken) {
-    inviteToken = urlToken.trim();
+  if (token) {
+    inviteToken = token.trim();
     localStorage.setItem(TOKEN_KEY, inviteToken);
   } else {
-    inviteToken =
-      localStorage.getItem(TOKEN_KEY) || "";
+    inviteToken = localStorage.getItem(TOKEN_KEY) || "";
   }
 }
 
@@ -333,26 +227,14 @@ function clearInvite() {
   inviteToken = "";
   localStorage.removeItem(TOKEN_KEY);
 
-  const url = new URL(window.location.href);
+  const url = new URL(location.href);
   url.searchParams.delete("invite");
-
-  history.replaceState(
-    null,
-    "",
-    url.toString()
-  );
+  history.replaceState(null, "", url.toString());
 }
 
 function updateAuthUI() {
-  $("inviteNotice").classList.toggle(
-    "hidden",
-    !inviteToken
-  );
-
-  $("switchButton").classList.toggle(
-    "hidden",
-    !inviteToken
-  );
+  $("inviteNotice").classList.toggle("hidden", !inviteToken);
+  $("switchButton").classList.toggle("hidden", !inviteToken);
 
   $("authTitle").textContent = signupMode
     ? "إنشاء حساب صاحب المتجر"
@@ -365,68 +247,71 @@ function updateAuthUI() {
   $("switchButton").textContent = signupMode
     ? "عندك حساب؟ تسجيل الدخول"
     : "ما عندك حساب؟ إنشاء حساب جديد";
-
-  $("password").autocomplete = signupMode
-    ? "new-password"
-    : "current-password";
 }
 
 function switchAuth() {
   signupMode = !signupMode;
   updateAuthUI();
-  msg("authMessage", "");
+  message("authMessage", "");
 }
 
 async function getMyStore() {
-  const { data, error } = await db.rpc(
-    "mr10_my_store"
-  );
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
+  const {data, error} = await db.rpc("mr10_my_store");
+  if (error) throw error;
   return data;
 }
 
-function renderDashboard(store) {
+function formatDate(value) {
+  return value
+    ? new Date(value).toLocaleDateString("ar-SA")
+    : "غير محدد";
+}
+
+function customerURL(token) {
+  const url = new URL("customer.html", location.href);
+  url.searchParams.set("token", token);
+  return url.toString();
+}
+
+async function copyText(value) {
+  try {
+    await navigator.clipboard.writeText(value);
+    alert("تم نسخ الرابط بنجاح");
+  } catch (error) {
+    window.prompt("انسخ الرابط:", value);
+  }
+}
+
+function copyNewLink() {
+  copyText($("newLink").value);
+}
+
+async function renderDashboard(store) {
+  currentStore = store;
   clearInvite();
 
-  $("ownerEmail").textContent =
-    currentUser.email || "";
-
-  $("storeTitle").textContent =
-    store.store_name;
-
-  $("statName").textContent =
-    store.store_name;
+  $("ownerEmail").textContent = currentUser.email || "";
+  $("storeTitle").textContent = store.store_name;
+  $("statName").textContent = store.store_name;
 
   $("statStatus").textContent =
-    store.status === "approved"
-      ? "مفعّل"
-      : store.status === "suspended"
-        ? "موقوف"
-        : store.status;
+    store.status === "approved" ? "مفعّل" :
+    store.status === "suspended" ? "موقوف" :
+    store.status;
 
   $("statDays").textContent =
-    Number(store.remaining_days || 0)
-    .toLocaleString("ar-SA") + " يوم";
+    Number(store.remaining_days || 0).toLocaleString("ar-SA") + " يوم";
 
-  $("statExpiry").textContent =
-    store.expires_at
-      ? new Date(store.expires_at)
-          .toLocaleDateString("ar-SA")
-      : "غير محدد";
+  $("statExpiry").textContent = formatDate(store.expires_at);
 
-  if (store.active === true) {
-    $("subscriptionMessage").textContent =
-      "اشتراكك فعّال ويمكنك استخدام خدمات المتجر.";
-  } else {
-    $("subscriptionMessage").textContent =
-      "الاشتراك غير فعّال أو انتهت مدته. تواصل مع المدير للتجديد.";
-  }
+  $("subscriptionMessage").textContent = store.active
+    ? "اشتراكك فعّال، ويمكنك إنشاء روابط معلومات الطلبات."
+    : "الاشتراك غير فعّال أو منتهي. تواصل مع المدير للتجديد.";
+
+  $("createButton").disabled = !store.active;
 
   show("dashboard");
+  await loadLinks();
 }
 
 async function checkStore() {
@@ -440,10 +325,8 @@ async function checkStore() {
   try {
     const store = await getMyStore();
 
-    // أهم جزء: إذا المتجر موجود
-    // نفتح اللوحة مباشرة بدون إعادة استخدام الدعوة
     if (store && store.id) {
-      renderDashboard(store);
+      await renderDashboard(store);
       return;
     }
 
@@ -457,27 +340,19 @@ async function checkStore() {
     }
 
     show("noStoreBox");
-
   } catch (error) {
     show("noStoreBox");
-    $("noStoreBox").querySelector("p").textContent =
-      "تعذر جلب بيانات المتجر: " + error.message;
+    message("linksMessage", error.message, true);
   }
 }
 
 async function submitAuth() {
-  const email =
-    $("email").value.trim().toLowerCase();
-
-  const password =
-    $("password").value;
+  const email = $("email").value.trim().toLowerCase();
+  const password = $("password").value;
 
   if (!email.includes("@") || password.length < 8) {
-    msg(
-      "authMessage",
-      "تأكد من البريد وكلمة المرور (8 أحرف على الأقل)",
-      true
-    );
+    message("authMessage",
+      "تأكد من البريد وكلمة المرور (8 أحرف على الأقل)", true);
     return;
   }
 
@@ -486,127 +361,199 @@ async function submitAuth() {
   try {
     if (signupMode) {
       if (!inviteToken) {
-        throw new Error(
-          "يجب الحصول على دعوة من المدير أولًا"
-        );
+        throw new Error("تحتاج إلى دعوة من المدير أولًا");
       }
 
-      const redirect = new URL(
-        "store.html",
-        window.location.href
-      );
+      const redirect = new URL("store.html", location.href);
+      redirect.searchParams.set("invite", inviteToken);
 
-      redirect.searchParams.set(
-        "invite",
-        inviteToken
-      );
-
-      const { data, error } = await db.auth.signUp({
+      const {data, error} = await db.auth.signUp({
         email,
         password,
-        options: {
-          emailRedirectTo: redirect.toString()
-        }
+        options: {emailRedirectTo: redirect.toString()}
       });
 
       if (error) throw error;
 
       if (!data.session) {
-        msg(
-          "authMessage",
-          "تم إرسال رسالة التأكيد. افتح بريدك وأكد الحساب، ثم ارجع إلى رابط الدعوة."
-        );
+        message("authMessage",
+          "أرسلنا رسالة تأكيد إلى بريدك. أكد الحساب ثم افتح رابط الدعوة.");
         return;
       }
-
     } else {
-      const { error } =
-        await db.auth.signInWithPassword({
-          email,
-          password
-        });
-
+      const {error} = await db.auth.signInWithPassword({
+        email, password
+      });
       if (error) throw error;
     }
 
-    const { data: { user } } =
-      await db.auth.getUser();
+    const {data:{user}, error} = await db.auth.getUser();
+    if (error) throw error;
 
     currentUser = user;
-
     await checkStore();
 
   } catch (error) {
-    msg("authMessage", error.message, true);
+    message("authMessage", error.message, true);
   } finally {
     $("authButton").disabled = false;
   }
 }
 
 async function claimInvite() {
-  if (!currentUser || !inviteToken) {
-    return;
-  }
+  if (!currentUser || !inviteToken) return;
 
   $("claimButton").disabled = true;
 
-  msg(
-    "claimMessage",
-    "جاري التحقق من الدعوة..."
-  );
-
-  const { data, error } = await db.rpc(
-    "mr10_redeem_invite",
-    {
+  try {
+    const {data, error} = await db.rpc("mr10_redeem_invite", {
       p_token: inviteToken
-    }
-  );
+    });
 
-  $("claimButton").disabled = false;
-
-  if (error) {
-    // ربما تم تفعيل المتجر سابقًا.
-    // نتحقق من ملكية المتجر بدل إعادة استخدام الدعوة.
-    try {
+    if (error) {
       const existing = await getMyStore();
-
       if (existing && existing.id) {
-        renderDashboard(existing);
+        await renderDashboard(existing);
         return;
       }
-    } catch (_) {}
+      throw error;
+    }
 
-    msg(
-      "claimMessage",
-      error.message,
-      true
-    );
+    if (data && data.success) {
+      const store = await getMyStore();
+
+      if (store && store.id) {
+        await renderDashboard(store);
+      } else {
+        throw new Error("تعذر تحميل بيانات المتجر");
+      }
+    } else {
+      throw new Error("لم يتم تفعيل الدعوة");
+    }
+
+  } catch (error) {
+    message("claimMessage", error.message, true);
+  } finally {
+    $("claimButton").disabled = false;
+  }
+}
+
+async function createLink() {
+  const product = $("productName").value.trim();
+  const order = $("orderReference").value.trim();
+
+  if (!product || !order) {
+    message("createMessage",
+      "اكتب اسم المنتج ورقم الطلب أولًا", true);
     return;
   }
 
-  if (data && data.success) {
-    const store = await getMyStore();
+  if (!currentStore || !currentStore.active) {
+    message("createMessage",
+      "اشتراك المتجر غير فعّال", true);
+    return;
+  }
 
-    if (store && store.id) {
-      renderDashboard(store);
-    } else {
-      msg(
-        "claimMessage",
-        "تم قبول الدعوة، لكن تعذر تحميل بيانات المتجر.",
-        true
-      );
+  $("createButton").disabled = true;
+  $("newLinkBox").classList.add("hidden");
+
+  try {
+    const {data, error} = await db.rpc(
+      "mr10_create_order_link",
+      {
+        p_product: product,
+        p_order: order
+      }
+    );
+
+    if (error) throw error;
+    if (!data || !data.success || !data.token) {
+      throw new Error("تعذر إنشاء الرابط");
     }
+
+    $("newLink").value = customerURL(data.token);
+    $("newLinkBox").classList.remove("hidden");
+
+    message("createMessage", "تم إنشاء رابط العميل بنجاح");
+
+    $("productName").value = "";
+    $("orderReference").value = "";
+
+    await loadLinks();
+
+  } catch (error) {
+    message("createMessage", error.message, true);
+  } finally {
+    $("createButton").disabled = !currentStore.active;
+  }
+}
+
+async function loadLinks() {
+  const list = $("linksList");
+  list.textContent = "جاري تحميل الروابط...";
+  message("linksMessage", "");
+
+  try {
+    const {data, error} = await db.rpc(
+      "mr10_list_order_links"
+    );
+
+    if (error) throw error;
+
+    const links = Array.isArray(data) ? data : [];
+
+    $("linksCount").textContent =
+      "إجمالي الروابط: " + links.length;
+
+    list.replaceChildren();
+
+    if (links.length === 0) {
+      list.textContent = "ما أنشأت أي روابط حتى الآن.";
+      return;
+    }
+
+    for (const item of links) {
+      const box = document.createElement("div");
+      box.className = "link-item";
+
+      const title = document.createElement("strong");
+      title.textContent = item.product_name || "منتج";
+
+      const order = document.createElement("small");
+      order.textContent =
+        "رقم الطلب: " + (item.order_reference || "—");
+
+      const expiry = document.createElement("small");
+      expiry.textContent =
+        "ينتهي: " + formatDate(item.expires_at);
+
+      const button = document.createElement("button");
+      button.textContent = "نسخ رابط العميل";
+      button.className = "secondary";
+
+      if (item.token) {
+        button.onclick = () =>
+          copyText(customerURL(item.token));
+      } else {
+        button.disabled = true;
+        button.textContent = "الرابط القديم غير متاح للنسخ";
+      }
+
+      box.append(title, order, expiry, button);
+      list.appendChild(box);
+    }
+
+  } catch (error) {
+    list.textContent = "";
+    message("linksMessage", error.message, true);
   }
 }
 
 async function logout() {
   await db.auth.signOut();
   currentUser = null;
-
-  // لا نمسح الدعوة إذا كان المستخدم
-  // لا يزال في مرحلة التسجيل
+  currentStore = null;
   signupMode = Boolean(inviteToken);
-
   updateAuthUI();
   show("authBox");
 }
@@ -615,25 +562,17 @@ async function start() {
   readInvite();
 
   try {
-    const { data: { user }, error } =
-      await db.auth.getUser();
-
+    const {data, error} = await db.auth.getSession();
     if (error) throw error;
 
-    currentUser = user;
-
+    currentUser = data.session?.user || null;
     await checkStore();
 
   } catch (error) {
     currentUser = null;
     updateAuthUI();
     show("authBox");
-
-    msg(
-      "authMessage",
-      error.message,
-      true
-    );
+    message("authMessage", error.message, true);
   }
 }
 
