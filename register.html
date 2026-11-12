@@ -3,138 +3,171 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1E302A">
-
   <title>إنشاء حساب | Mr10x</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --olive: #1E302A;
-      --olive-light: #30453A;
+      --background: #1E302A;
+      --card: #30453A;
+      --input: #24382E;
+      --border: #526859;
       --sage: #A7C4A0;
       --beige: #F1EDE3;
-      --muted: #C0CBBF;
+      --muted: #C7D0C3;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      background: var(--olive);
-      color: var(--beige);
+      min-height: 100vh;
       font-family: 'Cairo', sans-serif;
+      background: var(--background);
+      color: var(--beige);
+      direction: rtl;
     }
 
-    .register-page {
+    .page {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       padding: 40px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
       background:
         radial-gradient(
-          circle at 20% 20%,
+          circle at 15% 20%,
           rgba(167,196,160,.12),
-          transparent 40%
+          transparent 38%
         ),
         radial-gradient(
-          circle at 85% 80%,
-          rgba(241,237,227,.06),
+          circle at 85% 85%,
+          rgba(241,237,227,.07),
           transparent 40%
-        );
+        ),
+        var(--background);
+    }
+
+    .page::before,
+    .page::after {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      filter: blur(75px);
+      opacity: .17;
+      background: var(--sage);
+      pointer-events: none;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .page::before {
+      top: 8%;
+      right: 8%;
+    }
+
+    .page::after {
+      bottom: 8%;
+      left: 8%;
+      animation-delay: -4s;
     }
 
     .register-box {
+      position: relative;
+      z-index: 1;
       width: 100%;
       max-width: 480px;
-      padding: 36px;
-      background: #263B31;
-      border: 1px solid #496052;
+      padding: 38px 34px;
+      border: 1px solid var(--border);
       border-radius: 24px;
-      box-shadow: 0 20px 60px
-        rgba(0,0,0,.2);
-      animation: fadeUp .8s ease both;
-      box-sizing: border-box;
+      background: var(--card);
+      box-shadow: 0 24px 65px rgba(0,0,0,.22);
+      animation: fadeUp .75s ease both;
     }
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(25px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .brand {
+    .logo {
+      margin: 0;
       text-align: center;
-      font-size: 35px;
+      font-size: 38px;
       font-weight: 900;
-      margin: 0 0 5px;
+      letter-spacing: -.8px;
+      color: var(--beige);
     }
 
-    .brand span {
+    .logo span {
       color: var(--sage);
     }
 
     .subtitle {
+      margin: 4px 0 28px;
       text-align: center;
       color: var(--muted);
-      margin: 0 0 32px;
-      font-size: 15px;
+      font-size: 14px;
+    }
+
+    .field {
+      margin-bottom: 20px;
     }
 
     label {
       display: block;
       margin-bottom: 8px;
-      font-weight: 700;
       font-size: 14px;
+      font-weight: 800;
     }
 
     input {
-      display: block;
       width: 100%;
-      box-sizing: border-box;
-      padding: 14px 16px;
-      margin-bottom: 22px;
-      background: #1E302A;
-      border: 1px solid #496052;
+      padding: 14px 15px;
+      border: 1px solid var(--border);
       border-radius: 12px;
+      background: var(--input);
       color: var(--beige);
+      font-family: inherit;
+      font-size: 14px;
       outline: none;
-      font: inherit;
       transition:
         border-color .25s,
-        box-shadow .25s;
+        box-shadow .25s,
+        transform .25s;
     }
 
     input::placeholder {
-      color: #A5B4A8;
+      color: #AAB9A9;
     }
 
     input:focus {
       border-color: var(--sage);
       box-shadow: 0 0 0 3px
-        rgba(167,196,160,.12);
+        rgba(167,196,160,.14);
+      transform: translateY(-1px);
     }
 
     .submit-btn {
+      display: block;
       width: 100%;
+      padding: 15px;
+      margin-top: 8px;
       border: none;
       border-radius: 12px;
-      padding: 15px;
       background: linear-gradient(
         110deg,
         #A7C4A0,
-        #D8D0B9
+        #E0D7C1
       );
-      color: #17291F;
-      font: inherit;
+      color: #1E302A;
+      font-family: inherit;
+      font-size: 15px;
       font-weight: 900;
       cursor: pointer;
       transition:
@@ -144,7 +177,7 @@
 
     .submit-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 30px
+      box-shadow: 0 12px 28px
         rgba(167,196,160,.2);
     }
 
@@ -153,67 +186,89 @@
     }
 
     .notice {
+      margin-top: 22px;
+      padding: 17px;
       text-align: center;
-      margin-top: 24px;
-      padding: 15px;
-      border: 1px solid #496052;
-      border-radius: 12px;
-      background: rgba(167,196,160,.06);
-      color: var(--muted);
-      font-size: 13px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(167,196,160,.07);
       line-height: 2;
+      font-size: 13px;
+      color: var(--muted);
     }
 
     .notice strong {
-      color: var(--sage);
-    }
-
-    #registerStatus {
-      text-align: center;
-      color: var(--sage);
-      font-size: 14px;
-      line-height: 2;
-      margin-top: 18px;
+      color: var(--beige);
+      font-size: 16px;
     }
 
     .back {
       display: block;
-      text-align: center;
       margin-top: 22px;
+      text-align: center;
       color: var(--sage);
-      font-weight: 700;
+      font-size: 14px;
+      font-weight: 800;
       text-decoration: none;
+      transition: color .2s;
     }
 
     .back:hover {
-      text-decoration: underline;
+      color: var(--beige);
     }
 
     .disclaimer {
-      text-align: center;
+      margin: 22px 0 0;
       color: var(--muted);
+      text-align: center;
       font-size: 11px;
-      margin-top: 22px;
+      line-height: 1.9;
+    }
+
+    #registerStatus {
+      margin: 16px 0 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--sage);
+      line-height: 1.9;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-25px);
+      }
     }
 
     @media (max-width: 500px) {
       .register-box {
-        padding: 25px 20px;
+        padding: 28px 21px;
       }
 
-      .brand {
-        font-size: 30px;
+      .logo {
+        font-size: 32px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .register-box {
-        animation: none;
-      }
-
-      .submit-btn,
-      input {
-        transition: none;
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
       }
     }
   </style>
@@ -221,13 +276,10 @@
 
 <body>
 
-  <main class="register-page">
+  <main class="page">
+    <section class="register-box">
 
-    <div class="register-box">
-
-      <h1 class="brand">
-        Mr<span>10x</span>
-      </h1>
+      <h1 class="logo">Mr<span>10x</span></h1>
 
       <p class="subtitle">
         إنشاء حساب متجر جديد
@@ -235,64 +287,65 @@
 
       <form id="registerForm">
 
-        <label for="customerName">
-          اسم العميل
-        </label>
+        <div class="field">
+          <label for="customerName">
+            اسم العميل
+          </label>
+          <input
+            type="text"
+            id="customerName"
+            name="customerName"
+            placeholder="أدخل اسمك"
+            autocomplete="name"
+            maxlength="80"
+            required
+          >
+        </div>
 
-        <input
-          type="text"
-          id="customerName"
-          name="customerName"
-          placeholder="أدخل اسمك"
-          autocomplete="name"
-          maxlength="80"
-          required
-        >
+        <div class="field">
+          <label for="storeName">
+            اسم المتجر
+          </label>
+          <input
+            type="text"
+            id="storeName"
+            name="storeName"
+            placeholder="أدخل اسم متجرك"
+            maxlength="100"
+            required
+          >
+        </div>
 
-        <label for="storeName">
-          اسم المتجر
-        </label>
+        <div class="field">
+          <label for="email">
+            البريد الإلكتروني
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="example@email.com"
+            autocomplete="email"
+            required
+          >
+        </div>
 
-        <input
-          type="text"
-          id="storeName"
-          name="storeName"
-          placeholder="أدخل اسم متجرك"
-          maxlength="100"
-          required
-        >
+        <div class="field">
+          <label for="password">
+            كلمة مرور حساب Mr10x
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="8 أحرف على الأقل"
+            autocomplete="new-password"
+            minlength="8"
+            required
+          >
+        </div>
 
-        <label for="email">
-          البريد الإلكتروني
-        </label>
-
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="example@email.com"
-          autocomplete="email"
-          required
-        >
-
-        <label for="password">
-          كلمة مرور حساب Mr10x
-        </label>
-
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="8 أحرف على الأقل"
-          autocomplete="new-password"
-          minlength="8"
-          required
-        >
-
-        <button
-          type="submit"
-          class="submit-btn"
-        >
+        <button type="submit" class="submit-btn">
           إنشاء الحساب
         </button>
 
@@ -307,44 +360,38 @@
         <br>
         <strong>من ساعة إلى 24 ساعة</strong>
         <br>
-        بعد استلام الطلب ومراجعته.
+        بعد استلام الطلب ومراجعته
       </div>
 
       <a class="back" href="index.html">
-        ← العودة إلى الرئيسية
+        العودة إلى الرئيسية
       </a>
 
       <p class="disclaimer">
-        هذه واجهة تجريبية.
+        هذه نسخة تجريبية.
         لم يتم تفعيل إنشاء الحسابات
-        أو استقبال الطلبات بعد.
+        أو إرسال الطلبات بعد.
       </p>
 
-    </div>
-
+    </section>
   </main>
 
   <script>
-    const form = document.getElementById(
-      'registerForm'
-    );
+    document.getElementById('registerForm')
+      .addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    const status = document.getElementById(
-      'registerStatus'
-    );
+        if (!this.reportValidity()) {
+          return;
+        }
 
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
+        const status = document.getElementById(
+          'registerStatus'
+        );
 
-      if (!form.reportValidity()) {
-        return;
-      }
-
-      status.textContent =
-        '✓ النموذج مكتمل. بعد تفعيل استقبال الطلبات، سيتم التواصل معكم خلال ساعة إلى 24 ساعة.';
-
-      status.style.color = '#A7C4A0';
-    });
+        status.textContent =
+          '✓ النموذج مكتمل. إنشاء الحساب وإرسال الطلب غير مفعّلين حاليًا. بعد تفعيل استقبال الطلبات، ستكون مدة التواصل المتوقعة من ساعة إلى 24 ساعة.';
+      });
   </script>
 
 </body>
