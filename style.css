@@ -1,0 +1,45 @@
+
+/* Add your styles here */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+header {
+  background-color: #f8f9fa;
+  padding: 15px 0;
+}
+
+nav ul {
+  list-style-type: none;
+  text-align: right;
+}
+
+nav ul li {
+  display: inline;
+  margin-left: 10px;
+}
+
+nav ul li a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+section {
+  padding: 20px;
+}
+
+form input[type="email"],
+form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #333;
+  border-radius: 3px;
+}
+
+footer {
+  text-align: center;
+  padding: 10px 0;
+}
