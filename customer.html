@@ -1,0 +1,597 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1410">
+<title>Mr10x | استلام الطلب</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b1410;
+  --card:#19231f;
+  --inside:#202c26;
+  --border:#30463a;
+  --green:#39d7a3;
+  --green2:#22c9c8;
+  --white:#f2f6f1;
+  --muted:#96aaa0;
+  --red:#ff9696;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse at 50% 15%,#123027 0%,transparent 45%),
+    var(--bg);
+  color:var(--white);
+  font-family:Cairo,sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:55px 15px;
+}
+button{font:inherit;cursor:pointer}
+.page{width:100%;max-width:500px}
+.card{
+  background:var(--card);
+  border:1px solid #ffffff12;
+  border-radius:21px;
+  overflow:hidden;
+  box-shadow:0 25px 80px #0006;
+}
+.top{
+  text-align:center;
+  padding:27px 22px 25px;
+  position:relative;
+}
+.lang{
+  position:absolute;
+  top:15px;
+  left:15px;
+  border:1px solid var(--border);
+  background:#21332b;
+  color:var(--green);
+  border-radius:9px;
+  padding:5px 12px;
+  font-size:12px;
+}
+.brand{
+  width:65px;
+  height:65px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 14px;
+  background:linear-gradient(145deg,#e9f2e8,#a9d7bb);
+  color:#123a2a;
+  font-size:27px;
+  font-weight:900;
+  overflow:hidden;
+}
+.brand img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.top h1{
+  font-size:23px;
+  margin:4px 0;
+  font-weight:900;
+}
+.top p{
+  color:var(--muted);
+  font-size:12px;
+  margin:0;
+}
+.divider{height:1px;background:#ffffff12}
+.content{padding:22px}
+.store-info{
+  text-align:center;
+  margin-bottom:19px;
+}
+.store-info strong{
+  color:var(--green);
+  font-size:13px;
+}
+.field{
+  background:var(--inside);
+  border:1px solid #ffffff12;
+  border-radius:12px;
+  padding:13px 15px;
+  margin-bottom:11px;
+}
+.field-label{
+  font-size:11px;
+  color:var(--muted);
+  display:block;
+  margin-bottom:5px;
+}
+.field-value{
+  font-weight:700;
+  font-size:14px;
+  overflow-wrap:anywhere;
+}
+.field-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.copy{
+  background:transparent;
+  color:#9ab0a5;
+  border:0;
+  padding:5px;
+  font-size:18px;
+}
+.copy:hover{color:var(--green)}
+.primary{
+  width:100%;
+  background:linear-gradient(110deg,var(--green),var(--green2));
+  color:#09261d;
+  border:0;
+  border-radius:11px;
+  padding:13px;
+  font-weight:900;
+  margin:2px 0 12px;
+  transition:transform .2s,filter .2s;
+}
+.primary:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.05);
+}
+.primary:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none;
+}
+.status-box{
+  background:#142b21;
+  border:1px solid #23523d;
+  border-radius:12px;
+  text-align:center;
+  padding:17px;
+  margin-bottom:15px;
+}
+.status-box small{
+  color:var(--muted);
+  display:block;
+  font-size:11px;
+}
+.status-box strong{
+  display:block;
+  color:var(--green);
+  font-size:22px;
+  font-weight:900;
+  margin-top:3px;
+}
+.status-box .timer{
+  font-size:13px;
+  color:#badacb;
+  margin-top:6px;
+  direction:ltr;
+}
+.instructions{
+  background:#14271e;
+  border:1px solid #27553e;
+  border-radius:13px;
+  padding:16px;
+}
+.instructions h3{
+  color:var(--green);
+  font-size:14px;
+  margin:0 0 12px;
+}
+.step{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#203029;
+  border:1px solid #ffffff0c;
+  padding:11px;
+  margin-top:7px;
+  border-radius:9px;
+  font-size:11px;
+  color:#b9c8be;
+}
+.num{
+  min-width:26px;
+  height:26px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#1e4e37;
+  color:var(--green);
+  font-weight:900;
+}
+.notice{
+  font-size:11px;
+  text-align:center;
+  margin:14px 0 0;
+  color:var(--muted);
+  min-height:20px;
+}
+.footer{
+  text-align:center;
+  margin:20px auto 0;
+  width:max-content;
+  border:1px solid #244b39;
+  border-radius:30px;
+  padding:7px 17px;
+  color:#819c8c;
+  font-size:10px;
+}
+.footer b{color:var(--green)}
+.error{color:var(--red)!important}
+.hidden{display:none!important}
+@media(max-width:500px){
+  body{padding:22px 12px}
+  .content{padding:16px}
+  .top h1{font-size:20px}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <section class="card">
+
+    <div class="top">
+      <button class="lang" id="langButton" type="button">
+        English
+      </button>
+
+      <div class="brand" id="brand">
+        M
+      </div>
+
+      <h1 data-ar="تفاصيل طلبك"
+          data-en="Your Order Details">
+        تفاصيل طلبك
+      </h1>
+
+      <p data-ar="راجع بيانات الطلب وتحقق من حالته"
+         data-en="Review your order and check its status">
+        راجع بيانات الطلب وتحقق من حالته
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+
+      <div class="store-info">
+        <strong id="storeName">Mr10x</strong>
+      </div>
+
+      <div class="field">
+        <span class="field-label"
+              data-ar="اسم المنتج"
+              data-en="Product">
+          اسم المنتج
+        </span>
+
+        <div class="field-value" id="productName">
+          جارٍ تحميل البيانات...
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label"
+              data-ar="رقم الطلب"
+              data-en="Order Number">
+          رقم الطلب
+        </span>
+
+        <div class="field-row">
+          <div class="field-value" id="orderNumber">—</div>
+          <button class="copy" id="copyOrder" type="button"
+                  title="نسخ رقم الطلب">⧉</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label"
+              data-ar="صلاحية الرابط حتى"
+              data-en="Link expires on">
+          صلاحية الرابط حتى
+        </span>
+
+        <div class="field-value" id="expiresAt">—</div>
+      </div>
+
+      <button id="receiveButton" class="primary"
+              type="button" disabled
+              data-ar="استلام الكود"
+              data-en="Receive Code">
+        استلام الكود
+      </button>
+
+      <div class="status-box" role="status">
+        <small data-ar="حالة الرابط"
+               data-en="Link Status">
+          حالة الرابط
+        </small>
+
+        <strong id="statusText">جارٍ التحقق...</strong>
+
+        <div class="timer" id="countdown">--:--:--</div>
+      </div>
+
+      <div class="instructions">
+
+        <h3 data-ar="خطوات الاستخدام"
+            data-en="How to Use">
+          خطوات الاستخدام
+        </h3>
+
+        <div class="step">
+          <span class="num">1</span>
+          <span data-ar="افتح رابط الطلب الخاص بك."
+                data-en="Open your personal order link.">
+            افتح رابط الطلب الخاص بك.
+          </span>
+        </div>
+
+        <div class="step">
+          <span class="num">2</span>
+          <span data-ar="راجع المنتج ورقم الطلب ومدة الصلاحية."
+                data-en="Check the product, order number and expiry.">
+            راجع المنتج ورقم الطلب ومدة الصلاحية.
+          </span>
+        </div>
+
+        <div class="step">
+          <span class="num">3</span>
+          <span data-ar="تابع حالة الطلب، وتواصل مع المتجر إذا احتجت مساعدة."
+                data-en="Check the order status and contact the store for help.">
+            تابع حالة الطلب، وتواصل مع المتجر إذا احتجت مساعدة.
+          </span>
+        </div>
+      </div>
+
+      <p class="notice" id="notice">
+        يتم التحقق من صلاحية رابطك...
+      </p>
+
+    </div>
+  </section>
+
+  <div class="footer">
+    Powered by <b>Mr10x</b>
+  </div>
+</div>
+
+<script type="module">
+import {createClient}
+from "https://esm.sh/@supabase/supabase-js@2";
+
+const SUPABASE_URL =
+  "https://ojlkgvwzzkctjywooogx.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_YDaAejoRn0hHcECxdQmVqw_EBcdgNiD";
+
+const db=createClient(SUPABASE_URL,SUPABASE_KEY);
+
+const $=id=>document.getElementById(id);
+
+let language="ar";
+let expiry=null;
+let active=false;
+
+const phrases={
+  ar:{
+    loading:"جارٍ التحقق...",
+    active:"الرابط فعّال",
+    expired:"انتهت صلاحية الرابط",
+    invalid:"الرابط غير صالح أو متوقف",
+    missing:"لم يتم العثور على رابط العميل",
+    error:"تعذر الاتصال بالخدمة",
+    ready:"الرابط فعّال. تابع تعليمات المتجر لاستلام المنتج.",
+    delivery:"التسليم الإلكتروني غير مفعّل لهذه الصفحة بعد.",
+    copied:"تم نسخ رقم الطلب",
+    noOrder:"لا يوجد رقم طلب"
+  },
+  en:{
+    loading:"Checking...",
+    active:"Link Active",
+    expired:"Link Expired",
+    invalid:"Invalid or disabled link",
+    missing:"Customer link not found",
+    error:"Unable to connect",
+    ready:"Link active. Follow the store's product delivery instructions.",
+    delivery:"Electronic delivery is not yet enabled on this page.",
+    copied:"Order number copied",
+    noOrder:"No order number"
+  }
+};
+
+function translate(){
+  document.documentElement.lang=language;
+  document.documentElement.dir=
+    language==="ar"?"rtl":"ltr";
+
+  document.querySelectorAll("[data-ar][data-en]")
+    .forEach(el=>{
+      el.textContent=el.dataset[language];
+    });
+
+  $("langButton").textContent=
+    language==="ar"?"English":"العربية";
+
+  refreshStatus();
+}
+
+$("langButton").addEventListener("click",()=>{
+  language=language==="ar"?"en":"ar";
+  translate();
+});
+
+function setStatus(key,error=false){
+  $("statusText").dataset.status=key;
+  $("statusText").textContent=
+    phrases[language][key]||key;
+
+  $("statusText").classList.toggle("error",error);
+}
+
+function refreshStatus(){
+  const key=$("statusText").dataset.status;
+  if(key)setStatus(key,
+    key==="expired"||key==="invalid"||key==="error");
+
+  if($("notice").dataset.note){
+    $("notice").textContent=
+      phrases[language][$("notice").dataset.note];
+  }
+
+  if(expiry){
+    $("expiresAt").textContent=
+      expiry.toLocaleString(language==="ar"?"ar-SA":"en-US");
+  }
+}
+
+function note(key){
+  $("notice").dataset.note=key;
+  $("notice").textContent=phrases[language][key];
+}
+
+function tick(){
+  if(!expiry)return;
+
+  const remaining=expiry.getTime()-Date.now();
+
+  if(remaining<=0){
+    active=false;
+    setStatus("expired",true);
+    $("countdown").textContent="00:00:00";
+    $("receiveButton").disabled=true;
+    return;
+  }
+
+  const total=Math.floor(remaining/1000);
+  const days=Math.floor(total/86400);
+  const hours=Math.floor((total%86400)/3600);
+  const minutes=Math.floor((total%3600)/60);
+  const seconds=total%60;
+
+  const pad=n=>String(n).padStart(2,"0");
+
+  $("countdown").textContent=
+    (days?days+"d ":"")+
+    pad(hours)+":"+pad(minutes)+":"+pad(seconds);
+}
+
+async function loadCustomerLink(){
+  const url=new URL(window.location.href);
+  const token=url.searchParams.get("token");
+
+  if(!token){
+    setStatus("missing",true);
+    $("productName").textContent="—";
+    return;
+  }
+
+  const uuidPattern=
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+  if(!uuidPattern.test(token)){
+    setStatus("invalid",true);
+    $("productName").textContent="—";
+    return;
+  }
+
+  try{
+    const {data,error}=await db.rpc(
+      "mr_public_customer_link",
+      {p_token:token}
+    );
+
+    if(error)throw error;
+
+    const record=Array.isArray(data)?data[0]:data;
+
+    if(!record){
+      setStatus("invalid",true);
+      $("productName").textContent="—";
+      return;
+    }
+
+    $("storeName").textContent=
+      record.store_name||"Mr10x";
+
+    $("productName").textContent=
+      record.product_name||"—";
+
+    $("orderNumber").textContent=
+      record.order_reference||"—";
+
+    expiry=new Date(record.expires_at);
+
+    if(Number.isNaN(expiry.getTime())){
+      setStatus("error",true);
+      return;
+    }
+
+    $("expiresAt").textContent=
+      expiry.toLocaleString(
+        language==="ar"?"ar-SA":"en-US"
+      );
+
+    active=expiry.getTime()>Date.now();
+
+    if(active){
+      setStatus("active");
+      note("ready");
+      $("receiveButton").disabled=false;
+      tick();
+    }else{
+      setStatus("expired",true);
+      tick();
+    }
+
+  }catch(error){
+    console.error("Mr10x link lookup failed:",error);
+    setStatus("error",true);
+    $("productName").textContent="—";
+  }
+}
+
+$("copyOrder").addEventListener("click",async()=>{
+  const text=$("orderNumber").textContent.trim();
+
+  if(!text||text==="—"){
+    note("noOrder");
+    return;
+  }
+
+  try{
+    await navigator.clipboard.writeText(text);
+    note("copied");
+  }catch{
+    note("error");
+  }
+});
+
+$("receiveButton").addEventListener("click",()=>{
+  if(!active)return;
+
+  // Delivery is intentionally not simulated.
+  // A legitimate product-code issuance backend
+  // must be connected before enabling delivery.
+  note("delivery");
+});
+
+setStatus("loading");
+loadCustomerLink();
+setInterval(tick,1000);
+</script>
+</body>
+</html>
