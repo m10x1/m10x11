@@ -1,0 +1,712 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#14231b">
+<title>Mr10x | لوحة المتجر</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#14231b;
+  --panel:#203329;
+  --input:#17271e;
+  --border:#405947;
+  --green:#b9d0a8;
+  --cream:#f2ecdc;
+  --muted:#b6c3b7;
+  --red:#ff9c9c;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Cairo,sans-serif;
+  background:var(--bg);
+  color:var(--cream);
+  line-height:1.8;
+}
+button,input,select{font:inherit}
+button{
+  cursor:pointer;
+  border:0;
+  border-radius:10px;
+  background:var(--green);
+  color:var(--bg);
+  font-weight:900;
+  padding:11px 18px;
+}
+button:hover{filter:brightness(1.08)}
+button:disabled{opacity:.5;cursor:not-allowed}
+input,select{
+  width:100%;
+  padding:12px;
+  background:var(--input);
+  border:1px solid var(--border);
+  color:var(--cream);
+  border-radius:10px;
+  outline:none;
+}
+input:focus,select:focus{border-color:var(--green)}
+label{
+  font-size:13px;
+  color:var(--muted);
+  display:block;
+  margin-bottom:6px;
+}
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:22px;
+}
+header{
+  border-bottom:1px solid var(--border);
+  padding:0 0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+.logo{font-size:29px;font-weight:900}
+.logo span{color:var(--green)}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:25px;
+  margin-top:20px;
+}
+.login{
+  max-width:450px;
+  margin:65px auto;
+}
+.field{margin:15px 0}
+.full{width:100%}
+.outline{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--cream);
+}
+.hidden{display:none!important}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+.metric{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:22px;
+}
+.metric strong{
+  color:var(--green);
+  font-size:27px;
+  font-weight:900;
+  display:block;
+  overflow-wrap:anywhere;
+}
+.metric span{color:var(--muted);font-size:12px}
+h1{font-size:28px;margin-bottom:4px}
+h2{font-size:20px;margin-top:0}
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+.message{
+  font-size:13px;
+  min-height:24px;
+  padding-top:10px;
+  color:var(--green);
+}
+.message.error{color:var(--red)}
+.table-wrap{overflow-x:auto}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:700px;
+}
+th,td{
+  padding:12px 9px;
+  border-bottom:1px solid var(--border);
+  text-align:right;
+  font-size:13px;
+}
+th{color:var(--green)}
+td button{padding:7px 12px;font-size:12px}
+.badge{
+  display:inline-block;
+  border:1px solid var(--border);
+  padding:3px 12px;
+  border-radius:30px;
+  font-size:12px;
+  color:var(--green);
+}
+.note{
+  color:var(--muted);
+  font-size:12px;
+  margin:12px 0;
+}
+footer{
+  text-align:center;
+  padding:30px 0;
+  color:var(--muted);
+  font-size:12px;
+}
+footer b{color:var(--green)}
+@media(max-width:720px){
+  .grid,.form-grid{grid-template-columns:1fr}
+  .container{padding:15px}
+  .card{padding:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo">Mr<span>10x</span> | المتجر</div>
+    <div>
+      <span id="userEmail" class="muted small"></span>
+      <button id="logout" class="outline hidden">
+        تسجيل الخروج
+      </button>
+    </div>
+  </header>
+
+  <section id="loginView" class="card login">
+    <h2>دخول صاحب المتجر</h2>
+    <p class="muted small">
+      سجّل الدخول بالحساب الذي سجلت به متجرك في Mr10x.
+    </p>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="email">البريد الإلكتروني</label>
+        <input id="email" type="email"
+          autocomplete="username" required>
+      </div>
+
+      <div class="field">
+        <label for="password">كلمة المرور</label>
+        <input id="password" type="password"
+          autocomplete="current-password" required>
+      </div>
+
+      <button id="loginButton" class="full" type="submit">
+        تسجيل الدخول
+      </button>
+    </form>
+
+    <div id="loginMessage" class="message"></div>
+  </section>
+
+  <main id="dashboard" class="hidden">
+
+    <h1 id="storeTitle">لوحة المتجر</h1>
+    <p class="muted">
+      أنشئ روابط طلبات العملاء خلال فترة اشتراكك.
+    </p>
+
+    <div class="grid">
+      <div class="metric">
+        <strong id="subscriptionStatus">—</strong>
+        <span>حالة الاشتراك</span>
+      </div>
+
+      <div class="metric">
+        <strong id="expiryText">—</strong>
+        <span>تاريخ انتهاء الاشتراك</span>
+      </div>
+
+      <div class="metric">
+        <strong id="linksCount">0</strong>
+        <span>روابط العملاء</span>
+      </div>
+    </div>
+
+    <section class="card">
+      <h2>إنشاء رابط عميل جديد</h2>
+
+      <p class="note">
+        يمكن استخدام الروابط لعرض معلومات طلبات المنتجات
+        والتراخيص التي يحق لمتجرك توزيعها.
+      </p>
+
+      <form id="linkForm">
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="productName">اسم المنتج</label>
+            <input id="productName"
+              maxlength="150"
+              placeholder="مثال: ترخيص برنامج"
+              required>
+          </div>
+
+          <div class="field">
+            <label for="orderRef">رقم الطلب (اختياري)</label>
+            <input id="orderRef"
+              maxlength="100"
+              placeholder="ORD-1001">
+          </div>
+
+          <div class="field">
+            <label for="duration">مدة صلاحية رابط العميل</label>
+            <select id="duration" required>
+              <option value="1">ساعة واحدة</option>
+              <option value="6">6 ساعات</option>
+              <option value="24">يوم واحد</option>
+              <option value="72">3 أيام</option>
+              <option value="168">7 أيام</option>
+              <option value="720">30 يومًا</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="actions">
+          <button id="createButton" type="submit">
+            إنشاء رابط العميل
+          </button>
+          <button id="refreshButton"
+            type="button" class="outline">
+            تحديث البيانات
+          </button>
+        </div>
+      </form>
+
+      <div id="createMessage" class="message"></div>
+
+      <div id="createdLinkBox" class="hidden">
+        <label for="createdLink">الرابط الذي تم إنشاؤه</label>
+        <input id="createdLink" type="text" readonly>
+        <div class="actions">
+          <button id="copyCreatedLink" type="button">
+            نسخ الرابط
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>روابط العملاء</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>المنتج</th>
+              <th>رقم الطلب</th>
+              <th>تاريخ الإنشاء</th>
+              <th>تنتهي في</th>
+              <th>الحالة</th>
+              <th>الرابط</th>
+            </tr>
+          </thead>
+          <tbody id="linksBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div id="dashboardMessage" class="message"></div>
+  </main>
+
+  <footer>Powered by <b>Mr10x</b></footer>
+</div>
+
+<script type="module">
+import {createClient}
+from "https://esm.sh/@supabase/supabase-js@2";
+
+const SUPABASE_URL =
+  "https://ojlkgvwzzkctjywooogx.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_YDaAejoRn0hHcECxdQmVqw_EBcdgNiD";
+
+const db=createClient(SUPABASE_URL,SUPABASE_KEY);
+
+const $=id=>document.getElementById(id);
+
+let currentStore=null;
+let currentSubscription=null;
+let busy=false;
+
+const BASE_URL=new URL(
+  "./customer.html",
+  window.location.href
+).href;
+
+function show(id,visible){
+  $(id).classList.toggle("hidden",!visible);
+}
+
+function message(id,text,error=false){
+  const el=$(id);
+  el.textContent=text;
+  el.classList.toggle("error",error);
+}
+
+function formatDate(value){
+  if(!value)return "—";
+
+  return new Date(value).toLocaleString("ar-SA",{
+    year:"numeric",
+    month:"short",
+    day:"numeric",
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+}
+
+function makeCustomerUrl(token){
+  const url=new URL(BASE_URL);
+  url.searchParams.set("token",token);
+  return url.href;
+}
+
+function addCell(row,value){
+  const cell=document.createElement("td");
+  cell.textContent=String(value??"—");
+  row.appendChild(cell);
+  return cell;
+}
+
+async function copyText(text){
+  try{
+    await navigator.clipboard.writeText(text);
+    return true;
+  }catch{
+    return false;
+  }
+}
+
+function subscriptionActive(){
+  return currentStore?.status==="approved"
+    && currentSubscription
+    && new Date(currentSubscription.starts_at)<=new Date()
+    && new Date(currentSubscription.expires_at)>new Date();
+}
+
+function updateControls(){
+  const active=!!subscriptionActive();
+  $("createButton").disabled=!active||busy;
+  return active;
+}
+
+async function initialize(){
+  try{
+    const {data:{user},error}=await db.auth.getUser();
+
+    if(error)throw error;
+
+    if(!user){
+      currentStore=null;
+      currentSubscription=null;
+
+      show("loginView",true);
+      show("dashboard",false);
+      show("logout",false);
+      $("userEmail").textContent="";
+      return;
+    }
+
+    const {data:store,error:storeError}=await db
+      .from("mr_stores")
+      .select("id,owner_id,store_name,status")
+      .eq("owner_id",user.id)
+      .maybeSingle();
+
+    if(storeError)throw storeError;
+
+    if(!store){
+      await db.auth.signOut();
+      throw new Error(
+        "لا يوجد متجر مرتبط بهذا الحساب. سجّل متجرك أولًا."
+      );
+    }
+
+    currentStore=store;
+
+    show("loginView",false);
+    show("dashboard",true);
+    show("logout",true);
+
+    $("userEmail").textContent=user.email||"";
+    $("storeTitle").textContent=
+      "مرحبًا بك في "+store.store_name;
+
+    await loadDashboard();
+
+  }catch(error){
+    show("loginView",true);
+    show("dashboard",false);
+    show("logout",false);
+    message("loginMessage",error.message,true);
+  }
+}
+
+$("loginForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  $("loginButton").disabled=true;
+  message("loginMessage","جارٍ تسجيل الدخول...");
+
+  try{
+    const {error}=await db.auth.signInWithPassword({
+      email:$("email").value.trim(),
+      password:$("password").value
+    });
+
+    if(error)throw error;
+
+    $("password").value="";
+    await initialize();
+
+  }catch(error){
+    message("loginMessage",error.message,true);
+  }finally{
+    $("loginButton").disabled=false;
+  }
+});
+
+$("logout").addEventListener("click",async()=>{
+  await db.auth.signOut();
+  await initialize();
+});
+
+async function loadDashboard(){
+  if(!currentStore)return;
+
+  try{
+    message("dashboardMessage","جارٍ تحديث البيانات...");
+
+    const [subsResult,linksResult]=await Promise.all([
+      db.from("mr_subscriptions")
+        .select("id,store_id,starts_at,expires_at")
+        .eq("store_id",currentStore.id)
+        .order("expires_at",{ascending:false}),
+
+      db.from("mr_customer_links")
+        .select(
+          "id,token,product_name,order_reference,created_at,expires_at,is_active"
+        )
+        .eq("store_id",currentStore.id)
+        .order("created_at",{ascending:false})
+        .limit(200)
+    ]);
+
+    if(subsResult.error)throw subsResult.error;
+    if(linksResult.error)throw linksResult.error;
+
+    const subscriptions=subsResult.data||[];
+    const now=Date.now();
+
+    currentSubscription=subscriptions.find(s=>
+      new Date(s.starts_at).getTime()<=now &&
+      new Date(s.expires_at).getTime()>now
+    )||null;
+
+    const active=updateControls();
+
+    $("subscriptionStatus").textContent=
+      currentStore.status!=="approved"
+      ?"بانتظار تفعيل المتجر"
+      :active?"نشط":"غير نشط";
+
+    $("expiryText").textContent=currentSubscription
+      ?formatDate(currentSubscription.expires_at)
+      :subscriptions.length
+        ?formatDate(subscriptions[0].expires_at)
+        :"—";
+
+    const links=linksResult.data||[];
+    $("linksCount").textContent=links.length;
+
+    renderLinks(links);
+
+    message(
+      "dashboardMessage",
+      active
+        ?"اشتراكك نشط، ويمكنك إنشاء الروابط."
+        :"يلزم وجود متجر مقبول واشتراك نشط لإنشاء روابط جديدة.",
+      !active
+    );
+
+  }catch(error){
+    message("dashboardMessage",error.message,true);
+  }
+}
+
+function renderLinks(links){
+  const body=$("linksBody");
+  body.replaceChildren();
+
+  if(!links.length){
+    const row=document.createElement("tr");
+    addCell(row,"لا توجد روابط بعد").colSpan=6;
+    body.appendChild(row);
+    return;
+  }
+
+  for(const link of links){
+    const row=document.createElement("tr");
+
+    addCell(row,link.product_name);
+    addCell(row,link.order_reference||"—");
+    addCell(row,formatDate(link.created_at));
+    addCell(row,formatDate(link.expires_at));
+
+    const active=link.is_active &&
+      new Date(link.expires_at)>new Date();
+
+    addCell(row,active?"فعال":"منتهي أو متوقف");
+
+    const cell=document.createElement("td");
+    const button=document.createElement("button");
+
+    button.textContent="نسخ الرابط";
+    button.className="outline";
+
+    button.onclick=async()=>{
+      const ok=await copyText(
+        makeCustomerUrl(link.token)
+      );
+
+      message(
+        "dashboardMessage",
+        ok?"تم نسخ الرابط":"تعذر النسخ. جرّب متصفحًا آخر.",
+        !ok
+      );
+    };
+
+    cell.appendChild(button);
+    row.appendChild(cell);
+    body.appendChild(row);
+  }
+}
+
+$("linkForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  if(busy)return;
+
+  busy=true;
+  updateControls();
+
+  try{
+    // Recheck current store status and subscription
+    // against the database before attempting creation.
+
+    const {data:store,error:storeError}=await db
+      .from("mr_stores")
+      .select("id,owner_id,store_name,status")
+      .eq("id",currentStore.id)
+      .single();
+
+    if(storeError)throw storeError;
+    currentStore=store;
+
+    const {data:subs,error:subError}=await db
+      .from("mr_subscriptions")
+      .select("id,starts_at,expires_at")
+      .eq("store_id",store.id)
+      .order("expires_at",{ascending:false});
+
+    if(subError)throw subError;
+
+    const now=Date.now();
+
+    currentSubscription=(subs||[]).find(s=>
+      new Date(s.starts_at).getTime()<=now &&
+      new Date(s.expires_at).getTime()>now
+    )||null;
+
+    if(!subscriptionActive()){
+      throw new Error(
+        "اشتراك المتجر غير نشط. تواصل مع إدارة Mr10x."
+      );
+    }
+
+    const name=$("productName").value.trim();
+    const order=$("orderRef").value.trim();
+    const hours=Number($("duration").value);
+
+    if(!name||name.length>150){
+      throw new Error("أدخل اسم منتج صحيحًا.");
+    }
+
+    if(!Number.isFinite(hours)||hours<=0){
+      throw new Error("مدة الرابط غير صالحة.");
+    }
+
+    const requestedExpiry=now+hours*3600000;
+    const subscriptionExpiry=
+      new Date(currentSubscription.expires_at).getTime();
+
+    const finalExpiry=Math.min(
+      requestedExpiry,
+      subscriptionExpiry
+    );
+
+    if(finalExpiry<=now){
+      throw new Error("انتهت صلاحية الاشتراك.");
+    }
+
+    const {data,error}=await db
+      .from("mr_customer_links")
+      .insert({
+        store_id:currentStore.id,
+        product_name:name,
+        order_reference:order||null,
+        expires_at:new Date(finalExpiry).toISOString()
+      })
+      .select("token")
+      .single();
+
+    if(error)throw error;
+
+    const url=makeCustomerUrl(data.token);
+
+    $("createdLink").value=url;
+    show("createdLinkBox",true);
+
+    message("createMessage","تم إنشاء رابط العميل بنجاح.");
+    $("linkForm").reset();
+
+    await loadDashboard();
+
+  }catch(error){
+    message("createMessage",error.message,true);
+  }finally{
+    busy=false;
+    updateControls();
+  }
+});
+
+$("copyCreatedLink").addEventListener("click",async()=>{
+  const ok=await copyText($("createdLink").value);
+
+  message(
+    "createMessage",
+    ok?"تم نسخ الرابط بنجاح.":"تعذر نسخ الرابط.",
+    !ok
+  );
+});
+
+$("refreshButton").addEventListener("click",loadDashboard);
+
+initialize();
+</script>
+</body>
+</html>
