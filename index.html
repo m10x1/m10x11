@@ -1288,12 +1288,12 @@ registerForm.addEventListener('submit', async function(event) {
   button.disabled = true;
   status.textContent = currentLanguage === 'ar' ? 'جاري إرسال طلبك...' : 'Submitting your request...';
   try {
-    const { API_BASE } = await import('./mail-bridge-config.js');
+    const { requireApiBase } = await import('./mail-bridge-config.js');
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000);
     let response;
     try {
-      response = await fetch(API_BASE + '/api/registration-requests', {
+      response = await fetch(requireApiBase() + '/api/registration-requests', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
