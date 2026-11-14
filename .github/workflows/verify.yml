@@ -1,0 +1,43 @@
+name: Verify Mr10x backend and frontend
+
+on:
+  pull_request:
+  push:
+    branches:
+      - prepare-backend-deploy-2026-11-14
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci
+      - name: Validate JavaScript syntax
+        run: |
+          set -e
+          find backend/src backend/test -type f -name '*.js' -exec node --check {} \;
+          node --check script.js
+          node --check mail-bridge-config.js
+          node --check mailbox-feature.js
+      - name: Run backend unit tests
+        working-directory: backend
+        run: npm test
+      - name: Reject checked-in environment secrets
+        run: |
+          set -e
+          if git ls-files | grep -E '(^|/)\.env($|\.)' | grep -vE '(^|/)\.env\.example$'; then
+            echo 'Do not commit environment files or credentials' >&2
+            exit 1
+          fi
