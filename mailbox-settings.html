@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mr10x | إعداد تسليم الطلبات</title>
+<style>
+body{background:#0c1913;color:#e9fff1;font:16px system-ui,sans-serif;margin:0;padding:30px}
+main{max-width:730px;margin:auto}a{color:#75e1b7}.panel{background:#15271f;border:1px solid #305443;border-radius:16px;padding:22px;margin:20px 0}
+label{display:block;margin:12px 0 6px}input,select,button{width:100%;box-sizing:border-box;padding:12px;background:#0b1b13;color:#fff;border:1px solid #3b604c;border-radius:8px;font:inherit}
+button{background:#35d4a0;color:#082319;font-weight:700;margin-top:18px;cursor:pointer}
+small{color:#b9d4c2}code{overflow-wrap:anywhere}#state{white-space:pre-line}
+</style>
+</head>
+<body><main>
+<h1>تخصيص طلبات رموز التحقق</h1><p><a href="./store.html">الرجوع إلى لوحة المتجر</a></p>
+<p>يلزم تسجيل الدخول مسبقًا في لوحة المتجر. اختر رابط الطلب، ثم ضع بريد وكلمة مرور حساب المنتج الذي تملك حق تسليمه، وحدد صندوق بريد المتجر وطريقة مطابقة الرسالة. العميل لا يحتاج إنشاء حساب، لكن يلزمه رابط التسليم الخاص.</p>
+<section class="panel"><h2>إعداد طلب</h2>
+<form id="bindForm">
+<label for="page">رابط العميل</label><select id="page" required></select>
+<label for="mailbox">صندوق البريد الذي سيستقبل الرسالة</label><select id="mailbox" required></select>
+<label for="customer">بريد المشتري (سجل إداري فقط، ليس تسجيل دخول)</label><input id="customer" type="email" maxlength="254" required placeholder="customer@example.com">
+<label for="loginEmail">بريد حساب المنتج الذي سيظهر للعميل</label><input id="loginEmail" type="email" maxlength="254" required autocomplete="off" placeholder="product-account@example.com">
+<label for="loginPassword">كلمة مرور حساب المنتج التي ستظهر للعميل</label><input id="loginPassword" type="password" minlength="1" maxlength="512" required autocomplete="new-password" placeholder="كلمة مرور خاصة بالمنتج، وليست كلمة مرور Gmail أو Supabase">
+<small>يُستخدم هذا فقط لحساب منتج تملكه أو لديك إذن صريح بتسليم بياناته. لن نخزّن كلمة المرور نصًا مكشوفًا.</small>
+<label for="service">اسم الخدمة</label><input id="service" maxlength="100" required placeholder="My Licensed Service">
+<label for="sender">البريد الرسمي المسموح به للمرسل</label><input id="sender" type="email" maxlength="254" required placeholder="no-reply@service.example">
+<label for="mode">طريقة مطابقة الرسالة</label><select id="mode"><option value="reference">مرجع فريد يظهر في الرسالة</option><option value="recipient">عنوان استقبال فريد لهذا الطلب (To)</option></select>
+<label for="match">المرجع أو عنوان الاستقبال الفريد</label><input id="match" maxlength="254" required placeholder="ORDER-UNIQUE-12345">
+<small>لا تُستخدم ساعة وصول الرسالة أو أحدث طلب للمطابقة. يجب ظهور المرجع كاملًا داخل الرسالة، أو استخدام عنوان استقبال فريد يُظهره مزود البريد.</small>
+<button>حفظ الطلب وإنشاء رابط تسليم خاص</button></form><p id="state" role="status"></p>
+<div id="guestDelivery" hidden><h3>رابط التسليم الخاص للعميل</h3><textarea id="guestLink" readonly rows="3" style="width:100%;box-sizing:border-box;direction:ltr;border-radius:8px;background:#09160f;color:#fff;padding:12px"></textarea><button type="button" id="copyGuest">نسخ رابط التسليم</button><small>هذا الرابط يحتوي على مفتاح وصول سري. أرسله لصاحب الطلب فقط. لا تنشره علنًا، ولن يمكن استرجاعه من الخادم لاحقًا.</small></div>
+</section>
+<section class="panel"><h2>حالة الطلبات</h2><div id="orders">جارٍ التحميل...</div><button id="reload" type="button">تحديث</button></section>
+<section class="panel"><h2>صناديق البريد</h2><div id="accounts"></div></section>
+</main>
+<script type="module">
+import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
+import {api} from './mailbox-feature.js';
+const db=createClient('https://ojlkgvwzzkctjywooogx.supabase.co','sb_publishable_YDaAejoRn0hHcECxdQmVqw_EBcdgNiD');
+const $=id=>document.getElementById(id);
+function option(sel,value,text){const o=document.createElement('option');o.value=value;o.textContent=text;sel.appendChild(o);}
+function renderLines(parent,lines){parent.replaceChildren();for(const s of lines){const p=document.createElement('p');p.textContent=s;parent.appendChild(p);}}
+async function load(){
+ const {data:session}=await db.auth.getSession();if(!session.session)throw Error('سجّل الدخول في store.html أولاً');
+ const [{mailboxes},{orders},{data:links,error}]=await Promise.all([
+  api(db,'/api/mailboxes'),api(db,'/api/orders'),db.rpc('mr10_list_order_links')
+ ]);
+ if(error)throw error;
+ $('page').replaceChildren();$('mailbox').replaceChildren();
+ for(const link of links||[]){if(link.token && Date.parse(link.expires_at)>Date.now())option($('page'),link.token,`${link.order_reference} — ${link.product_name}`);}
+ for(const m of mailboxes.filter(x=>x.status==='connected'))option($('mailbox'),m.id,`${m.provider} — ${m.email}`);
+ $('accounts').replaceChildren();
+ for(const m of mailboxes){
+  const item=document.createElement('div');
+  const name=document.createElement('p');name.textContent=`${m.email} (${m.provider}): ${m.status}`;
+  const disconnect=document.createElement('button');disconnect.type='button';disconnect.textContent='فصل البريد';
+  disconnect.disabled=m.status==='disconnected';
+  disconnect.addEventListener('click',async()=>{
+   if(!confirm(`هل تريد فصل ${m.email} ومسح توكن الوصول؟`))return;
+   try{await api(db,`/api/mailboxes/${m.id}`,{method:'DELETE'});await load();}
+   catch(e){$('state').textContent=e.message;}
+  });
+  item.append(name,disconnect);$('accounts').appendChild(item);
+ }
+ renderLines($('orders'),orders.map(o=>`${o.service} — ${o.customer_email} — ${o.status}`));
+}
+$('bindForm').addEventListener('submit',async e=>{
+ e.preventDefault();$('state').textContent='جارٍ الحفظ...';
+ try{
+  const created=await api(db,'/api/orders/bind',{method:'POST',data:{
+   pageToken:$('page').value,mailboxId:$('mailbox').value,customerEmail:$('customer').value,
+   serviceName:$('service').value,allowedSender:$('sender').value,matchMode:$('mode').value,matchValue:$('match').value,loginEmail:$('loginEmail').value,loginPassword:$('loginPassword').value
+  }});
+  $('state').textContent='تم الربط. سلّم الرابط السري للعميل المحدد، ولا تنشره علنًا.';
+  $('guestLink').value=created.guest_link;
+  $('guestDelivery').hidden=false;
+  $('loginPassword').value='';
+  await load();
+ }catch(err){$('state').textContent=err.message;}
+});
+$('copyGuest').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText($('guestLink').value);$('state').textContent='تم نسخ رابط التسليم الخاص';}
+  catch(_){$('guestLink').select();$('state').textContent='انسخ الرابط المحدد يدويًا';}
+});
+$('reload').addEventListener('click',()=>load().catch(e=>$('state').textContent=e.message));
+load().catch(e=>$('state').textContent=e.message);
+</script>
+</body></html>
