@@ -54,3 +54,13 @@ It cannot access the owner's SQL Server on the PC, supply cloud account billing 
 - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Procedural.Importing.Native.Using.html
 - https://aws.amazon.com/about-aws/whats-new/2026/07/rds-sqlserver-supports-sqlserver-2025/
 - https://render.com/docs/free
+
+
+## 2026-11-14: Actual schema received and checked
+
+The owner uploaded the completed 219-line `Mr10xMail_schema_2022.sql` generated in SSMS, and exact row counts confirmed 0 rows in all five tables.
+The [reviewed schema for an empty hosted SQL Server 2022 database](Mr10xMail_schema_2022.sql) is now committed to the **staging branch**. It includes all five tables, key constraints, the filtered guest-token index, and foreign keys, but **no customer records, passwords, keys or login definitions**.
+
+**Important safety change:** the uploaded script unexpectedly began with `USE [Mr10xMail]`. The committed version replaces this with a guard that requires the connected target database to be named `Mr10xMail` and to contain no existing `dbo` tables. This avoids silently switching context to an unintended database. Always confirm the **server hostname** is the newly created hosted server, not the owner's local `SQLEXPRESS` instance.
+
+Do **not** create new migration scripts or repeat the SSMS Generate Scripts wizard unless the local schema changes. Review the committed file and execute it **once** using SSMS against a fresh hosted SQL Server 2022 database only, after verifying server compatibility and backups. A static review cannot replace actual execution/integration testing on the destination.
