@@ -45,3 +45,6 @@ A native SQL Server 2025 `.bak` **cannot** be restored on SQL Server 2022.
 AWS RDS 2025 Express availability cannot be assumed for any given region/instance.
 
 No hosted database has been provisioned or any customer data moved.
+
+
+**Exact counts verified 2026-11-14:** Owner executed `database/EXACT_ROW_COUNTS.sql` in SSMS and confirmed **0 actual rows** in all five `dbo` tables (`EmailAccounts`, `EmailProcessingLogs`, `OAuthStates`, `Orders`, `VerificationCodes`). Schema-only migration is now the preferred approach, after a private backup and review of SQL Server 2022 compatibility. Existing Supabase data is a separate database and is unaffected. Next task: export `Mr10xMail` table schema, constraints, indexes and triggers using SSMS Generate Scripts, targeting SQL Server 2022; review before running against any hosted SQL Server. No hosted database has been created or populated.
