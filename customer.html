@@ -1,525 +1,66 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b1410">
-<title>Mr10x | استلام الكود</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Mr10x | تسليم المنتج واستخراج الرمز</title>
 <style>
-:root{
-  --bg:#0b1410;
-  --card:#19231f;
-  --field:#202c26;
-  --line:#30463a;
-  --green:#39d7a3;
-  --cyan:#22c9c8;
-  --white:#f2f6f1;
-  --muted:#96aaa0;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  min-height:100vh;
-  background:radial-gradient(ellipse at 50% 15%,#123027,transparent 47%),var(--bg);
-  color:var(--white);
-  font-family:Cairo,sans-serif;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:40px 14px;
-}
-button,input{font:inherit}
-button{cursor:pointer}
-.page{width:100%;max-width:500px}
-.card{
-  background:var(--card);
-  border:1px solid #ffffff13;
-  border-radius:21px;
-  overflow:hidden;
-  box-shadow:0 25px 80px #0006;
-}
-.top{
-  text-align:center;
-  padding:30px 20px;
-  position:relative;
-}
-.lang{
-  position:absolute;
-  left:14px;
-  top:14px;
-  background:#21332b;
-  border:1px solid var(--line);
-  color:var(--green);
-  border-radius:9px;
-  padding:6px 12px;
-}
-.logo{
-  width:70px;
-  height:70px;
-  display:grid;
-  place-items:center;
-  margin:0 auto 14px;
-  background:linear-gradient(140deg,#e9f2e8,#a9d7bb);
-  color:#123a2a;
-  font-weight:900;
-  font-size:24px;
-  border-radius:17px;
-}
-h1{font-size:23px;margin:5px 0}
-.subtitle{color:var(--muted);font-size:12px;margin:0}
-.divider{height:1px;background:#ffffff14}
-.content{padding:22px}
-.store{
-  text-align:center;
-  font-weight:800;
-  color:var(--green);
-  margin-bottom:18px;
-}
-.field{
-  background:var(--field);
-  border:1px solid #ffffff15;
-  border-radius:12px;
-  padding:13px;
-  margin-bottom:11px;
-}
-.field:focus-within{border-color:var(--green)}
-.field label{
-  display:block;
-  font-size:11px;
-  color:var(--muted);
-  margin-bottom:6px;
-}
-.field-row{display:flex;align-items:center;gap:10px}
-.field input{
-  background:transparent;
-  border:0;
-  outline:0;
-  min-width:0;
-  width:100%;
-  color:var(--white);
-  direction:ltr;
-  text-align:left;
-  font-size:14px;
-}
-.field input::placeholder{color:#748b7e}
-.small-btn{
-  border:0;
-  background:transparent;
-  color:var(--green);
-  font-size:12px;
-  white-space:nowrap;
-}
-.primary{
-  width:100%;
-  padding:14px;
-  border:0;
-  border-radius:11px;
-  background:linear-gradient(110deg,var(--green),var(--cyan));
-  color:#09261d;
-  font-weight:900;
-  margin:4px 0 15px;
-  transition:.2s;
-}
-.primary:hover{filter:brightness(1.07);transform:translateY(-2px)}
-.primary:disabled{opacity:.55;cursor:not-allowed;transform:none}
-.status{
-  background:#142b21;
-  border:1px solid #23523d;
-  text-align:center;
-  border-radius:12px;
-  padding:17px;
-  margin-bottom:15px;
-}
-.status small{display:block;color:var(--muted);font-size:11px}
-.status strong{display:block;color:var(--green);font-size:22px;margin-top:4px}
-.timer{
-  direction:ltr;
-  color:#badacb;
-  font-size:15px;
-  margin-top:5px;
-}
-.instructions{
-  background:#14271e;
-  border:1px solid #27553e;
-  border-radius:13px;
-  padding:16px;
-}
-.instructions h3{margin:0 0 12px;color:var(--green);font-size:14px}
-.step{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  border:1px solid #ffffff0c;
-  background:#203029;
-  border-radius:9px;
-  padding:11px;
-  margin-top:7px;
-  color:#b9c8be;
-  font-size:11px;
-}
-.num{
-  flex-shrink:0;
-  width:26px;
-  height:26px;
-  border-radius:50%;
-  background:#1e4e37;
-  color:var(--green);
-  display:grid;
-  place-items:center;
-  font-weight:900;
-}
-.notice{
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  margin:14px 0 0;
-}
-.footer{
-  width:max-content;
-  margin:20px auto 0;
-  border:1px solid #244b39;
-  border-radius:30px;
-  padding:8px 18px;
-  color:#819c8c;
-  font-size:11px;
-}
-.footer b{color:var(--green)}
-.error{color:#ffa2a2!important}
-@media(max-width:500px){
-  body{padding:20px 12px}
-  .content{padding:16px}
-}
-</style>
-</head>
-<body>
-<div class="page">
-<section class="card">
-  <div class="top">
-    <button id="langButton" class="lang" type="button">
-      English
-    </button>
-    <div class="logo">Mr10x</div>
-    <h1 data-ar="استلام كود المنتج"
-        data-en="Receive Product Code">
-      استلام كود المنتج
-    </h1>
-    <p class="subtitle"
-       data-ar="سجّل الدخول بحساب Mr10x لمتابعة الاستلام"
-       data-en="Sign in with your Mr10x account to continue">
-      سجّل الدخول بحساب Mr10x لمتابعة الاستلام
-    </p>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="content">
-    <div class="store" id="storeName">Mr10x</div>
-
-    <form id="receiveForm">
-      <div class="field">
-        <label for="email"
-          data-ar="البريد الإلكتروني لحساب Mr10x"
-          data-en="Mr10x Account Email">
-          البريد الإلكتروني لحساب Mr10x
-        </label>
-        <div class="field-row">
-          <input id="email" type="email"
-            autocomplete="username"
-            placeholder="example@email.com" required>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="password"
-          data-ar="كلمة مرور حساب Mr10x"
-          data-en="Mr10x Account Password">
-          كلمة مرور حساب Mr10x
-        </label>
-        <div class="field-row">
-          <input id="password" type="password"
-            autocomplete="current-password"
-            placeholder="••••••••" required>
-          <button id="togglePassword"
-            type="button" class="small-btn">إظهار</button>
-        </div>
-      </div>
-
-      <button class="primary" id="receiveButton"
-        type="submit" disabled>
-        <span data-ar="استلام الكود"
-              data-en="Receive Code">
-          استلام الكود
-        </span>
-      </button>
-    </form>
-
-    <div class="status" role="status">
-      <small data-ar="حالة الرابط"
-             data-en="Link Status">
-        حالة الرابط
-      </small>
-      <strong id="statusText">جارٍ التحقق...</strong>
-      <div class="timer" id="countdown">--:--:--</div>
-    </div>
-
-    <div class="instructions">
-      <h3 data-ar="خطوات الاستلام"
-          data-en="Delivery Steps">
-        خطوات الاستلام
-      </h3>
-      <div class="step">
-        <span class="num">1</span>
-        <span data-ar="افتح رابط الطلب الذي أرسله المتجر."
-              data-en="Open the link sent by the store.">
-          افتح رابط الطلب الذي أرسله المتجر.
-        </span>
-      </div>
-      <div class="step">
-        <span class="num">2</span>
-        <span data-ar="سجّل الدخول بحسابك في Mr10x."
-              data-en="Sign in using your Mr10x account.">
-          سجّل الدخول بحسابك في Mr10x.
-        </span>
-      </div>
-      <div class="step">
-        <span class="num">3</span>
-        <span data-ar="تابع حالة تسليم كود المنتج المصرّح به."
-              data-en="Check delivery status for your authorized product code.">
-          تابع حالة تسليم كود المنتج المصرّح به.
-        </span>
-      </div>
-    </div>
-
-    <p id="notice" class="notice" role="status">
-      يتم التحقق من الرابط...
-    </p>
-  </div>
-</section>
-<div class="footer">Powered by <b>Mr10x</b></div>
-</div>
-
+:root{color-scheme:dark;--bg:#0b1410;--panel:#192b22;--field:#12241b;--line:#355743;--accent:#39d7a3;--muted:#a4bdad}
+*{box-sizing:border-box}body{background:radial-gradient(ellipse at top,#16382b,var(--bg) 75%);min-height:100vh;margin:0;padding:35px 14px;color:#f4fff6;font:15px/1.8 system-ui,sans-serif}
+main{max-width:540px;margin:20px auto;background:var(--panel);border:1px solid var(--line);padding:26px;border-radius:20px;box-shadow:0 22px 65px #0005}
+h1{text-align:center;font-size:30px;margin:0;color:var(--accent)}p.help{text-align:center;color:var(--muted);margin-top:0}h2{font-size:19px;margin:26px 0 8px}
+.field{border-radius:12px;border:1px solid var(--line);padding:12px 14px;margin:10px 0;background:var(--field)}.field label{display:block;color:var(--muted);font-size:13px}
+.field .value{display:flex;gap:10px;align-items:center;justify-content:space-between;overflow-wrap:anywhere;direction:ltr;text-align:left;font-size:16px}
+button{cursor:pointer;border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;background:var(--accent);color:#06281a}
+button.secondary{background:#234635;color:white;border:1px solid var(--line);font-size:13px}button:disabled{opacity:.55;cursor:wait}button.main{width:100%;margin-top:12px;padding:15px}#delivery[hidden]{display:none}
+.notice{font-size:13px;color:var(--muted);padding:12px;border:1px solid var(--line);border-radius:10px;overflow-wrap:anywhere}.error{color:#ffafaf}#code{font-weight:800;text-align:center;font-size:30px;color:var(--accent);direction:ltr}
+</style></head>
+<body><main>
+<h1>Mr10x</h1><p class="help">استلام بيانات المنتج والرمز دون إنشاء حساب</p>
+<p id="state" class="notice" role="status">جارٍ فحص رابط التسليم...</p>
+<div id="delivery" hidden>
+<h2 id="serviceTitle">تفاصيل المنتج</h2>
+<div class="field"><label>البريد الإلكتروني الخاص بالمنتج</label><div class="value"><span id="productEmail"></span><button id="copyEmail" class="secondary" type="button">نسخ</button></div></div>
+<div class="field"><label>كلمة مرور المنتج</label><div class="value"><span id="productPassword" dir="ltr">••••••••</span><div><button id="togglePassword" class="secondary" type="button">إظهار</button><button id="copyPassword" class="secondary" type="button">نسخ</button></div></div></div>
+<button id="extractButton" class="main" type="button">استخراج كود التحقق</button>
+<p id="codeStatus" class="notice" role="status">اضغط الزر لبدء البحث عن رمز هذا الطلب. سيُحدّث تلقائيًا عند وصول رسالة مطابقة.</p>
+<div id="code" aria-live="polite"></div>
+<p class="help">تنبيه: هذا الرابط خاص بالطلب. لا ترسله لأي شخص آخر، ولا تستخدمه إلا لبيانات الحساب الذي يحق للمتجر تسليمه.</p>
+</div></main>
 <script type="module">
-import {createClient}
-from "https://esm.sh/@supabase/supabase-js@2";
-
-const SUPABASE_URL =
-  "https://ojlkgvwzzkctjywooogx.supabase.co";
-
-const SUPABASE_KEY =
-  "sb_publishable_YDaAejoRn0hHcECxdQmVqw_EBcdgNiD";
-
-const db=createClient(SUPABASE_URL,SUPABASE_KEY);
-
+import {API_BASE} from './mail-bridge-config.js';
 const $=id=>document.getElementById(id);
-
-let lang="ar";
-let expiry=null;
-let linkActive=false;
-let statusKey="checking";
-let noticeKey="checking";
-
-const messages={
-  ar:{
-    checking:"جارٍ التحقق...",
-    active:"الرابط فعّال",
-    expired:"انتهت صلاحية الرابط",
-    invalid:"الرابط غير صالح أو متوقف",
-    missing:"رابط العميل غير موجود",
-    error:"تعذر الاتصال بالخدمة",
-    ready:"الرابط جاهز. سجل الدخول بحساب Mr10x.",
-    working:"جارٍ التحقق من حسابك...",
-    loginFailed:"تعذر تسجيل الدخول إلى حساب Mr10x.",
-    deliveryPending:"تم تسجيل الدخول. تسليم أكواد المنتجات غير مفعّل بعد.",
-    show:"إظهار",
-    hide:"إخفاء"
-  },
-  en:{
-    checking:"Checking...",
-    active:"Link Active",
-    expired:"Link Expired",
-    invalid:"Invalid or disabled link",
-    missing:"Customer link not found",
-    error:"Service unavailable",
-    ready:"Link ready. Sign in with your Mr10x account.",
-    working:"Verifying your account...",
-    loginFailed:"Unable to sign in to your Mr10x account.",
-    deliveryPending:"Signed in. Product code delivery is not enabled yet.",
-    show:"Show",
-    hide:"Hide"
+const url=new URL(location.href);
+const token=url.searchParams.get('token')||'';
+const access=new URLSearchParams(url.hash.replace(/^#/,'' )).get('access')||'';
+const validToken=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(token);
+const validAccess=/^[A-Za-z0-9_-]{43}$/.test(access);
+let credentialEmail='',credentialPassword='',timer=null,busy=false,until=0;
+function text(id,value){$(id).textContent=value;}
+async function check(includeCode=false){
+ if(busy)return;
+ busy=true;
+ try{
+  const r=await fetch(`${API_BASE}/api/customer/guest/status`,{method:'POST',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({pageToken:token,accessKey:access,includeCode})});
+  const result=await r.json().catch(()=>({}));
+  if(!r.ok)throw Error(result.error||'تعذر التحقق من رابط التسليم');
+  if(result.status==='unavailable'){
+   text('state','انتهت صلاحية الطلب أو الرمز؛ تواصل مع المتجر.');$('extractButton').disabled=true;stop();return;
   }
-};
-
-function setStatus(key){
-  statusKey=key;
-  $("statusText").textContent=messages[lang][key];
-  $("statusText").classList.toggle(
-    "error",
-    ["expired","invalid","missing","error"].includes(key)
-  );
+  credentialEmail=result.account_email;credentialPassword=result.account_password;
+  text('productEmail',credentialEmail);text('serviceTitle',result.service);
+  $('delivery').hidden=false;text('state','رابط التسليم الخاص صالح');
+  if(includeCode){
+   if(result.status==='received' && result.code){text('codeStatus','وصل الرمز لهذا الطلب');text('code',result.code);stop();}
+   else if(result.status==='code_unavailable'){text('codeStatus','انتهت صلاحية الكود السابق؛ تواصل مع المتجر لطلب جديد.');stop();}
+   else{text('codeStatus','لم يصل رمز مطابق بعد. يتم الفحص تلقائيًا كل 8 ثوانٍ.');}
+  }
+ }catch(e){text('state',e.message);$('state').classList.add('error');if(includeCode){stop();text('codeStatus','تعذر الاستعلام. جرّب بعد قليل.');}}
+ finally{busy=false;}
 }
-
-function setNotice(key){
-  noticeKey=key;
-  $("notice").textContent=messages[lang][key];
-}
-
-function translate(){
-  document.documentElement.lang=lang;
-  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
-
-  document.querySelectorAll("[data-ar][data-en]")
-    .forEach(el=>{
-      el.textContent=el.dataset[lang];
-    });
-
-  $("langButton").textContent=
-    lang==="ar"?"English":"العربية";
-
-  $("togglePassword").textContent=
-    $("password").type==="password"
-      ?messages[lang].show
-      :messages[lang].hide;
-
-  setStatus(statusKey);
-  setNotice(noticeKey);
-}
-
-$("langButton").onclick=()=>{
-  lang=lang==="ar"?"en":"ar";
-  translate();
-};
-
-$("togglePassword").onclick=()=>{
-  const input=$("password");
-  input.type=input.type==="password"?"text":"password";
-  $("togglePassword").textContent=
-    input.type==="password"
-      ?messages[lang].show
-      :messages[lang].hide;
-};
-
-function tick(){
-  if(!expiry)return;
-
-  const milliseconds=expiry.getTime()-Date.now();
-
-  if(milliseconds<=0){
-    linkActive=false;
-    setStatus("expired");
-    $("receiveButton").disabled=true;
-    $("countdown").textContent="00:00:00";
-    return;
-  }
-
-  const total=Math.floor(milliseconds/1000);
-  const days=Math.floor(total/86400);
-  const hours=Math.floor((total%86400)/3600);
-  const minutes=Math.floor((total%3600)/60);
-  const seconds=total%60;
-
-  const pad=n=>String(n).padStart(2,"0");
-
-  $("countdown").textContent=
-    (days?days+"d ":"")+
-    pad(hours)+":"+
-    pad(minutes)+":"+
-    pad(seconds);
-}
-
-async function verifyLink(){
-  const token=new URLSearchParams(location.search)
-    .get("token");
-
-  const uuid=
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-
-  if(!token){
-    setStatus("missing");
-    setNotice("missing");
-    return;
-  }
-
-  if(!uuid.test(token)){
-    setStatus("invalid");
-    setNotice("invalid");
-    return;
-  }
-
-  try{
-    const {data,error}=await db.rpc(
-      "mr_public_customer_link",
-      {p_token:token}
-    );
-
-    if(error)throw error;
-
-    const item=Array.isArray(data)?data[0]:data;
-
-    if(!item){
-      setStatus("invalid");
-      setNotice("invalid");
-      return;
-    }
-
-    expiry=new Date(item.expires_at);
-
-    if(Number.isNaN(expiry.getTime())){
-      throw new Error("Invalid expiry");
-    }
-
-    $("storeName").textContent=item.store_name||"Mr10x";
-
-    linkActive=expiry.getTime()>Date.now();
-
-    $("receiveButton").disabled=!linkActive;
-    setStatus(linkActive?"active":"expired");
-    setNotice(linkActive?"ready":"expired");
-    tick();
-
-  }catch(error){
-    console.error("Link verification failed:",error);
-    setStatus("error");
-    setNotice("error");
-  }
-}
-
-$("receiveForm").addEventListener("submit",async event=>{
-  event.preventDefault();
-  if(!linkActive)return;
-
-  const button=$("receiveButton");
-  button.disabled=true;
-  setNotice("working");
-
-  try{
-    const {error}=await db.auth.signInWithPassword({
-      email:$("email").value.trim(),
-      password:$("password").value
-    });
-
-    if(error)throw error;
-
-    $("password").value="";
-
-    // Only Mr10x first-party authentication is performed.
-    // The product delivery backend is not implemented.
-    // Never claim a code was delivered before it actually was.
-    setNotice("deliveryPending");
-
-  }catch(error){
-    console.error("Mr10x authentication failed");
-    setNotice("loginFailed");
-  }finally{
-    button.disabled=!linkActive;
-  }
-});
-
-setStatus("checking");
-setNotice("checking");
-verifyLink();
-setInterval(tick,1000);
-</script>
-</body>
-</html>
+function stop(){if(timer){clearInterval(timer);timer=null;} $('extractButton').disabled=false;}
+$('togglePassword').onclick=()=>{const x=$('productPassword');const show=x.textContent==='••••••••';x.textContent=show?credentialPassword:'••••••••';$('togglePassword').textContent=show?'إخفاء':'إظهار';};
+async function copy(value){try{await navigator.clipboard.writeText(value);text('state','تم النسخ');}catch(_){text('state','تعذر النسخ التلقائي');}}
+$('copyEmail').onclick=()=>copy(credentialEmail);$('copyPassword').onclick=()=>copy(credentialPassword);
+$('extractButton').onclick=()=>{if(timer)return;$('extractButton').disabled=true;until=Date.now()+5*60_000;check(true);timer=setInterval(()=>{if(Date.now()>=until){stop();text('codeStatus','انتهت مهلة الانتظار. اضغط لاستخراج الكود مرة أخرى.');}else check(true);},8000);};
+if(validToken && validAccess)check();else text('state','رابط التسليم غير مكتمل. افتح الرابط الخاص الذي أرسله لك المتجر.');
+</script></body></html>
