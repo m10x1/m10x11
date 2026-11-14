@@ -346,7 +346,7 @@
   </main>
 
   <script type="module">
-    import { API_BASE } from './mail-bridge-config.js';
+    import { requireApiBase } from './mail-bridge-config.js';
     const form = document.getElementById('registerForm');
     const status = document.getElementById('registerStatus');
     form.addEventListener('submit', async event => {
@@ -360,7 +360,7 @@
         const timeout = setTimeout(() => controller.abort(), 15000);
         let response;
         try {
-          response = await fetch(API_BASE + '/api/registration-requests', {
+          response = await fetch(requireApiBase() + '/api/registration-requests', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
