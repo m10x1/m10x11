@@ -27,7 +27,7 @@ button.secondary{background:#234635;color:white;border:1px solid var(--line);fon
 <p class="help">تنبيه: هذا الرابط خاص بالطلب. لا ترسله لأي شخص آخر، ولا تستخدمه إلا لبيانات الحساب الذي يحق للمتجر تسليمه.</p>
 </div></main>
 <script type="module">
-import {API_BASE} from './mail-bridge-config.js';
+import {requireApiBase} from './mail-bridge-config.js';
 const $=id=>document.getElementById(id);
 const url=new URL(location.href);
 const token=url.searchParams.get('token')||'';
@@ -40,7 +40,7 @@ async function check(includeCode=false){
  if(busy)return;
  busy=true;
  try{
-  const r=await fetch(`${API_BASE}/api/customer/guest/status`,{method:'POST',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({pageToken:token,accessKey:access,includeCode})});
+  const r=await fetch(`${requireApiBase()}/api/customer/guest/status`,{method:'POST',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({pageToken:token,accessKey:access,includeCode})});
   const result=await r.json().catch(()=>({}));
   if(!r.ok)throw Error(result.error||'تعذر التحقق من رابط التسليم');
   if(result.status==='unavailable'){
