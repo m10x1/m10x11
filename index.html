@@ -1042,12 +1042,13 @@
 
     <div class="notice" data-i18n="notice">
       مدة التواصل المستهدفة: من ساعة إلى 24 ساعة
-      بعد تفعيل استقبال الطلبات ومراجعتها.
-      النماذج حاليًا تجريبية.
+      يُرسل طلب إنشاء المتجر إلى الإدارة للمراجعة.
+      بعد الموافقة ستحصل على رابط دعوة لتفعيل حسابك.
     </div>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const translations = {
   ar: {
@@ -1099,7 +1100,7 @@ const translations = {
     faqOne: "ما هو Mr10x؟",
     faqOneAnswer: "منصة قيد التطوير لإدارة خدمات المتاجر وطلباتها.",
     faqTwo: "هل أستطيع إنشاء حساب الآن؟",
-    faqTwoAnswer: "يمكنك تجربة النموذج، لكن إنشاء الحسابات الحقيقية غير مفعّل بعد.",
+    faqTwoAnswer: "يمكنك تقديم طلب متجر؛ يراجع المدير الطلب ويرسل رابط دعوة بعد الموافقة.",
     faqThree: "كم مدة التواصل المتوقعة؟",
     faqThreeAnswer: "بعد تفعيل استقبال الطلبات، المدة المستهدفة من ساعة إلى 24 ساعة بعد مراجعة الطلب.",
     footer: "© 2026 Mr10x — جميع الحقوق محفوظة",
@@ -1110,9 +1111,9 @@ const translations = {
     customerName: "اسم العميل",
     storeName: "اسم المتجر",
     submitRequest: "متابعة طلب إنشاء الحساب",
-    notice: "مدة التواصل المستهدفة: من ساعة إلى 24 ساعة بعد تفعيل استقبال الطلبات ومراجعتها. النماذج حاليًا تجريبية.",
-    loginStatus: "تسجيل الدخول غير مفعّل بعد. لم تُرسل أي بيانات.",
-    registerStatus: "النموذج مكتمل، لكنه تجريبي ولم يُرسل طلبًا. بعد تفعيل استقبال الطلبات، سوف يتم التواصل معكم خلال ساعة إلى 24 ساعة بعد مراجعة طلبكم. شكرًا لاختياركم Mr10x."
+    notice: "يُرسل طلب إنشاء المتجر إلى الإدارة. بعد الموافقة يرسل المدير رابط الدعوة لصاحب المتجر.",
+    loginStatus: "جاري تسجيل الدخول...",
+    registerStatus: "تم إرسال طلبك للإدارة للمراجعة. تفعيل الحساب يحتاج موافقة المدير ورابط الدعوة."
   },
 
   en: {
@@ -1164,7 +1165,7 @@ const translations = {
     faqOne: "What is Mr10x?",
     faqOneAnswer: "Mr10x is a platform under development for managing store services and requests.",
     faqTwo: "Can I create an account now?",
-    faqTwoAnswer: "You can try the form, but real account registration is not enabled yet.",
+    faqTwoAnswer: "You can submit a store request. An administrator reviews it and sends an invitation link if approved.",
     faqThree: "How long does it take to get a response?",
     faqThreeAnswer: "Once requests are enabled, our target response time will be 1 to 24 hours after review.",
     footer: "© 2026 Mr10x — All Rights Reserved",
@@ -1175,9 +1176,9 @@ const translations = {
     customerName: "Customer Name",
     storeName: "Store Name",
     submitRequest: "Continue Registration Request",
-    notice: "Target response time: 1 to 24 hours after request handling is enabled and your request is reviewed. Forms are currently demos.",
-    loginStatus: "Login is not enabled yet. No data was sent.",
-    registerStatus: "The form is complete, but this is a demo and no request was sent. Once submissions are enabled, we aim to contact you within 1 to 24 hours after reviewing your request. Thank you for choosing Mr10x."
+    notice: "Your registration request is sent to the administrators. After approval, they share an invitation link to activate your store.",
+    loginStatus: "Signing in...",
+    registerStatus: "Request submitted for admin review. You need an invitation link to activate your account after approval."
   }
 };
 
@@ -1249,22 +1250,70 @@ function switchTab(tab) {
   document.getElementById('registerStatus').textContent = '';
 }
 
-loginForm.addEventListener('submit', function(event) {
+// Public Supabase publishable key only. Do not use service_role keys in HTML.
+const MR10_SUPABASE_URL = "https://ojlkgvwzzkctjywooogx.supabase.co";
+const MR10_SUPABASE_PUBLISHABLE = "sb_publishable_YDaAejoRn0hHcECxdQmVqw_EBcdgNiD";
+
+loginForm.addEventListener('submit', async function(event) {
   event.preventDefault();
-
-  document.getElementById('loginStatus').textContent =
-    translations[currentLanguage].loginStatus;
-
-  document.getElementById('loginPassword').value = '';
+  if (!loginForm.reportValidity()) return;
+  const status = document.getElementById('loginStatus');
+  const button = loginForm.querySelector('[type="submit"]');
+  button.disabled = true;
+  status.textContent = translations[currentLanguage].loginStatus;
+  try {
+    if (!window.supabase) throw new Error('تعذر تحميل خدمة تسجيل الدخول');
+    const db = window.supabase.createClient(MR10_SUPABASE_URL, MR10_SUPABASE_PUBLISHABLE);
+    const { error } = await db.auth.signInWithPassword({
+      email: document.getElementById('loginEmail').value.trim(),
+      password: document.getElementById('loginPassword').value
+    });
+    if (error) throw error;
+    document.getElementById('loginPassword').value = '';
+    window.location.href = 'store.html';
+  } catch (error) {
+    status.textContent = currentLanguage === 'ar'
+      ? 'لم يتم تسجيل الدخول. تأكد من البريد وكلمة المرور وتفعيل الحساب.'
+      : 'Sign-in failed. Check credentials and account activation.';
+  } finally {
+    button.disabled = false;
+  }
 });
 
-registerForm.addEventListener('submit', function(event) {
+registerForm.addEventListener('submit', async function(event) {
   event.preventDefault();
-
   if (!registerForm.reportValidity()) return;
-
-  document.getElementById('registerStatus').textContent =
-    translations[currentLanguage].registerStatus;
+  const status = document.getElementById('registerStatus');
+  const button = registerForm.querySelector('[type="submit"]');
+  button.disabled = true;
+  status.textContent = currentLanguage === 'ar' ? 'جاري إرسال طلبك...' : 'Submitting your request...';
+  try {
+    const { API_BASE } = await import('./mail-bridge-config.js');
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    let response;
+    try {
+      response = await fetch(API_BASE + '/api/registration-requests', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          customerName: document.getElementById('customerName').value.trim(),
+          storeName: document.getElementById('storeName').value.trim(),
+          email: document.getElementById('registerEmail').value.trim()
+        }),
+        signal: controller.signal
+      });
+    } finally { clearTimeout(timeout); }
+    if (!response.ok) throw new Error('request_failed');
+    status.textContent = translations[currentLanguage].registerStatus;
+    registerForm.reset();
+  } catch (_error) {
+    status.textContent = currentLanguage === 'ar'
+      ? 'تعذر إرسال الطلب. تأكد أن الخادم يعمل ثم جرّب مرة ثانية.'
+      : 'Unable to submit the request. Ensure the backend is running and retry.';
+  } finally {
+    button.disabled = false;
+  }
 });
 
 modal.addEventListener('click', function(event) {
