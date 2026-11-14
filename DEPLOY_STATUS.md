@@ -48,3 +48,6 @@ No hosted database has been provisioned or any customer data moved.
 
 
 **Exact counts verified 2026-11-14:** Owner executed `database/EXACT_ROW_COUNTS.sql` in SSMS and confirmed **0 actual rows** in all five `dbo` tables (`EmailAccounts`, `EmailProcessingLogs`, `OAuthStates`, `Orders`, `VerificationCodes`). Schema-only migration is now the preferred approach, after a private backup and review of SQL Server 2022 compatibility. Existing Supabase data is a separate database and is unaffected. Next task: export `Mr10xMail` table schema, constraints, indexes and triggers using SSMS Generate Scripts, targeting SQL Server 2022; review before running against any hosted SQL Server. No hosted database has been created or populated.
+
+
+**Schema export received and staged 2026-11-14:** The owner uploaded `Mr10xMail_schema_2022.sql` (219 lines, schema only). The reviewed [target-guarded SQL script](database/Mr10xMail_schema_2022.sql) is committed on this branch; it contains five tables, index/unique/FK/default constraints and zero inserted rows. No need to redo the Generate Scripts wizard. **Next external dependency** is provision of an empty hosted SQL Server 2022 Express database and permission to apply the script. It has *not* been applied; deployment/SQL syntax must still be tested on a real target. Never merge while BACKEND_URL and hosted SQL are not connected.
