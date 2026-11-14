@@ -904,6 +904,7 @@ async function start() {
 }
 
 start();
+import("./mailbox-feature.js").then(m=>m.initStoreBridge({db,getStore:()=>currentStore})).catch(console.error);
 </script>
 
 </body>
