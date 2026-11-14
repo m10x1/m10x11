@@ -28,16 +28,20 @@ unconfigured until the requirements below are met.
 
 ## Hosted SQL Server chosen (2026-11-14)
 
-The owner selected **hosted SQL Server** over a PostgreSQL rewrite. The repository now
-contains:
+The owner selected **hosted SQL Server** over a PostgreSQL rewrite. The repository now contains:
 - [Read-only local SQL Server preflight](database/READ_ONLY_PREFLIGHT.sql), safe to run in SSMS without exposing customer records.
 - [SQL Server hosting and migration runbook](database/HOSTED_SQL_SERVER_RUNBOOK.md), including version compatibility, backup verification, pricing questions, network access and safe cutover.
 
-**Critical version check:** Local screenshots indicate SQL Server 2025/17.x. A SQL Server
-2025 backup **cannot be restored** on SQL Server 2022 or older. Verify the exact
-source version and chosen provider's SQL Server 2025 edition/region before paying.
-AWS RDS advertises SQL Server 2025 support, but the July 2026 launch announcement
-specifically named Enterprise, Standard and Developer editions, so SQL Server
-2025 **Express availability cannot be assumed**.
+**Preflight result verified 2026-11-14:** source SQL Server 2025 Express 17.0.1000.7,
+`Mr10xMail`, Arabic_CI_AS, five dbo tables each reporting **zero approximate rows**, 
+8 MB data + 8 MB log allocated, guest-delivery columns all present. **Do not choose
+hosting based on allocated file size; it isn't used data.**
+
+**Preferred lower-cost path:** run [EXACT_ROW_COUNTS.sql](database/EXACT_ROW_COUNTS.sql)
+to confirm zero real records, then export **schema only** targeting SQL Server 2022
+and review it before deploying an empty hosted SQL Server 2022 Express database.
+This avoids native-backup downgrade entirely. Preserve a private local backup.
+A native SQL Server 2025 `.bak` **cannot** be restored on SQL Server 2022.
+AWS RDS 2025 Express availability cannot be assumed for any given region/instance.
 
 No hosted database has been provisioned or any customer data moved.
