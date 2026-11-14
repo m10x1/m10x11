@@ -1,0 +1,26 @@
+# Mr10x deployment status (staging branch)
+
+This public GitHub repository contains frontend pages and Node.js backend source **only**.
+It is **not** equivalent to a running hosted backend/database. The hosted app remains
+unconfigured until the requirements below are met.
+
+## Completed in the repository
+- Latest owner-supplied frontend and backend source staged on `prepare-backend-deploy-2026-11-14`.
+- `render.yaml` supplies Render-compatible build, root-directory, branch, and health-check settings, with auto-deploy **off**.
+- `backend/.env.example` documents environment **names only**; real secrets stay in Render's private environment.
+- `.github/workflows/verify.yml` checks JavaScript syntax, unit tests, and accidental `.env` commits.
+
+## Blocking external setup (not possible by GitHub source changes alone)
+1. **Database** — `backend/src/db.js` uses `mssql`, not PostgreSQL. Existing data in the owner's local SQL Server Express `Mr10xMail` is not present on GitHub or Supabase. Host and migrate the original SQL Server data securely (or implement and test a deliberate PostgreSQL migration). The Render service cannot connect to `localhost` on the owner's PC.
+2. **Encryption keys** — preserve existing `DATA_ENCRYPTION_KEY` and `CODE_HASH_KEY` during migration. Replacing them makes existing encrypted values unreadable and changes keyed digests. Enter actual values privately in Render; never in GitHub.
+3. **Service environment** — add SQL Server connection credentials, Supabase service-role key and URL, the exact deployed `BACKEND_URL`, and any optional OAuth integration credentials inside Render only. Code's production mode enforces HTTPS and trusted TLS for SQL Server.
+4. **Frontend API URL** — after Render allocates a real HTTPS service URL, set `HOSTED_API_ORIGIN` in `mail-bridge-config.js` to that exact URL on the deploy branch. Do not guess the URL.
+5. **Google/Microsoft OAuth** — update authorized redirect URI to the exact hosted backend callback; verify existing consent/scopes and domain requirements.
+6. **GitHub Pages** — current live site is built from `main` and has **not** received this draft branch. Review tests, staging behavior and security, then merge intentionally.
+7. **Billing/reliability** — Render Free web services sleep after inactivity, so background polling may not run continuously. Select a production-appropriate plan if continuous availability is required.
+
+## Safety and validation
+- Do not make local SQL Server reachable from the public internet without a secure production network design.
+- Keep guest links private and scoped per order; use only service-approved verification and delivery workflows.
+- Health-check route `/api/health` requires a working SQL connection and therefore reports unhealthy until database hosting is ready.
+- Do not deploy to real customers before full integration tests, authorization review, and revocation/expiry tests.
