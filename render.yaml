@@ -1,0 +1,50 @@
+# Mr10x backend service template. This file does NOT deploy itself.
+# Use only after SQL Server is securely hosted and all required secrets
+# are configured. Never store credentials in this public repository.
+services:
+  - type: web
+    name: mr10x-backend
+    runtime: node
+    plan: free
+    region: oregon
+    branch: prepare-backend-deploy-2026-11-14
+    rootDir: backend
+    buildCommand: npm ci
+    startCommand: npm start
+    autoDeployTrigger: off
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_ORIGIN
+        value: https://m10x1.github.io
+      - key: FRONTEND_ORIGINS
+        value: https://m10x1.github.io
+      - key: FRONTEND_SITE_URL
+        value: https://m10x1.github.io/m10x11
+      - key: SQL_DATABASE
+        value: Mr10xMail
+      - key: SQL_PORT
+        value: "1433"
+      - key: SQL_ENCRYPT
+        value: "true"
+      - key: SQL_TRUST_SERVER_CERTIFICATE
+        value: "false"
+      # Supply the exact allocated HTTPS URL after Render creates the service.
+      - key: BACKEND_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SQL_SERVER
+        sync: false
+      - key: SQL_USER
+        sync: false
+      - key: SQL_PASSWORD
+        sync: false
+      # Reuse the original keys when moving data; new keys cannot decrypt old values.
+      - key: DATA_ENCRYPTION_KEY
+        sync: false
+      - key: CODE_HASH_KEY
+        sync: false

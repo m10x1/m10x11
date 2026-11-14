@@ -315,23 +315,8 @@
           >
         </div>
 
-        <div class="field">
-          <label for="password">
-            كلمة مرور حساب Mr10x
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="8 أحرف على الأقل"
-            autocomplete="new-password"
-            minlength="8"
-            required
-          >
-        </div>
-
         <button type="submit" class="submit-btn">
-          إنشاء الحساب
+          إرسال طلب إنشاء المتجر
         </button>
 
         <p id="registerStatus"
@@ -353,30 +338,46 @@
       </a>
 
       <p class="disclaimer">
-        هذه نسخة تجريبية.
-        لم يتم تفعيل إنشاء الحسابات
-        أو إرسال الطلبات بعد.
+        سيتم إرسال طلب المتجر للإدارة للمراجعة.
+        بعد الموافقة سيُرسل رابط دعوة لإنشاء حسابك وتفعيل متجرك.
       </p>
 
     </section>
   </main>
 
-  <script>
-    document.getElementById('registerForm')
-      .addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        if (!this.reportValidity()) {
-          return;
-        }
-
-        const status = document.getElementById(
-          'registerStatus'
-        );
-
-        status.innerHTML =
-          '✅ سوف يتم التواصل معكم خلال ساعة إلى 24 ساعة بعد مراجعة طلبكم.<br>شكرًا لاختياركم Mr10x 💚';
-      });
+  <script type="module">
+    import { requireApiBase } from './mail-bridge-config.js';
+    const form = document.getElementById('registerForm');
+    const status = document.getElementById('registerStatus');
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const button = form.querySelector('[type="submit"]');
+      button.disabled = true;
+      status.textContent = 'جاري إرسال الطلب...';
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 15000);
+        let response;
+        try {
+          response = await fetch(requireApiBase() + '/api/registration-requests', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              customerName: document.getElementById('customerName').value.trim(),
+              storeName: document.getElementById('storeName').value.trim(),
+              email: document.getElementById('email').value.trim()
+            }),
+            signal: controller.signal
+          });
+        } finally { clearTimeout(timeout); }
+        if (!response.ok) throw new Error('request_failed');
+        status.textContent = '✅ تم استلام طلبك وإرساله للإدارة للمراجعة. ستحتاج إلى رابط الدعوة بعد الموافقة.';
+        form.reset();
+      } catch (_error) {
+        status.textContent = 'تعذر إرسال الطلب. تأكد أن خادم Mr10x يعمل وأعد المحاولة.';
+      } finally { button.disabled = false; }
+    });
   </script>
 
 </body>
