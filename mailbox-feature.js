@@ -1,9 +1,9 @@
-import {API_BASE} from './mail-bridge-config.js';
+import {requireApiBase} from './mail-bridge-config.js';
 
 async function api(db,path,{method='GET',data}={}) {
   const {data:auth,error}=await db.auth.getSession();
   if(error || !auth.session?.access_token)throw new Error('سجّل الدخول أولاً');
-  const r=await fetch(`${API_BASE}${path}`,{
+  const r=await fetch(`${requireApiBase()}${path}`,{
     method,
     headers:{'Authorization':`Bearer ${auth.session.access_token}`,'Content-Type':'application/json'},
     ...(data===undefined?{}:{body:JSON.stringify(data)}),
